@@ -16,17 +16,8 @@ vim.keymap.set("n", "<leader>ch", "<cmd>cd %:h<CR>")
 vim.keymap.set("i", "jk", "<Esc>", { desc = "which_key_ignore" })
 vim.keymap.set("i", "<C-CR>", "<End><CR>")
 vim.keymap.set({ "i", "c" }, "<C-S-V>", '<C-r>"')
+vim.keymap.set({ "i", "c" }, "<S-Insert>", '<C-r>"')
 vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>")
 
 vim.keymap.set("t", "<C-S-V>", "<cmd>stopinsert<CR>pi")
 vim.keymap.set("t", "<esc><esc>", "<cmd>stopinsert<CR>", { desc = "which_key_ignore" })
-
--- vim.keymap.set("n", "<C-/>", function()
---   LazyVim.terminal({ "zsh" }, {
---     margin = {
---       left = 15
---       right = 15,
---     },
---     border = "solid",
---   })
--- end, { desc = "LazyTerm" })

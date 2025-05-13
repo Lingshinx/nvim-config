@@ -91,7 +91,7 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
-      animate = { enabled = false },
+      animate = { easing = true },
       bigfile = { enabled = true },
       indent = { enabled = true },
       styles = {

@@ -68,6 +68,7 @@ return {
       },
       formatters_by_ft = {
         sql = { "sqlfmt" },
+        python = { "ruff" },
       },
     },
   },
