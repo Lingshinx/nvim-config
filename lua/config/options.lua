@@ -1,6 +1,8 @@
 vim.cmd("language zh_CN.UTF-8")
 -- vim.o.guifont = "FiraCode Nerd Font Propo"
+vim.o.shada = "'100,<0"
 vim.o.autochdir = true
+vim.o.swapfile = false
 -- vim.g.neovide_fullscreen = true
 vim.g.neovide_input_time = true
 vim.g.neovide_padding_top = 10
