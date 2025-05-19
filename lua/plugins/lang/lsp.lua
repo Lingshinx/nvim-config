@@ -29,7 +29,7 @@ return {
         "xml",
         "yaml",
         "typst",
-        "solyrc",
+        "sognac",
         "sognasm",
       },
     },

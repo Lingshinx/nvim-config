@@ -15,3 +15,11 @@ tree_sitter.sognasm = {
   },
   filetype = "sognasm",
 }
+
+tree_sitter.sognac = {
+  install_info = {
+    url = "/home/lingshin/Desktop/Workspace/JavaScript/parser/tree-sitter-sognac",
+    files = { "src/parser.c" },
+  },
+  filetype = "sognac",
+}
