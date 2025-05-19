@@ -9,17 +9,14 @@ local function set_ime(args)
   end
 end
 
--- Function to clear all letter registers
-local function clear_registers()
-  for i = string.byte("a"), string.byte("z") do
-    local letter = string.char(i)
-    vim.fn.setreg(letter, "")
-  end
-end
-
--- Clear registers on VimLeave event
+-- Git stage on VimLeave event
 vim.api.nvim_create_autocmd("VimLeave", {
-  callback = clear_registers,
+  callback = function()
+    local git_path = Snacks.git.get_root()
+    if git_path then
+      vim.system({ "git", "stage", "." })
+    end
+  end,
 })
 
 local ime_input = vim.api.nvim_create_augroup("ime_input", { clear = true })
