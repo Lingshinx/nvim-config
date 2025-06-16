@@ -13,7 +13,7 @@ vim.keymap.set("n", "<Leader>n", function()
   Snacks.notifier.show_history()
 end)
 vim.keymap.set("n", "<Leader>fh", "<cmd>Telescope hoogle hoogle<CR>")
-vim.keymap.set("n", "<BS>", "@@")
+vim.keymap.set("n", "<BS>", "<cmd>Oil<CR>")
 vim.keymap.set("n", "<leader>ch", "<cmd>cd %:h<CR>")
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "which_key_ignore" })
@@ -21,6 +21,6 @@ vim.keymap.set("i", "<C-CR>", "<End><CR>")
 vim.keymap.set({ "i", "c" }, "<C-S-V>", '<C-r>"')
 vim.keymap.set({ "i", "c" }, "<S-Insert>", '<C-r>"')
 vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>")
-
+-- <S-Insert>
 vim.keymap.set("t", "<C-S-V>", "<cmd>stopinsert<CR>pi")
 vim.keymap.set("t", "<esc><esc>", "<cmd>stopinsert<CR>", { desc = "which_key_ignore" })
