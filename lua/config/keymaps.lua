@@ -24,3 +24,16 @@ vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>")
 -- <S-Insert>
 vim.keymap.set("t", "<C-S-V>", "<cmd>stopinsert<CR>pi")
 vim.keymap.set("t", "<esc><esc>", "<cmd>stopinsert<CR>", { desc = "which_key_ignore" })
+
+require("which-key").add({
+  {
+    {
+      "<leader>fy",
+      function()
+        require("toggleterm.terminal").Terminal:new({ cmd = "yazi" }):toggle()
+      end,
+      desc = "Explorer Yazi",
+      icon = "󰇥",
+    },
+  },
+})
