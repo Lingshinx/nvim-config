@@ -36,7 +36,7 @@ return {
 
         -- Disable modes highlights in specified filetypes
         -- Please PR commonly ignored filetypes
-        ignore_filetypes = { "NvimTree", "TelescopePrompt" },
+        ignore = { "NvimTree", "TelescopePrompt" },
       })
     end,
   },
@@ -91,18 +91,18 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
-      animate = { easing = true },
       bigfile = { enabled = true },
       indent = { enabled = true },
-      styles = {
-        input = { relative = "cursor", row = -3, col = 3 },
-      },
       notifier = { enabled = true, timeout = 3000 },
       quickfile = { enabled = true },
       scroll = { enabled = true },
       explorer = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
+      styles = {
+        input = { relative = "cursor", row = -3, col = 3 },
+        terminal = { position = "right", border = "rounded" },
+      },
       dashboard = {
         enabled = true,
         preset = {
