@@ -1,3 +1,4 @@
+require("user.neovide")
 require("user.filetype")
 require("user.treesitter")
 

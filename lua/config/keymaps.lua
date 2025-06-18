@@ -21,7 +21,6 @@ vim.keymap.set("i", "<C-CR>", "<End><CR>")
 vim.keymap.set({ "i", "c" }, "<C-S-V>", '<C-r>"')
 vim.keymap.set({ "i", "c" }, "<S-Insert>", '<C-r>"')
 vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>")
--- <S-Insert>
 vim.keymap.set("t", "<C-S-V>", "<cmd>stopinsert<CR>pi")
 vim.keymap.set("t", "<esc><esc>", "<cmd>stopinsert<CR>", { desc = "which_key_ignore" })
 
