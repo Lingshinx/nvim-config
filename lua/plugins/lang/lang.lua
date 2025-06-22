@@ -4,6 +4,7 @@ return {
   -- cognate
   {
     "hedyhli/tree-sitter-cognate",
+    lazy = false,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     enabled = vim.fn.has("nvim-0.9") == 1,
   },

@@ -1,5 +1,6 @@
 return {
   "echasnovski/mini.operators",
+  lazy = false,
   version = "*",
   opts = {
     -- No need to copy this inside `setup()`. Will be used automatically.
