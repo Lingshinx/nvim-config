@@ -12,9 +12,8 @@ vim.keymap.set("n", "<Right>", "<End>")
 vim.keymap.set("n", "<Leader>n", function()
   Snacks.notifier.show_history()
 end, { desc = "notification" })
-vim.keymap.set("n", "<Leader>fh", "<cmd>Telescope hoogle hoogle<CR>")
 vim.keymap.set("n", "<BS>", "<cmd>Oil<CR>")
-vim.keymap.set("n", "<leader>ch", "<cmd>cd %:h<CR>")
+vim.keymap.set("n", "#", ":%s/<C-r><C-w>/")
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "which_key_ignore" })
 vim.keymap.set("i", "<C-CR>", "<End><CR>")
@@ -22,6 +21,7 @@ vim.keymap.set({ "i", "c" }, "<C-S-V>", '<C-r>"')
 vim.keymap.set({ "i", "c" }, "<S-Insert>", '<C-r>"')
 vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>")
 vim.keymap.set("t", "<C-S-V>", "<cmd>stopinsert<CR>pi")
+vim.keymap.set("t", "<S-Insert>", "<cmd>stopinsert<CR>pi")
 vim.keymap.set("t", "<esc><esc>", "<cmd>stopinsert<CR>", { desc = "which_key_ignore" })
 
 require("which-key").add({
