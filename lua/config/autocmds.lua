@@ -12,4 +12,22 @@ vim.api.nvim_create_autocmd("VimLeave", {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  callback = function()
+    if vim.bo.buftype ~= "" or vim.o.filetype == "oil" then
+      return
+    end
+
+    local file = vim.fn.expand("%:p:h")
+    local root = LazyVim.root()
+    if file == "" then
+      return
+    elseif root == "/home/lingshin" then
+      vim.fn.chdir(file)
+    else
+      vim.fn.chdir(vim.startswith(file, root) and root or file)
+    end
+  end,
+})
+
 vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
