@@ -13,7 +13,7 @@ vim.keymap.set("n", "<Leader>n", function()
   Snacks.notifier.show_history()
 end, { desc = "notification" })
 vim.keymap.set("n", "<BS>", "<cmd>Oil<CR>")
-vim.keymap.set("n", "#", ":%s/<C-r><C-w>/")
+vim.keymap.set("n", "#", [[:%s/\<<C-r><C-w>\>/]])
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "which_key_ignore" })
 vim.keymap.set("i", "<C-CR>", "<End><CR>")
