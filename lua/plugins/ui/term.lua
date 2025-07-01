@@ -1,7 +1,7 @@
 return {
   "akinsho/toggleterm.nvim",
   enable = false,
-  lazy = false,
+  keys = { [[<C-\>]] },
   -- I can't copy this to my system clipboard maybe because it is headless
   -- I think it is because it's neovide
   -- i cannot copy/paste in neovide with cmd-c / cmd-v

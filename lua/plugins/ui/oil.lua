@@ -12,8 +12,8 @@ return {
       keymaps = {
         ["<CR>"] = "actions.select",
         ["<C-v>"] = { "actions.select", opts = { vertical = true } },
-        ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
-        ["<C-c>"] = { "actions.close", mode = "n" },
+        ["<M-s>"] = { "actions.select", opts = { horizontal = true } },
+        ["<M-c>"] = { "actions.close", mode = "n" },
         ["K"] = { "actions.preview", mode = "n" },
         ["<BS>"] = { "actions.parent", mode = "n" },
         ["g?"] = { "actions.show_help", mode = "n" },
