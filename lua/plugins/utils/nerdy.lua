@@ -4,5 +4,8 @@ return {
   dependencies = {
     "folke/snacks.nvim",
   },
+  opts = {
+    use_new_command = true,
+  },
   cmd = "Nerdy",
 }
