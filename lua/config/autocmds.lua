@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     local root = LazyVim.root()
     if file == "" then
       return
-    elseif root == "/home/lingshin" then
+    elseif root == vim.env.HOME then
       vim.fn.chdir(file)
     else
       vim.fn.chdir(vim.startswith(file, root) and root or file)
