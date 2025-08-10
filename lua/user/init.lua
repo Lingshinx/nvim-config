@@ -2,7 +2,11 @@ require("user.neovide")
 require("user.filetype")
 require("user.treesitter")
 
-local abbr = require("user.abbr")
-for k, v in pairs(abbr) do
+for k, v in pairs(require("user.abbr")) do
   vim.cmd("iabbrev" .. " " .. k .. " " .. v)
+end
+
+for k, v in pairs(require("user.lsp")) do
+  vim.lsp.config[k] = v
+  vim.lsp.enable(k)
 end

@@ -5,6 +5,7 @@ return {
     "folke/snacks.nvim",
   },
   opts = {
+    add_default_keybindings = false,
     use_new_command = true,
   },
   cmd = "Nerdy",
