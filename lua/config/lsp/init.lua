@@ -1,13 +1,30 @@
-require("config.langs.lsp")
+require("config.lsp.config")
+
 local M = {}
 local list = require("config.utils.list")
+
+local dir = vim.fn.stdpath("config") .. "/lua/config/langs"
+local langs = {}
+
+local files = vim.uv.fs_scandir(dir)
+while files do
+	local file, _ = vim.uv.fs_scandir_next(files)
+	if not file then
+		break
+	end
+	local name = file:sub(1, -5)
+	local ok, mod = pcall(require, "config.langs." .. name)
+	if ok then
+		langs[name] = mod
+	end
+end
 
 M.formattor = {}
 M.treesitter = {}
 M.mason = {}
 M.lsp = {}
 
-for key, value in pairs(require("config.langs.config")) do
+for key, value in pairs(langs) do
 	local formattor = value.formattor
 	if formattor then
 		if type(formattor) == "table" then
@@ -29,9 +46,11 @@ for key, value in pairs(require("config.langs.config")) do
 			for k, v in pairs(value.lsp) do
 				if type(k) == "number" then
 					list.append(M.mason, v)
+					vim.lsp.enable(v)
 				elseif type(k) == "string" then
 					list.append(M.mason, k)
 					vim.lsp.config(k, v)
+					vim.lsp.enable(k)
 				end
 			end
 		end

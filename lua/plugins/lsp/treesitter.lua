@@ -41,7 +41,7 @@ return {
 						node_decremental = "<bs>",
 					},
 				},
-				ensure_installed = require("config.langs").treesitter,
+				ensure_installed = require("config.lsp").treesitter,
 				textobjects = {
 					swap = {
 						enable = true,

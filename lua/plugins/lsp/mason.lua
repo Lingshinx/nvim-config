@@ -12,12 +12,20 @@ return {
 		},
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 	},
+
+  {
+      "mason-org/mason-lspconfig.nvim",
+      opts = {
+        ensure_installed = require("config.lsp").mason
+      }
+  },
+
 	{
 		"neovim/nvim-lspconfig",
 		event = "LazyFile",
 		dependencies = {
 			"mason.nvim",
-			"mason-org/mason-lspconfig.nvim",
+      "mason-org/mason-lspconfig.nvim",
 		},
 	},
 }
