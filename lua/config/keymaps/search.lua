@@ -1,5 +1,5 @@
 local function picker(name)
-	return Snacks.picker[name]
+	return require("config.utils.plugin.snacks")[name] or Snacks.picker[name]
 end
 
 -- stylua: ignore start
