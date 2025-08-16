@@ -1,2 +1,5 @@
+require("config.options")
 require("config.lazy")
-require("user")
+require("config.keymaps")
+require("config.autocmds")
+require("config.neovide")
