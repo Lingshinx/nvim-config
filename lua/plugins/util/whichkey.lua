@@ -9,6 +9,7 @@ return {
 				mode = { "n", "v" },
 				{ "<leader><tab>", group = "tabs" },
 				{ "<leader>c", group = "code" },
+				{ "<leader>d", group = "debug" },
 				{ "<leader>f", group = "file/find" },
 				{ "<leader>g", group = "git" },
 				{ "<leader>q", group = "quit/session" },

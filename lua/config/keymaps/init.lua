@@ -5,6 +5,7 @@ require("config.keymaps.toggle")
 require("config.keymaps.winbuf")
 require("config.keymaps.lsp")
 require("config.keymaps.delete")
+require("config.keymaps.debug")
 
 local map = vim.keymap.set
 

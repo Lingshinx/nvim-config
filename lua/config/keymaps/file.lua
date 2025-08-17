@@ -17,4 +17,5 @@ require("which-key").add({
 	{ "<leader>fp", picker("projects"), desc = "Projects" },
   { "<leader><space>", picker("files"), desc = "Files" },
   { "<leader>e", Snacks.explorer.open, desc = "Explorer", icon = { icon = "", color = "purple" } },
+  { "<leader>fy", function() require("toggleterm.terminal").Terminal:new({ cmd = "yazi" }):toggle() end, desc = "Explorer Yazi", icon = "󰇥" }
 })

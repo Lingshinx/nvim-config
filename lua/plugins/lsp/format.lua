@@ -1,9 +1,11 @@
 return {
 	"stevearc/conform.nvim",
-  event = "LazyFile",
-	opts = {
-		formatters_by_ft = require("config.lsp").formattor,
-	},
+	event = "LazyFile",
+	opts = function()
+		return {
+			formatters_by_ft = require("config.lsp").formatter,
+		}
+	end,
 	keys = {
 		{
 			"<leader>cf",

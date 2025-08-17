@@ -34,6 +34,7 @@ require("which-key").add({
 
 	{ "<leader>cl", picker("lsp_config"), desc = "LSP" },
 	{ "<leader>ci", vim.show_pos, desc = "Inspect Pos" },
+	{ "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
 	{ "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", desc = "Add Comment Below" },
 	{ "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", desc = "Add Comment Above" },
 

@@ -1,5 +1,5 @@
 return {
-	formattor = "stylua",
+	formatter = "stylua",
 	lsp = {
 		lua_ls = {
 			settings = {

@@ -3,7 +3,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy.core.handler.event").mappings.LazyFile = {
 	id = "LazyFile",
-	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+	event = { "BufReadPre", "BufNewFile", "BufWritePre" },
 }
 
 require("lazy").setup({
