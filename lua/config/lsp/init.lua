@@ -15,13 +15,22 @@ while files do
 	local name = file:sub(1, -5)
 	local ok, mod = pcall(require, "config.langs." .. name)
 	if ok then
-		langs[name] = mod
+		if type(mod[1]) == "table" then
+			for _, lang in ipairs(mod) do
+				langs[lang[1]] = lang
+			end
+		elseif type(mod[1]) == "string" then
+			langs[mod[1]] = mod
+		else
+			langs[name] = mod
+		end
 	end
 end
 
 M.formatter = {}
 M.treesitter = {}
 M.mason = {}
+M.plugins = {}
 
 local function config_lsp(lsp)
 	if not lsp then
@@ -45,6 +54,12 @@ local function config_lsp(lsp)
 	end
 end
 
+local function config_plugins(plugins) 
+  if plugins then
+    vim.list_extend(M.plugins, plugins)
+  end
+end
+
 local function config_treesitter(lang, treesitter)
 	if treesitter ~= false then
 		list.append(M.treesitter, lang)
@@ -64,6 +79,7 @@ end
 
 for lang, config in pairs(langs) do
 	if config.enabled ~= false then
+		config_plugins(config.plugins)
 		config_formatter(lang, config.formatter)
 		config_treesitter(lang, config.treesitter)
 		config_lsp(config.lsp)
