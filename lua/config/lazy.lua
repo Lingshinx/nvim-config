@@ -1,3 +1,4 @@
+-- git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
@@ -15,7 +16,8 @@ require("lazy").setup({
 		{ import = "plugins.lsp" },
 		{ import = "plugins.util" },
 		{ import = "plugins.editor" },
-		{ import = "plugins.lang" },
+
+		require("config.lsp").plugins,
 	},
 	performance = {
 		rtp = {
