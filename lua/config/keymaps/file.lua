@@ -1,4 +1,5 @@
 local config = vim.fn.stdpath("config")
+local dotfile = vim.env.XDG_CONFIG_PATH
 local function picker(name)
 	return Snacks.picker[name]
 end
@@ -12,6 +13,7 @@ require("which-key").add({
   { "<leader>fn", "<cmd>enew<cr>", desc = "New File" },
 	{ "<leader>fb", picker("buffers"), desc = "Buffers" },
 	{ "<leader>fc", pickfile(config), desc = "Config" },
+	{ "<leader>f.", pickfile(dotfile), desc = "Dotfile" },
 	{ "<leader>fg", picker("git_files"), desc = "Git" },
 	{ "<leader>fr", picker("recent"), desc = "Recent" },
 	{ "<leader>fp", picker("projects"), desc = "Projects" },
