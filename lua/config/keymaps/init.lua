@@ -64,6 +64,6 @@ map("v", ">", ">gv")
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 map("n", "<leader>n", Snacks.notifier.show_history, { desc = "Notifications" })
-map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Notifications" })
+map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy" })
 
 require("which-key").add({ "<leader>K", "<cmd>norm! K<cr>", desc = "Keyword", icon = "" })
