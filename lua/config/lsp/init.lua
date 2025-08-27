@@ -54,10 +54,10 @@ local function config_lsp(lsp)
 	end
 end
 
-local function config_plugins(plugins) 
-  if plugins then
-    vim.list_extend(M.plugins, plugins)
-  end
+local function config_plugins(plugins)
+	if plugins then
+		vim.list_extend(M.plugins, plugins)
+	end
 end
 
 local function config_treesitter(lang, treesitter)
