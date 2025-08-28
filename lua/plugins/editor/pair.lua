@@ -1,6 +1,6 @@
 return {
 	"echasnovski/mini.pairs",
-	event = "VeryLazy",
+	event = "InsertEnter",
 	opts = {
 		modes = { insert = true, command = true, terminal = false },
 		-- skip autopair when next character is one of these
@@ -13,4 +13,18 @@ return {
 		-- better deal with markdown code blocks
 		markdown = true,
 	},
+
+	config = function(opts)
+		require("mini.pairs").setup(opts)
+
+		Snacks.toggle({
+			name = "Pairs",
+			get = function()
+				return not vim.g.minipairs_disable
+			end,
+			set = function(state)
+				vim.g.minipairs_disable = not state
+			end,
+		}):map("<leader>up")
+	end,
 }
