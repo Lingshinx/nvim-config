@@ -68,6 +68,3 @@ vim.opt.wrap = false -- Disable line wrap
 vim.opt.smoothscroll = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldtext = ""
-
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
