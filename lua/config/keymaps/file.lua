@@ -1,5 +1,5 @@
 local config = vim.fn.stdpath("config")
-local dotfile = vim.env.XDG_CONFIG_PATH
+local dotfile = vim.env.XDG_CONFIG_HOME or "~/.config"
 local function picker(name)
 	return Snacks.picker[name]
 end
