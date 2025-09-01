@@ -1,13 +1,17 @@
-require("config.keymaps.git")
-require("config.keymaps.file")
-require("config.keymaps.search")
-require("config.keymaps.toggle")
-require("config.keymaps.winbuf")
-require("config.keymaps.lsp")
-require("config.keymaps.delete")
-require("config.keymaps.debug")
+require "config.keymaps.git"
+require "config.keymaps.file"
+require "config.keymaps.search"
+require "config.keymaps.toggle"
+require "config.keymaps.winbuf"
+require "config.keymaps.lsp"
+require "config.keymaps.delete"
+require "config.keymaps.debug"
 
 local map = vim.keymap.set
+
+for abbr, full in pairs(require "config.keymaps.abbr") do
+  map("ia", abbr, full)
+end
 
 map("n", "dm", "<cmd>delm!<CR>", { desc = "Delete Marks" })
 map("n", "<UP>", "<C-u>")
@@ -66,4 +70,4 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 map("n", "<leader>n", Snacks.notifier.show_history, { desc = "Notifications" })
 map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy" })
 
-require("which-key").add({ "<leader>K", "<cmd>norm! K<cr>", desc = "Keyword", icon = "" })
+require("which-key").add { "<leader>K", "<cmd>norm! K<cr>", desc = "Keyword", icon = "" }
