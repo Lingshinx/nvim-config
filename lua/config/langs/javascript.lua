@@ -1,3 +1,4 @@
 return {
-	lsp = "ts_ls",
+  { "javascript", lsp = "ts_ls" },
+  { "typescript", lsp = "ts_ls" },
 }
