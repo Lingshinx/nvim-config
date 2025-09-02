@@ -18,7 +18,9 @@ while files do
         langs[lang[1]] = lang
       end
     elseif type(mod[1]) == "string" then
-      langs[mod[1]] = mod
+      for _, lang in ipairs(mod) do
+        langs[lang] = mod
+      end
     else
       langs[name] = mod
     end
@@ -33,8 +35,9 @@ M.plugins = {}
 local function config_lsp(lsp)
   if not lsp then return end
 
-  if type(lsp) == "string" then list.append(M.mason, lsp) end
-  if type(lsp) == "table" then
+  if type(lsp) == "string" then
+    list.append(M.mason, lsp)
+  elseif type(lsp) == "table" then
     for k, v in pairs(lsp) do
       if type(k) == "number" then
         list.append(M.mason, v)
