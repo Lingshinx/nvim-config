@@ -18,7 +18,7 @@ map("n", "<UP>", "<C-u>")
 map("n", "<Down>", "<C-d>")
 map("n", "<Left>", "<C-f>")
 map("n", "<Right>", "<C-b>")
-map("n", "#", [[:%s/\<<C-r><C-w>\>/]], { desc = "Replace" })
+-- map("n", "#", [[:%s/\<<C-r><C-w>\>/]], { desc = "Replace" })
 
 map("i", "<C-CR>", "<End><CR>")
 map({ "i", "c" }, "<C-S-V>", '<C-r>"')

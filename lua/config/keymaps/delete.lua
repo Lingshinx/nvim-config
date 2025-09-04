@@ -7,4 +7,4 @@ del("n", "grr")
 del("n", "gri")
 del("n", "grt")
 
-map({ "n", "x", "o" }, "s", "gs", { remap = true })
+map({ "n", "x" }, "s", "gs", { remap = true })
