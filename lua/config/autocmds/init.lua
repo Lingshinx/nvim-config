@@ -1,5 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
-local augroup = function(name) return vim.api.nvim_create_augroup("lignshin_" .. name, { clear = true }) end
+local augroup = function(name) return vim.api.nvim_create_augroup("lingshin_" .. name, { clear = true }) end
 
 -- Auto Chdir
 autocmd({ "BufEnter", "BufWinEnter" }, {
