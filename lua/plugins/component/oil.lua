@@ -21,9 +21,9 @@ return {
         ["gx"] = "actions.open_external",
         ["<leader>R"] = "actions.refresh",
         ["<leader>oh"] = { "actions.open_cwd", mode = "n" },
-        ["<leader>os"] = { "actions.change_sort", mode = "n" },
-        ["<leader>uh"] = { "actions.toggle_hidden", mode = "n" },
-        ["<leader>or"] = { "actions.toggle_trash", mode = "n" },
+        ["<leader>os"] = { "actions.change_sort", desc = "Oil change sort", mode = "n" },
+        ["<leader>uh"] = { "actions.toggle_hidden", desc = "Oil toggle hidden", mode = "n" },
+        ["<leader>or"] = { "actions.toggle_trash", desc = "Oil trash", mode = "n" },
         ["<leader>od"] = {
           desc = "Oil toggle detail",
           callback = function()
