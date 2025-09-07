@@ -1,6 +1,4 @@
-local function picker(name)
-	return require("config.utils.plugin.snacks")[name] or Snacks.picker[name]
-end
+local function picker(name) return require("config.utils.plugin.snacks")[name] or Snacks.picker[name] end
 
 -- stylua: ignore start
 require("which-key").add({

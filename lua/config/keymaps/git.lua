@@ -1,6 +1,4 @@
-local function picker(name)
-	return Snacks.picker[name]
-end
+local function picker(name) return Snacks.picker[name] end
 -- stylua: ignore
 require("which-key").add({
   { "<leader>gd", picker("git_diff"), desc = "Diff" },

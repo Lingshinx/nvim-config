@@ -1,13 +1,10 @@
-local config = vim.fn.stdpath("config")
+local config = vim.fn.stdpath "config"
 local dotfile = vim.env.XDG_CONFIG_HOME or "~/.config"
-local function picker(name)
-	return Snacks.picker[name]
-end
+local function picker(name) return Snacks.picker[name] end
 local function pickfile(cwd)
-	return function()
-		return Snacks.picker.files({ cwd = cwd })
-	end
+  return function() return Snacks.picker.files { cwd = cwd } end
 end
+
 -- stylua: ignore
 require("which-key").add({
   { "<leader>fn", "<cmd>enew<cr>", desc = "New File" },
