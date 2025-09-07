@@ -7,19 +7,26 @@ local function diagnostic_goto(count, severity)
     vim.diagnostic.jump {
       count = count,
       severity = severity and vim.diagnostic.severity[severity] or nil,
-      float = true,
     }
   end
 end
 
+local function diagnostic_preview()
+  vim.diagnostic.open_float()
+  vim.diagnostic.open_float()
+end
+
 require("which-key").add {
   { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-  { "]d", diagnostic_goto(1), desc = "Diagnostic", icon = "" },
   { "[d", diagnostic_goto(-1), desc = "Diagnostic", icon = "" },
-  { "]e", diagnostic_goto(1, "ERROR"), desc = "Error", icon = { icon = diagnostic_icon.Error, color = "red" } },
+  { "]d", diagnostic_goto(1), desc = "Diagnostic", icon = "" },
+  { "[D", desc = "First Diagnostic", icon = "" },
+  { "]D", desc = "Last Diagnostic", icon = "" },
   { "[e", diagnostic_goto(-1, "ERROR"), desc = "Error", icon = { icon = diagnostic_icon.Error, color = "red" } },
-  { "]w", diagnostic_goto(1, "WARN"), desc = "Warning", icon = { icon = diagnostic_icon.Warn, color = "yellow" } },
+  { "]e", diagnostic_goto(1, "ERROR"), desc = "Error", icon = { icon = diagnostic_icon.Error, color = "red" } },
   { "[w", diagnostic_goto(-1, "WARN"), desc = "Warning", icon = { icon = diagnostic_icon.Warn, color = "yellow" } },
+  { "]w", diagnostic_goto(1, "WARN"), desc = "Warning", icon = { icon = diagnostic_icon.Warn, color = "yellow" } },
+  { "<leader>xp", diagnostic_preview, desc = "Preview" },
 
   { "gD", picker "lsp_declarations", desc = "Goto Definition" },
   { "gd", picker "lsp_definitions", desc = "Goto Definition" },
