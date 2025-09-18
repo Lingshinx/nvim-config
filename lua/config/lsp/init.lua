@@ -10,19 +10,19 @@ local files = vim.uv.fs_scandir(dir)
 while files do
   local file, _ = vim.uv.fs_scandir_next(files)
   if not file then break end
-  local name = file:sub(1, -5)
+  local name = file:sub(1, -5) -- throw '.lua' away
   local ok, mod = pcall(require, "config.langs." .. name)
   if ok then
-    if type(mod[1]) == "table" then
-      for _, lang in ipairs(mod) do
-        langs[lang[1]] = lang
-      end
-    elseif type(mod[1]) == "string" then
-      for _, lang in ipairs(mod) do
-        langs[lang] = mod
-      end
-    else
+    if mod[1] == nil then
       langs[name] = mod
+    else
+      for _, lang in ipairs(mod) do
+        if type(lang) == "string" then
+          langs[lang] = mod
+        elseif type(lang) == "table" and type(lang[1]) == "string" then
+          langs[lang[1]] = vim.tbl_extend("keep", lang, mod)
+        end
+      end
     end
   end
 end
