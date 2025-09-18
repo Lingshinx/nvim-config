@@ -32,4 +32,5 @@ require("which-key").add({
 
 	{ "<leader>sn", picker("notifications"), desc = "Notifications" },
   { "<leader>sf", picker("filetypes"), desc = "Filetypes" },
+  { "<leader>si", picker("icons"), desc = "Filetypes" },
 })
