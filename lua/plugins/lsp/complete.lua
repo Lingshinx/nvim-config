@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
-  version = not vim.g.lazyvim_blink_main and "*",
-  build = "cargo build --release",
+  version = "1.*",
+  -- build = "cargo build --release",
   dependencies = {
     "rafamadriz/friendly-snippets",
     { "L3MON4D3/LuaSnip", version = "v2.*" },
@@ -45,7 +45,7 @@ return {
         auto_show_delay_ms = 200,
       },
       ghost_text = {
-        enabled = vim.g.ai_cmp,
+        enabled = true,
       },
     },
 
@@ -66,7 +66,6 @@ return {
 
     keymap = {
       preset = "enter",
-      ["<C-y>"] = { "select_and_accept" },
     },
   },
 }
