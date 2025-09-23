@@ -1,6 +1,7 @@
 return {
   {
     "mason-org/mason.nvim",
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ui = {
         icons = {
@@ -10,15 +11,6 @@ return {
         },
       },
     },
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-  },
-
-  {
-    "mason-org/mason-lspconfig.nvim",
-    lazy = true,
-    opts = {
-      ensure_installed = require("config.lsp").mason,
-    },
   },
 
   {
@@ -26,7 +18,6 @@ return {
     event = "LazyFile",
     dependencies = {
       "mason.nvim",
-      "mason-org/mason-lspconfig.nvim",
     },
   },
 }
