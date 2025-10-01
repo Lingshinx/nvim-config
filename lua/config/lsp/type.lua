@@ -1,6 +1,7 @@
 ---@class Config.Lang
+---@field [integer] string|table
 ---@field lsp string|table<string|string,table>?
----@field treesitter boolean?
----@field formattor string[]|string?
----@field plugins LazySpec
+---@field treesitter? string|boolean
+---@field formattor? string[]|string
+---@field plugins? LazySpec
 ---@field enabled? boolean
