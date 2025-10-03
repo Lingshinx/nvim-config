@@ -2,6 +2,7 @@ local function picker(name) return require("config.utils.plugin.snacks")[name] o
 
 -- stylua: ignore start
 require("which-key").add({
+  { "<leader>S", picker("pickers"), desc = "All Searcher" },
   { "<leader>s/", picker("search_history"), desc = "Search History" },
   { "<leader>s:", picker("command_history"), desc = "Command History" },
 
@@ -24,10 +25,8 @@ require("which-key").add({
 	{ "<leader>sD", picker("diagnostics_buffer"), desc = "Diagnostics (Buffer)" },
 
 	{ "<leader>sh", picker("help"), desc = "Help Pages" },
-	{ "<leader>sM", picker("man"), desc = "Man Pages" },
 
 	{ "<leader>sp", picker("lazy"), desc = "Plugins" },
-	{ "<leader>sH", picker("highlights"), desc = "Highlights" },
 	{ "<leader>su", picker("undo"), desc = "Undotree" },
 
 	{ "<leader>sn", picker("notifications"), desc = "Notifications" },
