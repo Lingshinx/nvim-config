@@ -18,10 +18,13 @@ return {
       require("mason").setup(opts)
       local lsp = require "config.lsp"
       local registry = require "mason-registry"
-      local function install(pkg)
-        if not registry.is_installed(pkg) and registry.has_package(pkg) then
-          vim.notify("installing " .. pkg .. "..")
-          registry.get_package(pkg):install()
+      local function install(pkg_name)
+        if not registry.is_installed(pkg_name) and registry.has_package(pkg_name) then
+          vim.notify("installing " .. pkg_name .. "..")
+          local pkg = registry.get_package(pkg_name)
+          pkg:install():once("closed", function()
+            vim.schedule(function() vim.notify(pkg_name .. (pkg:is_installed() and "is" or "not") .. "installed") end)
+          end)
         end
       end
       for _, pkg in ipairs(lsp.lsp) do
