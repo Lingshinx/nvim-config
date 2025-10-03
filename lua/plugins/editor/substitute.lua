@@ -1,5 +1,6 @@
 return {
   "gbprod/substitute.nvim",
+  event = "BufEnter",
   keys = {
     { "ds", desc = "Substitute" },
     { "dss", desc = "Substitute Line" },
