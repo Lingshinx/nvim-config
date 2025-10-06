@@ -2,8 +2,7 @@ return {
   "folke/flash.nvim",
   event = "LazyFile",
   opts = {},
-	---@type Flash.Config
-  -- stylua: ignore
+  ---@type Flash.Config
   keys = {
     { "X", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     { "<C-space>", mode = "o", function() require("flash").treesitter() end, desc = "Flash Treesitter" },

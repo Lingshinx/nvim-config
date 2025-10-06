@@ -3,17 +3,13 @@ local M = {}
 ---@param path string
 ---@return string?
 function M.realpath(path)
-	if path == "" or path == nil then
-		return nil
-	end
-	return vim.uv.fs_realpath(path) or path
+  if path == "" or path == nil then return nil end
+  return vim.uv.fs_realpath(path) or path
 end
 
 ---@param buf integer
 ---@return string?
-function M.bufpath(buf)
-	return M.realpath(vim.api.nvim_buf_get_name(assert(buf)))
-end
+function M.bufpath(buf) return M.realpath(vim.api.nvim_buf_get_name(assert(buf))) end
 
 ---@param pattern string
 ---@param path string

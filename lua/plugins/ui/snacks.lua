@@ -19,14 +19,12 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  opts = function()
-    ---@type snacks.Config
-    return {
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      dashboard = {
-        preset = {
-          header = logo,
+  opts = {
+    scroll = { enabled = true },
+    statuscolumn = { enabled = true },
+    dashboard = {
+      preset = {
+        header = logo,
           -- stylua: ignore
 					---@type snacks.dashboard.Item[]
 					keys = {
@@ -39,8 +37,7 @@ return {
 						{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
 						{ icon = " ", key = "q", desc = "Quit", action = ":qa" }
 					},
-        },
       },
-    }
-  end,
+    },
+  },
 }
