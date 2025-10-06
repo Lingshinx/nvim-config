@@ -24,6 +24,8 @@ map("i", "<C-CR>", "<End><CR>")
 map({ "i", "c" }, "<C-S-V>", '<C-r>"')
 map({ "i", "c" }, "<S-Insert>", '<C-r>"')
 map({ "i", "c" }, "<C-BS>", "<C-w>")
+map({ "i", "c" }, "<C-Delete>", "<C-Right><C-w>")
+
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
