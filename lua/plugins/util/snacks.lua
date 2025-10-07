@@ -15,8 +15,7 @@ return {
       quickfile = { enabled = true },
       explorer = { enabled = true },
       words = { enabled = true },
-      picker = { enabled = true },
-      rename = { enabled = true },
+      -- rename = { enabled = true },
       styles = {
         input = { relative = "cursor", row = -3, col = 3 },
         terminal = { border = "rounded" },
