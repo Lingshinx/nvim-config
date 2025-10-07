@@ -10,14 +10,26 @@ return {
       matcher = {
         frecency = true,
       },
-
       formatters = {
-        file = {
-          filename_first = true,
-          filename_only = true,
-        },
         selected = {
           unselected = false,
+        },
+      },
+      win = {
+        input = {
+          keys = {
+            ["<C-BS>"] = { "<c-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
+            ["<C-Delete>"] = { "<C-Right><C-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
+          },
+        },
+      },
+      icons = {
+        ui = {
+          live = "󰐰 ",
+          hidden = "󰘓",
+          ignored = "",
+          follow = "󱕱",
+          selected = "",
         },
       },
     },
