@@ -1,11 +1,11 @@
-return {
-	filetypes = function()
-		Snacks.picker.select(vim.fn.getcompletion("", "filetype"), {
-			prompt = "filetype",
-		}, function(filetype)
-			if filetype then
-				vim.bo.filetype = filetype
-			end
-		end)
-	end,
-}
+for key, value in pairs(require "config.utils.plugin.pickers") do
+  if type(value) == "table" then
+    Snacks.picker[key] = function(opts) Snacks.picker.pick(vim.tbl_extend("force", value, opts or {})) end
+  elseif type(value) == "function" then
+    Snacks.picker[key] = function(opts) Snacks.picker.pick(value(opts)) end
+  end
+end
+
+return function(name, opts)
+  return opts and function() Snacks.picker[name](opts) end or Snacks.picker[name]
+end

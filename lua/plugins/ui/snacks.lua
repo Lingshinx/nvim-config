@@ -25,18 +25,17 @@ return {
     dashboard = {
       preset = {
         header = logo,
-          -- stylua: ignore
-					---@type snacks.dashboard.Item[]
-					keys = {
-						{ icon = " ", key = "f", desc = "Find File", action =  pick("files") , },
-            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-            { icon = " ", key = "r", desc = "Recent Files", action = pick("oldfiles") },
-						{ icon = " ", key = ".", desc = "Dot Files", action =  pickfiles(dot_dir) },
-						{ icon = " ", key = "c", desc = "Config", action = pickfiles(config_dir) },
-						{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
-						{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-						{ icon = " ", key = "q", desc = "Quit", action = ":qa" }
-					},
+        ---@type snacks.dashboard.Item[]
+        keys = {
+          { icon = " ", key = "f", desc = "Find File", action = pick "files" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "r", desc = "Recent Files", action = pick "oldfiles" },
+          { icon = " ", key = ".", desc = "Dot Files", action = pickfiles(dot_dir) },
+          { icon = " ", key = "c", desc = "Config", action = pickfiles(config_dir) },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
       },
     },
   },
