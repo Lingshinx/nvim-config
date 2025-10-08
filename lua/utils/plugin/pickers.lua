@@ -18,6 +18,13 @@ function M.filetypes(opts)
       end
       return ret
     end, vim.fn.getcompletion("", "filetype"))
+    local fn = require "config.lsp.fn"
+    fn.foreach_lang(function(name, mod)
+      local names = fn.get_names(mod)
+      -- comment
+      if false then
+      end
+    end)
   end
   local filetypes = cache.filetypes
   return vim.tbl_extend("force", {

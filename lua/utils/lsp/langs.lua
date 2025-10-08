@@ -13,6 +13,7 @@ local mapfold = require("config.utils.list").mapfold
 ---@field plugins LazySpec
 ---@field append fun(langs: Config.Langs, name:string, config: Config.LangConfig)
 ---@field config fun()
+---@field solve fun(langs: Config.Langs, name:string, config:Config.LangConfig)
 
 local metatable = {
   __index = function(self, key)
@@ -36,6 +37,20 @@ local metatable = {
         config = function(langs)
           for _, config in pairs(langs.get) do
             config:config_lsp()
+          end
+        end,
+
+        solve = function(langs, name, mod)
+          if mod[1] == nil then
+            langs:append(name, mod)
+          else
+            for _, lang in ipairs(mod) do
+              if type(lang) == "string" then
+                langs:append(lang, mod)
+              elseif type(lang) == "table" and type(lang[1]) == "string" then
+                langs:append(lang[1], vim.tbl_extend("keep", lang, mod))
+              end
+            end
           end
         end,
 
