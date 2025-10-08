@@ -4,7 +4,6 @@ require "config.keymaps.search"
 require "config.keymaps.toggle"
 require "config.keymaps.winbuf"
 require "config.keymaps.lsp"
-require "config.keymaps.delete"
 require "config.keymaps.debug"
 
 local map = vim.keymap.set
@@ -38,6 +37,8 @@ map("t", "<esc><esc>", "<cmd>stopinsert<CR>", { desc = "which_key_ignore" })
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+map({ "n", "x" }, "s", "gs", { remap = true })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })

@@ -5,7 +5,7 @@ local M = {}
 
 function M.filetypes(opts)
   if not cache.filetypes then
-    local config = require "config.lsp"
+    local config = require (("config.language"))
     cache.filetypes = vim.tbl_map(function(filetype)
       local lang = config.get[filetype]
       local ret = {
@@ -18,13 +18,7 @@ function M.filetypes(opts)
       end
       return ret
     end, vim.fn.getcompletion("", "filetype"))
-    local fn = require "config.lsp.fn"
-    fn.foreach_lang(function(name, mod)
-      local names = fn.get_names(mod)
-      -- comment
-      if false then
-      end
-    end)
+    local fn = require "utils.language.fn"
   end
   local filetypes = cache.filetypes
   return vim.tbl_extend("force", {

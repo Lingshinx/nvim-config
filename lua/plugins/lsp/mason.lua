@@ -16,8 +16,8 @@ return {
     },
     config = function(_, opts)
       require("mason").setup(opts)
-      local lsp = require "config.lsp"
-      local install = require("config.utils.plugin.mason").install
+      local lsp = require (("config.language"))
+      local install = require("utils.plugin.mason").install
       for _, pkg in ipairs(lsp.mason) do
         install(pkg)
       end

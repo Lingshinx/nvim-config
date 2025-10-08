@@ -1,19 +1,8 @@
-local Lang = require "config.lsp.lang"
-local append = require("config.utils.list").append
-local mapfold = require("config.utils.list").mapfold
+local Lang = require "utils.language.lang"
+local append = require("utils.list").append
+local mapfold = require("utils.list").mapfold
 
 ---@alias Config.Langs.Collect fun(lang:Config.Langs, callback: fun(result:table, config:Config.Langs)):table
-
----@class Config.Langs
----@field get table<string,Config.Lang>
----@field formatters table<string,string[]>
----@field lsp (string|table<string,table>)[]
----@field mason string[]
----@field treesitter string[]
----@field plugins LazySpec
----@field append fun(langs: Config.Langs, name:string, config: Config.LangConfig)
----@field config fun()
----@field solve fun(langs: Config.Langs, name:string, config:Config.LangConfig)
 
 local metatable = {
   __index = function(self, key)

@@ -1,20 +1,19 @@
 local map = vim.keymap.set
+local del = vim.keymap.del
 local diagnostic_icon = require("config.icons").diagnostics
-
-local function picker(name) return Snacks.picker[name] end
-local function diagnostic_goto(count, severity)
-  return function()
-    vim.diagnostic.jump {
-      count = count,
-      severity = severity and vim.diagnostic.severity[severity] or nil,
-    }
-  end
-end
+local picker = require "utils.plugin.snacks"
+local diagnostic_goto = require("utils.language.fn").diagnostic_goto
 
 local function diagnostic_preview()
   vim.diagnostic.open_float()
   vim.diagnostic.open_float()
 end
+
+del("n", "grn")
+del("n", "gra")
+del("n", "grr")
+del("n", "gri")
+del("n", "grt")
 
 require("which-key").add {
   { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
@@ -74,5 +73,3 @@ map({ "i", "n", "s" }, "<esc>", function()
   if require("luasnip").expand_or_jumpable() then require("luasnip").unlink_current() end
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
-
--- commenting

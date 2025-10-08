@@ -1,23 +1,7 @@
 local Lang = {}
-local append = require("config.utils.list").append
+local append = require("utils.list").append
 
 ---@module 'lazy'
-
----@class Config.LangConfig
----@field [integer] string|table
----@field lsp string|table<string|string,table>?
----@field treesitter? string|boolean
----@field formatter? string[]|string
----@field plugins? LazySpec
----@field enabled? boolean
-
----@class Config.Lang
----@field lsp string|table<string|string,table>?
----@field name string?
----@field treesitter? string[]
----@field formatter? string[]
----@field plugins? LazySpec
----@field get_lspnames fun(self: Config.Lang):string
 
 local metatable = {
   __index = {

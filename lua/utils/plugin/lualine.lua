@@ -35,7 +35,7 @@ return {
     local path = vim.fn.expand "%:p" --[[@as string]]
     if path == "" then return "" end
 
-    local root = require("config.utils.root").get()
+    local root = require("utils.root").get()
     if path:find(root, 1, true) == 1 then path = path:sub(#root + 2) end
 
     local parts = vim.split(path, "/")

@@ -1,4 +1,4 @@
-local picker = require "config.utils.plugin.snacks"
+local picker = require "utils.plugin.snacks"
 
 require("which-key").add {
   { "<leader>S", picker "pickers", desc = "All Searcher" },

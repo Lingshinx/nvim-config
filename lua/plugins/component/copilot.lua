@@ -1,4 +1,4 @@
-local username = require("config.utils.fn").capitalize(vim.env.USER or "USER")
+local username = require("utils.fn").capitalize(vim.env.USER or "USER")
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
   dependencies = {

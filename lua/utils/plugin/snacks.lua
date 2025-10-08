@@ -1,4 +1,4 @@
-for key, value in pairs(require "config.utils.plugin.pickers") do
+for key, value in pairs(require "utils.plugin.pickers") do
   if type(value) == "table" then
     Snacks.picker[key] = function(opts) Snacks.picker.pick(vim.tbl_extend("force", value, opts or {})) end
   elseif type(value) == "function" then

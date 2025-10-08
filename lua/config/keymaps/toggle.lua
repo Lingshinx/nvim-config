@@ -15,6 +15,6 @@ Snacks.toggle.zoom():map("<leader>wm"):map "<leader>uZ"
 Snacks.toggle.zen():map "<leader>uz"
 Snacks.toggle.inlay_hints():map "<leader>uh"
 
-local format = require "config.utils.format"
+local format = require "utils.format"
 format.format_toggle:map "<leader>uf"
 format.format_toggle_global:map "<leader>uF"
