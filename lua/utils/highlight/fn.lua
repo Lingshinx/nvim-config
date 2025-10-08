@@ -8,8 +8,9 @@ M.setter = setmetatable({}, {
   end,
 })
 
----@class Config.highlight.Hl: vim.api.keyset.highlight
----@field set fun(self:Config.highlight.Hl, field: string, value: any):Config.highlight.Hl
+M.getter = setmetatable({}, {
+  __index = function(_, index) return M.get_by_name(index) end,
+})
 
 ---@class Config.highlight.Fn
 ---@field getter table<string, fun(opt: vim.api.keyset.highlight):vim.api.keyset.highlight>
