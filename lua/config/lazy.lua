@@ -10,6 +10,7 @@ require("lazy.core.handler.event").mappings.LazyFile = {
 require("lazy").setup {
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = true, frequence = 24 * 60 * 60 },
+  change_detection = { enabled = false },
   spec = {
     { import = "plugins.component" },
     { import = "plugins.ui" },
@@ -17,7 +18,18 @@ require("lazy").setup {
     { import = "plugins.util" },
     { import = "plugins.editor" },
 
-    require((("config.language"))).plugins,
+    require("config.language").plugins,
+  },
+  ui = {
+    custom_keys = {
+      gf = {
+        function(plugins)
+          vim.api.nvim_win_close(0, false)
+          Snacks.picker.files { cwd = plugins.dir }
+        end,
+        desc = "Search Files",
+      },
+    },
   },
   performance = {
     rtp = {
