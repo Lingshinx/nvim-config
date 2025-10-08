@@ -41,7 +41,11 @@ return {
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
 
     keys = {
-      { "<leader>fo", function() require("oil").toggle_float() end, desc = "Oil" },
+      {
+        "<leader>fo",
+        function() require("oil").toggle_float() end,
+        desc = "Oil",
+      },
       { "<BS>", "<cmd>Oil<CR>", desc = "Oil" },
     },
 

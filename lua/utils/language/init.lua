@@ -1,4 +1,4 @@
 return {
-  Lang = require("utils.language.lang"),
-  Langs = require("utils.language.langs")
+  Lang = require "utils.language.lang",
+  Langs = require "utils.language.langs",
 }

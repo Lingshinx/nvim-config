@@ -5,7 +5,7 @@ local M = {}
 
 function M.filetypes(opts)
   if not cache.filetypes then
-    local config = require (("config.language"))
+    local config = require "config.language"
     cache.filetypes = vim.tbl_map(function(filetype)
       local lang = config.get[filetype]
       local ret = {
@@ -18,7 +18,6 @@ function M.filetypes(opts)
       end
       return ret
     end, vim.fn.getcompletion("", "filetype"))
-    local fn = require "utils.language.fn"
   end
   local filetypes = cache.filetypes
   return vim.tbl_extend("force", {
@@ -45,7 +44,10 @@ function M.filetypes(opts)
           align(filetype, math.floor(side_width) - 2, { truncate = true }),
           item.treesitter and "" or "SnacksPickerDimmed",
         },
-        { align(item.formatter, center_width, { align = "center", truncate = true }), "LingshinPickerFtFormatter" },
+        {
+          align(item.formatter, center_width, { align = "center", truncate = true }),
+          "LingshinPickerFtFormatter",
+        },
         { align(item.lsp, math.ceil(side_width), { align = "right", truncate = true }), "LingshinPickerFtLsp" },
       }
     end,

@@ -16,8 +16,16 @@ require("which-key").add {
   { "<leader>fz", picker "zoxide", desc = "zoxide" },
   { "<leader><space>", picker "smart", desc = "Files" },
   { "<leader>e", Snacks.explorer.open, desc = "Explorer", icon = { icon = "", color = "purple" } },
-  { "<leader>fs", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-  { "<leader>fS", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+  {
+    "<leader>fs",
+    function() Snacks.scratch() end,
+    desc = "Toggle Scratch Buffer",
+  },
+  {
+    "<leader>fS",
+    function() Snacks.scratch.select() end,
+    desc = "Select Scratch Buffer",
+  },
   {
     "<leader>fy",
     function() require("toggleterm.terminal").Terminal:new({ cmd = "yazi" }):toggle() end,
