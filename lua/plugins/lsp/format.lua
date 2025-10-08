@@ -3,7 +3,7 @@ return {
   event = "LazyFile",
   opts = function()
     return {
-      formatters_by_ft = require((("config.language"))).formatters,
+      formatters_by_ft = require("config.language").formatters,
     }
   end,
   keys = {

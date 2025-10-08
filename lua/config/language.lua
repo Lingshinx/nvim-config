@@ -1,7 +1,6 @@
 local diagnostics = require("config.icons").diagnostics
 
 vim.diagnostic.config {
-  -- virtual_text = { prefix = "●" },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = diagnostics.Error,
@@ -23,7 +22,7 @@ vim.filetype.add {
 
 vim.treesitter.language.register("bash", "kitty")
 
-local langs = require ("utils.language").Langs.new()
+local langs = require("utils.language").Langs.new()
 
 require("utils.fs").load_each(
   vim.fn.stdpath "config",
