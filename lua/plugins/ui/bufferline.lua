@@ -28,7 +28,14 @@ return {
             (diag.warning and icons.Warn .. diag.warning or "")
 					)
         end,
-        offsets = { { filetype = "snacks_layout_box" } },
+        offsets = {
+          {
+            separator = true,
+            text = "File Explorer",
+            text_align = "center",
+            filetype = "snacks_layout_box",
+          },
+        },
         ---@param opts bufferline.IconFetcherOpts
         get_element_icons = function(opts) return MiniIcon.get("filetype", opts.filetype) end,
       },
