@@ -4,10 +4,6 @@ return {
     priority = 1000,
     opts = {},
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  {
-    "marko-cerovac/material.nvim",
-  },
   {
     "mvllow/modes.nvim",
     event = "VeryLazy",
