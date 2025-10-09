@@ -18,11 +18,11 @@ M = {
   ---@return A
   fold = function(init, f, list)
     if type(init) == "table" then
-      for i, v in pairs(list) do
+      for i, v in ipairs(list) do
         f(init, v, i)
       end
     else
-      for i, v in pairs(list) do
+      for i, v in ipairs(list) do
         init = f(init, v, i)
       end
     end

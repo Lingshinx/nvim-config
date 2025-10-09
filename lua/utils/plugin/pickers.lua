@@ -6,11 +6,25 @@ local M = {}
 function M.filetypes(opts)
   if not cache.filetypes then
     local config = require "config.language"
+    local file_name_of = {}
+    local lang_fn = require "utils.language.fn"
+    require("utils.fs").load_each(vim.fn.stdpath "config", "config.langs", function(file_name, mod)
+      local names = lang_fn.get_names(mod)
+      if vim.tbl_isempty(names) then
+        file_name_of[file_name] = file_name
+      else
+        for _, lang_name in ipairs(names) do
+          file_name_of[lang_name] = file_name
+        end
+      end
+    end)
     cache.filetypes = vim.tbl_map(function(filetype)
       local lang = config.get[filetype]
+      local file_name = file_name_of[filetype]
       local ret = {
         treesitter = not vim.tbl_isempty(lang and lang.treesitter or {}),
         text = filetype,
+        file = file_name and lang_fn.get_path(file_name),
       }
       if lang then
         ret.formatter = lang.formatter and lang.formatter[1]
