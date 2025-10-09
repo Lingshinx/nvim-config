@@ -1,4 +1,4 @@
--- require("config.utils.profiler")
+-- require "utils.profiler"
 require "config.options"
 require "config.lazy"
 require "config.keymaps"
