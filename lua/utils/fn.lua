@@ -13,5 +13,12 @@ M = {
   ---@param str string
   ---@return string
   capitalize = function(str) return str:sub(1, 1):upper() .. str:sub(2) end,
+
+  ---@param callback fun()
+  deter = function(callback)
+    vim.api.nvim_create_autocmd("UIEnter", {
+      callback = callback,
+    })
+  end,
 }
 return M
