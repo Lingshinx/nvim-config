@@ -1,8 +1,9 @@
 local map = vim.keymap.set
 local del = vim.keymap.del
 local diagnostic_icon = require("config.icons").diagnostics
-local picker = require "utils.plugin.snacks"
+local picker = require("utils.plugin.snacks").picker
 local diagnostic_goto = require("utils.language.fn").diagnostic_goto
+local reference_goto = require("utils.plugin.snacks").word_goto
 
 local function diagnostic_preview()
   vim.diagnostic.open_float()
@@ -25,6 +26,8 @@ require("which-key").add {
   { "]e", diagnostic_goto(1, "ERROR"), desc = "Error", icon = { icon = diagnostic_icon.Error, color = "red" } },
   { "[w", diagnostic_goto(-1, "WARN"), desc = "Warning", icon = { icon = diagnostic_icon.Warn, color = "yellow" } },
   { "]w", diagnostic_goto(1, "WARN"), desc = "Warning", icon = { icon = diagnostic_icon.Warn, color = "yellow" } },
+  { "[[", reference_goto(-1), desc = "Reference", icon = { icon = "", color = "purple" } },
+  { "]]", reference_goto(1), desc = "Reference", icon = { icon = "", color = "purple" } },
   { "<leader>xp", diagnostic_preview, desc = "Preview" },
 
   { "gD", picker "lsp_declarations", desc = "Goto Definition" },

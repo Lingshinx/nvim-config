@@ -1,6 +1,6 @@
 local config = vim.fn.stdpath "config"
 local dotfile = vim.env.XDG_CONFIG_HOME or "~/.config"
-local picker = require "utils.plugin.snacks"
+local picker = require("utils.plugin.snacks").picker
 local function pickfile(cwd)
   return function() return Snacks.picker.files { cwd = cwd } end
 end

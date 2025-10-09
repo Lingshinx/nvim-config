@@ -6,6 +6,18 @@ for key, value in pairs(require "utils.plugin.pickers") do
   end
 end
 
-return function(name, opts)
-  return opts and function() Snacks.picker[name](opts) end or Snacks.picker[name]
-end
+return {
+  ---@param name string
+  ---@param opts snacks.picker.Config?
+  ---@return fun(opts: snacks.picker.Config?):snacks.Picker
+  picker = function(name, opts)
+    return opts and function() Snacks.picker[name](opts) end or Snacks.picker[name]
+  end,
+
+  ---@param count integer
+  ---@param cycle boolean?
+  ---@return fun()
+  word_goto = function(count, cycle)
+    return function() Snacks.words.jump(count, cycle) end
+  end,
+}
