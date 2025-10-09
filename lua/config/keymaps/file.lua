@@ -19,12 +19,12 @@ require("which-key").add {
   { "<leader>e", Snacks.explorer.open, desc = "Explorer", icon = { icon = "", color = "purple" } },
   {
     "<leader>fs",
-    function() Snacks.scratch() end,
+    Snacks.scratch.open,
     desc = "Toggle Scratch Buffer",
   },
   {
     "<leader>fS",
-    function() Snacks.scratch.select() end,
+    Snacks.scratch.select,
     desc = "Select Scratch Buffer",
   },
   {
