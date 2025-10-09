@@ -12,10 +12,9 @@ return {
       watch_for_changes = true,
       keymaps = {
         ["<CR>"] = "actions.select",
-        ["<M-v>"] = { "actions.select", opts = { vertical = true } },
-        ["<M-s>"] = { "actions.select", opts = { horizontal = true } },
+        ["|"] = { "actions.select", opts = { vertical = true } },
+        ["-"] = { "actions.select", opts = { horizontal = true } },
         ["<C-c>"] = { "actions.close", mode = "n" },
-        ["K"] = { "actions.preview", mode = "n" },
         ["<BS>"] = { "actions.parent", mode = "n" },
         ["g?"] = { "actions.show_help", mode = "n" },
         ["gx"] = "actions.open_external",
