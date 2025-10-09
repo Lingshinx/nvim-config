@@ -1,16 +1,8 @@
 require("which-key").add {
   -- buffers
   { "<leader>bb", "<cmd>e #<cr>", desc = "Switch" },
-  {
-    "<leader>bd",
-    function() Snacks.bufdelete() end,
-    desc = "Delete",
-  },
-  {
-    "<leader>bo",
-    function() Snacks.bufdelete.other() end,
-    desc = "Delete Others",
-  },
+  { "<leader>bd", Snacks.bufdelete.delete, desc = "Delete" },
+  { "<leader>bo", Snacks.bufdelete.other, desc = "Delete Others" },
 
   -- windows
   { "<leader>-", "<C-W>s", desc = "Split Below", remap = true, icon = { icon = "", color = "blue" } },
