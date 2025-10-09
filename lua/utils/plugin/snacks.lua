@@ -1,17 +1,18 @@
-for key, value in pairs(require "utils.plugin.pickers") do
-  if type(value) == "table" then
-    Snacks.picker[key] = function(opts) Snacks.picker.pick(vim.tbl_extend("force", value, opts or {})) end
-  elseif type(value) == "function" then
-    Snacks.picker[key] = function(opts) Snacks.picker.pick(value(opts)) end
-  end
-end
-
 return {
   ---@param name string
   ---@param opts snacks.picker.Config?
   ---@return fun(opts: snacks.picker.Config?):snacks.Picker
   picker = function(name, opts)
-    return opts and function() Snacks.picker[name](opts) end or Snacks.picker[name]
+    if Snacks.picker[name] then return opts and function() Snacks.picker[name](opts) end or Snacks.picker[name] end
+    local ok, value = pcall(require, "config.pickers." .. name)
+    if ok then
+      value = type(value) == "table" and vim.tbl_extend("force", value, opts or {}) or value(opts)
+      local picker = function() Snacks.picker.pick(value) end
+      Snacks.picker[name] = picker
+      return picker --[[@as fun(opts: snacks.picker.Config?):snacks.Picker]]
+    else
+      error("No picker named " .. name)
+    end
   end,
 
   ---@param count integer

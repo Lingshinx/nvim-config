@@ -1,9 +1,7 @@
 local cache = {}
 
----@type table<string,snacks.picker.Config|fun(snacks.picker.Config):snacks.picker.Config>
-local M = {}
-
-function M.filetypes(opts)
+---@type snacks.picker.Config|fun(snacks.picker.Config):snacks.picker.Config>
+return function(opts)
   if not cache.filetypes then
     local config = require "config.language"
     local file_name_of = {}
@@ -72,5 +70,3 @@ function M.filetypes(opts)
     end,
   }, opts or {})
 end
-
-return M
