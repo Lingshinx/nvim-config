@@ -8,6 +8,7 @@ end
 require("which-key").add {
   { "<leader>fn", "<cmd>enew<cr>", desc = "New File" },
   { "<leader>fb", picker "buffers", desc = "Buffers" },
+  { "<leader>ff", picker "files", desc = "Files" },
   { "<leader>fc", pickfile(config), desc = "Config" },
   { "<leader>f.", pickfile(dotfile), desc = "Dotfile" },
   { "<leader>fg", picker "git_files", desc = "Git" },
