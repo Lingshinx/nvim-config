@@ -1,4 +1,4 @@
-local function picker(name) return Snacks.picker[name] end
+local picker = require("utils.plugin.snacks").picker
 require("which-key").add {
   { "<leader>gd", picker "git_diff", desc = "Diff" },
   { "<leader>gs", picker "git_status", desc = "Status" },
