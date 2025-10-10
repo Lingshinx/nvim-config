@@ -11,6 +11,7 @@ require("lazy").setup {
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = true, frequence = 24 * 60 * 60 },
   change_detection = { enabled = false },
+  rocks = { enabled = false },
   spec = {
     { import = "plugins.component" },
     { import = "plugins.ui" },
