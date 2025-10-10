@@ -40,7 +40,8 @@ M = {
   ---@return string?
   parent = function(buf)
     local path = vim.api.nvim_buf_get_name(buf)
-    local parent = vim.fn.filereadable(path) and (vim.fn.fnamemodify(path, ":p:h"))
+    if vim.fn.filereadable(path) == 0 then return end
+    local parent = vim.fn.fnamemodify(path, ":p:h")
     return vim.uv.fs_stat(parent) and parent or nil
   end,
 
