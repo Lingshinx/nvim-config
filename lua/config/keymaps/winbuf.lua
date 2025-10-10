@@ -24,8 +24,8 @@ require("which-key").add {
   { "<leader><tab>f", "<cmd>tabfirst<cr>", desc = "First" },
   { "<leader><tab>l", "<cmd>tablast<cr>", desc = "Last" },
   { "<leader><tab>o", "<cmd>tabonly<cr>", desc = "Delete Others" },
-  { "<leader><tab><tab>", "<cmd>tabnew<cr>", desc = "New" },
+  { "<leader><tab>n", "<cmd>tabnew<cr>", desc = "New" },
   { "<leader><tab>]", "<cmd>tabnext<cr>", desc = "Next" },
-  { "<leader><tab>d", "<cmd>tabclose<cr>", desc = "Delete" },
   { "<leader><tab>[", "<cmd>tabprevious<cr>", desc = "Previous" },
+  { "<leader><tab>d", "<cmd>tabclose<cr>", desc = "Delete" },
 }
