@@ -15,12 +15,14 @@
 ---@field treesitter? string[]
 ---@field formatter? string[]
 ---@field plugins? LazySpec
+---@field pkgs? string[]
 ---@field get_lspnames fun(self: Config.Lang):string
 
 ---@class Config.LangConfig
----@field [integer] string|table
+---@field [integer] string|Config.LangConfig
 ---@field lsp string|table<string|string,table>?
----@field treesitter? string|boolean
+---@field treesitter? string[]|boolean
 ---@field formatter? string[]|string
 ---@field plugins? LazySpec
+---@field pkgs? string[]
 ---@field enabled? boolean

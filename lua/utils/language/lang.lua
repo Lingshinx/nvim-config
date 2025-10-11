@@ -70,6 +70,7 @@ function Lang.new(name, config)
   result:set_formatter(config.formatter)
   result.lsp = config.lsp
   result.plugins = config.plugins
+  result.pkgs = config.pkgs
   return setmetatable(result, metatable)
 end
 

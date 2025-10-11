@@ -14,6 +14,7 @@ local metatable = {
       mason = function(result, config)
         vim.list_extend(result, config:get_lspnames() or {})
         vim.list_extend(result, config.formatter or {})
+        vim.list_extend(result, config.pkgs or {})
       end,
     })[key]
     return result and self:collect(result)
