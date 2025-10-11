@@ -29,16 +29,13 @@ local metatable = {
           end
         end,
 
-        solve = function(langs, name, mod)
-          if mod[1] == nil then
-            langs:append(name, mod)
-          else
-            for _, lang in ipairs(mod) do
-              if type(lang) == "string" then
-                langs:append(lang, mod)
-              elseif type(lang) == "table" and type(lang[1]) == "string" then
-                langs:append(lang[1], vim.tbl_extend("keep", lang, mod))
-              end
+        solve = function(langs, mod)
+          local mt = { __index = mod }
+          for _, lang in ipairs(mod) do
+            if type(lang) == "string" then
+              langs:append(lang, mod)
+            elseif type(lang) == "table" then
+              langs:solve(setmetatable(lang, mt))
             end
           end
         end,

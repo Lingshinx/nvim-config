@@ -7,7 +7,7 @@
 ---@field plugins LazySpec
 ---@field append fun(langs: Config.Langs, name:string, config: Config.LangConfig)
 ---@field config fun()
----@field solve fun(langs: Config.Langs, name:string, config:Config.LangConfig)
+---@field solve fun(langs: Config.Langs, config:Config.LangConfig)
 
 ---@class Config.Lang
 ---@field lsp string|table<string|string,table>?
