@@ -5,7 +5,7 @@ return {
       set_hl(hl_group, value)
     end
     for hl_group, value in pairs(config.lingshin or {}) do
-      set_hl(hl_group, value)
+      set_hl("Lingshin" .. hl_group, value)
     end
   end,
 }
