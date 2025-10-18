@@ -1,26 +1,20 @@
 return {
-  "echasnovski/mini.surround",
-  keys = {
-    { "gsa", desc = "Add" },
-    { "gsd", desc = "Delete" },
-    { "gsf", desc = "Find right" },
-    { "gsF", desc = "Find left" },
-    { "gsh", desc = "Highlight" },
-    { "gsr", desc = "Replace" },
-    { "gsn", desc = "Update Number of within lines" },
-  },
+  "kylechui/nvim-surround",
+  version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+  event = "VeryLazy",
   opts = {
-    mappings = {
-      add = "gsa",
-      delete = "gsd",
-      find = "gsf",
-      find_left = "gsF",
-      highlight = "gsh",
-      replace = "gsr",
-      update_n_lines = "gsn",
-
-      suffix_last = "[",
-      suffix_next = "]",
+    keymaps = {
+      insert = "<C-g>s",
+      insert_line = "<C-g>S",
+      normal = "sa",
+      normal_cur = "saa",
+      normal_line = "sA",
+      normal_cur_line = "sao",
+      visual = "sa",
+      visual_line = "sA",
+      delete = "sd",
+      change = "sr",
+      change_line = "sR",
     },
   },
 }

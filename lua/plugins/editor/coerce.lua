@@ -5,8 +5,8 @@ return {
   opts = {
     default_mode_keymap_prefixes = {
       normal_mode = "co",
-      motion_mode = "gsc",
-      visual_mode = "gsc",
+      motion_mode = "sc",
+      visual_mode = "sc",
     },
   },
 }
