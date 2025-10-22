@@ -1,5 +1,6 @@
 local TermName = {
-  provider = function() return " " .. vim.api.nvim_buf_get_name(0):gsub(".*:", "") end,
+  provider = function() return " " .. vim.api.nvim_buf_get_name(0):gsub("^.*:", ""):gsub(";#toggleterm#[0-9]$", "") end,
+  hl = { fg = "green", bold = true },
   condition = function() return vim.bo.buftype == "terminal" end,
 }
 
@@ -48,8 +49,12 @@ local File = {
 }
 
 local HelpName = {
+  { provider = "󱛉 ", hl = { fg = "green" } },
+  {
+    provider = function() return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t:r") end,
+    hl = { bold = true, fg = "white" },
+  },
   condition = function() return vim.bo.filetype == "help" end,
-  provider = function() return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t") end,
 }
 
 local Default = {
