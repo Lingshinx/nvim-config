@@ -1,7 +1,5 @@
 local M = {}
 
----@alias path_handler fun(path: string): string
-
 ---@param path string?
 ---@return string?
 function M.realpath(path)
