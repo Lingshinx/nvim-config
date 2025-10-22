@@ -8,7 +8,12 @@ local TermName = {
 
 local WorkDir = {
   flexible = 1,
-  { provider = function(self) return " " .. vim.fn.fnamemodify(self.filename, ":.:h") .. "/" end },
+  {
+    provider = function(self)
+      local dir = vim.fn.fnamemodify(self.filename, ":.:h")
+      return dir == "." and " " or " " .. dir .. "/"
+    end,
+  },
   {
     provider = function(self) return " " .. fs.shorten_path(vim.fn.fnamemodify(self.filename, ":.:h")) .. "/" end,
   },
