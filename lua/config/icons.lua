@@ -7,7 +7,7 @@ return {
   },
   git = {
     added = " ",
-    modified = " ",
+    changed = " ",
     removed = " ",
   },
   kinds = {
