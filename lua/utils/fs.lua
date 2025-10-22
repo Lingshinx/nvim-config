@@ -43,4 +43,17 @@ function M.load_each(rtp, modname, callback)
   end)
 end
 
+---@param path string
+---@return string
+function M.shorten_path(path, opts)
+  opts = vim.tbl_extend("keep", opts or {}, {
+    length = 2,
+  })
+  local parts = vim.split(path, "/")
+  -- handle situation when path start with "/"
+  parts = parts[1] == "" and { "", parts[2], "…", unpack(parts, #parts - opts.length + 2, #parts) }
+    or { parts[1], "…", unpack(parts, #parts - opts.length + 2, #parts) }
+  return #parts < opts.length and path or table.concat(parts, "/")
+end
+
 return M

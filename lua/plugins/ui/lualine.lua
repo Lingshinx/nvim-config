@@ -2,6 +2,7 @@ local icons = require "config.icons"
 
 return {
   "nvim-lualine/lualine.nvim",
+  enabled = false,
   event = "VeryLazy",
   dependencies = { "nvim-tree/nvim-web-devicons", "folke/trouble.nvim" },
   opts = function()
