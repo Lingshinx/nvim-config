@@ -29,7 +29,7 @@ return {
     hl = { fg = "diag_info" },
   },
   {
-    provider = function(self) return self.hints > 0 and (self.icons.Hint .. self.hints) end,
+    provider = function(self) return self.hints > 0 and (self.icons.Hint .. self.hints .. " ") end,
     hl = { fg = "diag_hint" },
   },
   { provider = " " },
