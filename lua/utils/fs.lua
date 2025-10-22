@@ -1,6 +1,8 @@
 local M = {}
 
----@param path string
+---@alias path_handler fun(path: string): string
+
+---@param path string?
 ---@return string?
 function M.realpath(path)
   if path == "" or path == nil then return nil end
@@ -15,10 +17,7 @@ function M.bufpath(buf) return M.realpath(vim.api.nvim_buf_get_name(assert(buf))
 ---@param path string
 ---@return boolean
 function M.match(pattern, path)
-  -- stylua: ignore
-	return pattern == path or
-    pattern:sub(1, 1) == "*" and
-    path:find(vim.pesc(pattern:sub(2)) .. "$") ~= nil
+  return pattern == path or pattern:sub(1, 1) == "*" and path:find(vim.pesc(pattern:sub(2)) .. "$") ~= nil
 end
 
 ---@param dir string
@@ -54,6 +53,13 @@ function M.shorten_path(path, opts)
   parts = parts[1] == "" and { "", parts[2], "…", unpack(parts, #parts - opts.length + 2, #parts) }
     or { parts[1], "…", unpack(parts, #parts - opts.length + 2, #parts) }
   return #parts < opts.length and path or table.concat(parts, "/")
+end
+
+---@param path string
+---@return string
+function M.tilde(path)
+  local home = vim.uv.os_homedir()
+  return path:sub(1, #home) == home and "~" .. path:sub(#home + 1) or path
 end
 
 return M
