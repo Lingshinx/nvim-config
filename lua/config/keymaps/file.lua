@@ -14,7 +14,7 @@ require("which-key").add {
   { "<leader>fg", picker "git_files", desc = "Git" },
   { "<leader>fr", picker "recent", desc = "Recent" },
   { "<leader>fp", picker "projects", desc = "Projects" },
-  { "<leader>fz", picker "zoxide", desc = "zoxide" },
+  { "<leader>fz", picker "zoxide", desc = "Zoxide" },
   { "<leader><space>", picker "smart", desc = "Files" },
   { "<leader>e", Snacks.explorer.open, desc = "Explorer", icon = { icon = "", color = "purple" } },
   {

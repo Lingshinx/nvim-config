@@ -41,7 +41,7 @@ return {
           end,
         },
         ["<leader>fz"] = {
-          desc = "zoxide",
+          desc = "Zoxide",
           callback = function()
             Snacks.picker.zoxide {
               actions = {
