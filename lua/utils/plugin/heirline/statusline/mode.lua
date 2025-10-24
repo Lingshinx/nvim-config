@@ -1,9 +1,9 @@
 local conditions = require "heirline.conditions"
 
 local Mode = {
+  update = { "BufEnter", "ModeChanged" },
   {
     provider = function(self) return " " .. self.mode_names[self.mode] .. " " end,
-    update = { "BufEnter", "ModeChanged" },
     hl = function(self) return { fg = "dark", bg = self.mode_colors[self.mode] } end,
     static = {
       mode_names = {
