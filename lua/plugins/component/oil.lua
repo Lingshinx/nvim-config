@@ -19,6 +19,8 @@ return {
         ["<BS>"] = { "actions.parent", mode = "n" },
         ["g?"] = { "actions.show_help", mode = "n" },
         ["gx"] = "actions.open_external",
+        ["<C-y>"] = "actions.copy_to_system_clipboard",
+        ["<C-p>"] = "actions.paste_from_system_clipboard",
         ["<leader>R"] = "actions.refresh",
         ["<leader>oh"] = { "actions.open_cwd", mode = "n" },
         ["<leader>os"] = { "actions.change_sort", desc = "Oil change sort", mode = "n" },
@@ -29,6 +31,26 @@ return {
           callback = function()
             vim.b.detail = not vim.b.detail
             require("oil").set_columns(vim.b.detail and { "icon", "permissions", "size", "mtime" } or { "icon" })
+          end,
+        },
+        ["<c-\\>"] = {
+          desc = "Terminal",
+          callback = function()
+            vim.cmd.chdir(require("oil").get_current_dir(0))
+            require("toggleterm").toggle_command()
+          end,
+        },
+        ["<leader>fz"] = {
+          desc = "zoxide",
+          callback = function()
+            Snacks.picker.zoxide {
+              actions = {
+                confirm = function(picker, item)
+                  picker:close()
+                  require("oil").open(item.file)
+                end,
+              },
+            }
           end,
         },
       },
