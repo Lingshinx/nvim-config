@@ -18,11 +18,6 @@ return {
     self.mode = vim.fn.mode()
     self.mode_color = self.mode_colors[self.mode]
   end,
-  update = {
-    "ModeChanged",
-    pattern = "*:*",
-    callback = vim.schedule_wrap(function() vim.cmd "redrawstatus" end),
-  },
   static = {
     mode_colors = {
       n = "blue",
