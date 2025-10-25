@@ -22,7 +22,7 @@ return {
     map("n", "ds", substitute.operator, { noremap = true })
     map("n", "dss", substitute.line, { noremap = true })
     map("n", "dS", substitute.eol, { noremap = true })
-    map("x", "gss", substitute.visual, { noremap = true })
+    map("x", "s", substitute.visual, { noremap = true })
 
     local range = require "substitute.range"
     map("n", "g#", range.operator, { noremap = true })
