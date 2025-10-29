@@ -135,11 +135,13 @@ And feel free to open an issue if interested in my **nvim-config**.
 I'll draw a custom Logo for you when I have time.
 
 > I'm unable to make so many friends. So, hurry up?
+> 
 > Okay, take it easy, I think there is no chance that I will be followed by 100+ friends.
 
 ## Planned Features
 
 - [ ] Workspace Configuration
 
-  Inspired by [@aurora](https://github.com/aurora0x27)/[nvim-config](https://github.com/aurora0x27/nvim-config)
+  Inspired by [@aurora](https://github.com/aurora0x27)/[nvim-config](https://github.com/aurora0x27/nvim-config).
+
   Add user commands, keymaps, and autocmds, and apply project-specific options when `.nvim/` was detected in root of project
