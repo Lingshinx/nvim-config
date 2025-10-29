@@ -79,6 +79,8 @@ git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.
 
 随便一提，我把我自己的语言配置放在了 `stdpath('config')/languages`, 你可以把他们复制到 `stdpath('config')/lua/langs` 里去
 
+如果你喜欢这个功能，也可以提交一些你个人的语言配置到这里来。由于不会自动应用，所以无论什么语言都大欢迎！
+
 ### FileType Picker
 
 用 <kbd>\<leader\>sf</kbd> 来 查找文件类型 *(search filetypes)*

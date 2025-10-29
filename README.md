@@ -70,7 +70,10 @@ Each file should returns a table of type `Config.LangConfig`.
 
 [Example](./Language.md) about how to configure languages.
 
-Also, my own language configurations are placed in `stdpath('config')/languages`, you can move some of them to `stdpath('config')/lua/langs` to enable.
+Also, my own language configurations are placed in `stdpath('config')/languages`, You can copy some of them to `stdpath('config')/lua/langs` to enable.
+
+Feel free to PR your own language configuration to me if you like this functionality.
+Since those configuration aren't applied automatically, so I'd really appreciate your contribution whatever the language is
 
 ### FileType Picker
 
