@@ -27,7 +27,7 @@
 相信我的配置还是足以胜任的
 
 > [!TIP]
-> If you already have a Neovim setup i> 如果你已经有一个 Neovim 配置的话，可以不用备份原来的配置，而是将我的配置下载到 `$XDG_CONFIG_COME/{NVIM_APPNAME}`
+> 如果你已经有一个 Neovim 配置的话，可以不用备份原来的配置，而是将我的配置下载到 `$XDG_CONFIG_COME/{NVIM_APPNAME}`
 > NVIM_APPNAME 随便起什么都行啦，只要不和你原来的目录起冲突。比如说，你可以用 `nvim_lingshin` 来当这份配置的 APPNAME
 >
 > ```bash
