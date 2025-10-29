@@ -2,7 +2,7 @@
 
 <img width="2516" height="1348" alt="Image" src="https://github.com/user-attachments/assets/9849a4e0-aa54-4dae-81d2-5d6e97787d73" />
 
-## Introduction
+## Introduction [zh_CN](./README-CN.md)
 
 I used to use [LazyVim](https://www.lazyvim.org/). It's awesome.
 But I found it kind of hard to keep tweaking Neovim on top of LazyVim.
