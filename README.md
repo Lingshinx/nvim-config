@@ -93,6 +93,8 @@ When root directory cannot be detected, default to parent directory.
 
 ### Oil, Tabline and Harpoon
 
+<img width="1396" height="919" alt="图片" src="https://github.com/user-attachments/assets/55bd0614-69d7-4a2e-9b60-95f36ed6173a" />
+
 I agree with the opinion that *you should not turn your Neovim into a traditional IDE*.
 
 - Use **tabline** instead of **bufferline**
