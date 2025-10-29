@@ -76,7 +76,7 @@ Also, my own language configurations are placed in `stdpath('config')/languages`
 
 Use <kbd>\<leader\>sf</kbd> to *search filetypes*.
 
-https://github.com/user-attachments/assets/bbcee4b8-3e6b-42e8-ae0a-dbfd991ac677.
+https://github.com/user-attachments/assets/bbcee4b8-3e6b-42e8-ae0a-dbfd991ac677
 
 Thanks to the [feature](#language) above that I can display informations of formatter, Tree-sitter, and LSP for each language.
 
