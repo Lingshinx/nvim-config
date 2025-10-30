@@ -1,3 +1,5 @@
+---@module 'lazy'
+
 ---@class Config.Langs
 ---@field get table<string,Config.Lang>
 ---@field formatters table<string,string[]>
@@ -20,7 +22,7 @@
 
 ---@class Config.LangConfig
 ---@field [integer] string|Config.LangConfig
----@field lsp string|table<string|string,table>?
+---@field lsp? string|table<string|string,table>
 ---@field treesitter? string[]|boolean
 ---@field formatter? string[]|string
 ---@field plugins? LazySpec
