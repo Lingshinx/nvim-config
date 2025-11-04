@@ -18,9 +18,8 @@ return {
     "ZkAdd",
   },
   config = function()
-    require("zk").setup {
+    require("utils.plugin.zk").setup {
       picker = "snacks_picker",
     }
-    require "utils.plugin.zk"
   end,
 }

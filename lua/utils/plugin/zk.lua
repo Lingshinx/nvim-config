@@ -25,49 +25,51 @@ local function zk_new()
   )
 end
 
--- alias.where = "echo $ZK_NOTEBOOK_DIR"
-vim.system({ "zk", "where" }, { text = true }, function(result)
-  Snacks.debug.log(result.stdout .. "/*.md")
-  if result.code ~= 0 then vim.notify(result.stderr, vim.log.ERROR) end
-  vim.schedule(function()
-    local notebook = result.stdout:sub(1, -2)
-    vim.env.ZK_NOTEBOOK_DIR = notebook
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-      pattern = { notebook .. "/*.md" },
-      callback = function()
-        require("which-key").add {
-          { "<leader>z", group = "zettlekasten", icon = "" },
-          { "<leader>zn", zk_new, desc = "New", remap = false, buffer = true },
-          { "<leader>zi", command.get "ZkInsertLink", desc = "Insert Link", remap = false, buffer = true },
-          { "<leader>zl", command.get "ZkLinks", desc = "Link", remap = false, buffer = true },
-          { "<leader>zL", command.get "ZkBackLinks", desc = "BackLinks", remap = false, buffer = true },
-          { "<leader>zs", command.get "ZkMatch", desc = "BackLinks", remap = false, buffer = true },
-          {
-            "<leader>zi",
-            command.get "ZkInsertLinkAtSelection",
-            desc = "Insert Link",
-            remap = false,
-            buffer = true,
-            mode = "x",
-          },
-          {
-            "<leader>zn",
-            command.get "ZkNewFromTitleSelection",
-            desc = "New Title",
-            remap = false,
-            buffer = true,
-            mode = "x",
-          },
-          {
-            "<leader>zN",
-            command.get "ZkNewFromContentSelection",
-            desc = "New Content",
-            remap = false,
-            buffer = true,
-            mode = "x",
-          },
-        }
-      end,
-    })
+local function map(key, callback, desc, mode)
+  return {
+    "<leader>z" .. key,
+    type(callback) == "string" and command.get(callback) or callback,
+    desc = desc,
+    mode = mode,
+    remap = false,
+    buffer = true,
+  }
+end
+
+local function nmap(key, callback, desc) return map(key, callback, desc, "n") end
+
+local function xmap(key, callback, desc) return map(key, callback, desc, "x") end
+
+local keymaps = {
+  { "<leader>z", group = "zettlekasten", icon = "" },
+  nmap("n", zk_new, "New"),
+  nmap("i", "ZkInsertLink", "Insert Link"),
+  nmap("l", "ZkLinks", "Link"),
+  nmap("L", "ZkBackLinks", "BackLinks"),
+  nmap("s", "ZkMatch", "BackLinks"),
+  xmap("i", "ZkInsertLinkAtSelection", "Insert Link"),
+  xmap("n", "ZkNewFromTitleSelection", "New Title"),
+  xmap("N", "ZkNewFromContentSelection", "New Content"),
+}
+
+local function set_keymaps()
+  -- alias.where = "echo $ZK_NOTEBOOK_DIR"
+  vim.system({ "zk", "where" }, { text = true }, function(result)
+    if result.code ~= 0 then vim.notify(result.stderr, vim.log.ERROR) end
+    vim.schedule(function()
+      local notebook = result.stdout:sub(1, -2)
+      vim.env.ZK_NOTEBOOK_DIR = notebook
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+        pattern = { notebook .. "/*.md" },
+        callback = function() require("which-key").add(keymaps) end,
+      })
+    end)
   end)
-end)
+end
+
+return {
+  setup = function(opts)
+    zk.setup(opts)
+    set_keymaps()
+  end,
+}
