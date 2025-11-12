@@ -5,8 +5,12 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, ... }: {
-    homeModules.nvim-config = { pkgs, ... }: {
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  }: {
+    homeModules.nvim-config = {pkgs, ...}: {
       home.packages = with pkgs; [
         gnumake
         ripgrep

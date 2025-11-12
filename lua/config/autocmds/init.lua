@@ -4,6 +4,7 @@ local augroup = function(name) return vim.api.nvim_create_augroup("lingshin_" ..
 -- Auto Chdir
 autocmd({ "BufEnter", "BufWinEnter" }, {
   desc = "Auto change dir to root",
+  nested = true,
   callback = function()
     if vim.bo.buftype ~= "" then return end
     vim.fn.chdir(require("utils.root").get())
