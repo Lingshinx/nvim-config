@@ -25,6 +25,18 @@ local function zk_new()
   )
 end
 
+vim.api.nvim_create_user_command("ZkAdd", function(opts)
+  local notebook = vim.env.ZK_NOTEBOOK_DIR
+  if not notebook then notebook = vim.system({ "zk", "where" }, { text = true }):wait().stdout:sub(1, -2) end
+  vim.env.ZK_NOTEBOOK_DIR = notebook
+  local nargs = #opts.fargs
+  if nargs == 0 then
+    zk_new()
+  else
+    zk.new(resolve_input(opts.args))
+  end
+end, { nargs = "*" })
+
 local function map(key, callback, desc, mode)
   return {
     "<leader>z" .. key,
