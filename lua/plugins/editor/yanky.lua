@@ -5,6 +5,9 @@ return {
     textobj = {
       enabled = true,
     },
+    system_clipboard = {
+      sync_with_ring = not vim.env.SSH_CLIENT,
+    },
   },
   --stylua: ignore
 	keys = {
