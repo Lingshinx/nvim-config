@@ -10,11 +10,10 @@
     nixpkgs,
     ...
   }: {
-    homeModules.nvim-config = {pkgs, ...}: {
+    module = {pkgs, ...}: {
       home.packages = with pkgs; [
         gnumake
         ripgrep
-        neovide
       ];
 
       xdg.configFile."nvim" = {
@@ -25,6 +24,8 @@
       programs.neovim = {
         enable = true;
         defaultEditor = true;
+
+        plugins = [pkgs.vimPlugins.lazy-nvim];
       };
     };
   };
