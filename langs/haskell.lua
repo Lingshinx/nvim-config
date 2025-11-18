@@ -1,6 +1,6 @@
 ---@type Config.LangConfig
 return {
-  { "haskell", formatter = "fourmolu", lsp = "haskell-language-server" },
+  { "haskell", formatter = "fourmolu" }, -- Install haskell language server by yourself plz
   { "cabal", formatter = "cabal_fmt", treesitter = false },
   plugins = {
     {
