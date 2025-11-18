@@ -18,9 +18,9 @@ return {
       keys = {
         {
           "<localleader>e",
-          "<cmd>HlsEvalAll<cr>",
+          function() require("haskell-tools").lsp.buf_eval_all() end,
           ft = "haskell",
-          desc = "Evaluate All",
+          desc = "Evaluate",
         },
         {
           "<localleader>h",
@@ -30,12 +30,6 @@ return {
         },
         {
           "<localleader>r",
-          function() require("haskell-tools").repl.toggle() end,
-          ft = "haskell",
-          desc = "REPL (Package)",
-        },
-        {
-          "<localleader>R",
           function() require("haskell-tools").repl.toggle(vim.api.nvim_buf_get_name(0)) end,
           ft = "haskell",
           desc = "REPL (Buffer)",
