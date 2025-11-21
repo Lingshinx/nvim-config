@@ -11,6 +11,6 @@ in {
     enable = true;
     defaultEditor = true;
 
-    plugins = [pkgs.vinPlugins.lazy-nvim];
+    plugins = [pkgs.vimPlugins.lazy-nvim];
   };
 }
