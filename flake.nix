@@ -13,12 +13,12 @@
   outputs = {
     flake-parts,
     nixpkgs,
+    lazy-nvim,
     ...
   } @ inputs: flake-parts.lib.mkFlake {inherit inputs;}({
       self,
       withSystem,
       flake-parts-lib,
-      lazy-nvim,
       ...
       } @ top: {
         systems = nixpkgs.lib.platforms.all;
