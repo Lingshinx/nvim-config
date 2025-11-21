@@ -1,6 +1,6 @@
 {
   self,
-  lazy-nvim
+  lazy-nvim,
 }: {pkgs, ...}: let
 in {
   home.packages = with pkgs; [
@@ -9,9 +9,10 @@ in {
   ];
 
   xdg.dataFile."nvim/lazy/lazy-nvim" = {
-    recursive = ture;
+    recursive = true;
     source = lazy-nvim;
-  }
+  };
+
   xdg.configFile."nvim".source = self.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   programs.neovim = {
