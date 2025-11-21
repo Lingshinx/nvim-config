@@ -9,7 +9,7 @@ in {
   ];
 
   xdg.dataFile."nvim/lazy/lazy-nvim".source = lazy-nvim;
-  xdg.configFile."nvim".source = self.packages.${pkgs.stdenv.hostPlatform.system}.default
+  xdg.configFile."nvim".source = self.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   programs.neovim = {
     enable = true;
