@@ -21,6 +21,7 @@ in mkDerivation {
     mkdir -p $out
     cp -r $src/* $out
 
+    chmod u+w $out/lua/config/
     if test -n "${toString languages}"
     then
       mkdir -p ${langs}
