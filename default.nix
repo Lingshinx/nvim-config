@@ -3,7 +3,7 @@
   stdenvNoCC,
 
   dashboardCommand ? null,
-  Languages ? [],
+  languages ? [],
   extraLanguages ? [],
 }: let
   inherit (stdenvNoCC) mkDerivation;
@@ -16,28 +16,27 @@ in mkDerivation {
 
   installPhase = let
     snacks = "$out/lua/plugins/ui/snacks.lua";
+    langs = "$out/lua/config/langs/";
   in ''
     mkdir -p $out
     cp -r $src/* $out
 
-    if test -n "${toString Languages}"
+    if test -n "${toString languages}"
     then
-      mkdir -p lua/config/langs/
-      ln -s ../../langs/{${concatStringsSep "," Languages}} $out/lua/config/langs/
+      mkdir -p ${langs}
+      ln -s ../../langs/{${concatStringsSep "," languages}} ${langs}
     fi
 
     if test -n "${toString extraLanguages}"
     then
-      mkdir -p $out/lua/config/langs/
-      cp "${toString extraLanguages}" $out/lua/config/langs/
+      mkdir -p ${langs}
+      cp "${toString extraLanguages}" ${langs}
     fi
 
     if test -n "${toString dashboardCommand}"
     then
-      chmod u+w $out/lua/plugins/ui/snacks.lua
-      cat $out/lua/plugins/ui/snacks.lua
-      substituteInPlace $out/lua/plugins/ui/snacks.lua \
-        --replace 'cmd = [[.*]]' 'cmd = [[${toString dashboardCommand}]]'
+      chmod u+w ${snacks}
+      sed -i 's@cmd = [[.*]]@cmd = [[${dashboardCommand}]]@' ${snacks}
     fi
     '';
 }
