@@ -12,6 +12,7 @@ with types;
 let
   languages =
     with strings;
+    with builtins;
     map
       (removeSuffix ".lua")
       (attrNames
