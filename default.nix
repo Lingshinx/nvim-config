@@ -25,7 +25,7 @@ in mkDerivation {
     if test -n "${toString languages}"
     then
       mkdir -p ${langs}
-      ln -s ../../langs/{${concatStringsSep "," languages}} ${langs}
+      ln -s ../../../langs/{${concatStringsSep "," languages}}.lua ${langs}
     fi
 
     if test -n "${toString extraLanguages}"
