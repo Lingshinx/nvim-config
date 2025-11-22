@@ -18,23 +18,6 @@
         "type": "github"
       }
     },
-    "lazy-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1762421181,
-        "narHash": "sha256-h5404njTAfqMJFQ3MAr2PWSbV81eS4aIs0cxAXkT0EM=",
-        "owner": "folke",
-        "repo": "lazy.nvim",
-        "rev": "85c7ff3711b730b4030d03144f6db6375044ae82",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "ref": "stable",
-        "repo": "lazy.nvim",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1762596750,
@@ -69,7 +52,6 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "lazy-nvim": "lazy-nvim",
         "nixpkgs": "nixpkgs"
       }
     }
