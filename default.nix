@@ -37,7 +37,9 @@ in mkDerivation {
     if test -n "${toString dashboardCommand}"
     then
       chmod +w ${snacks}
-      sed 's@cmd = \[\[.*\]\]@cmd = [[${toString dashboardCommand}]]@' ${snacks} > ${snacks}
+      sed 's@cmd = \[\[.*\]\]@cmd = [[${toString dashboardCommand}]]@' ${snacks} > $out/tempfile
+      chmod +w $out/lua/plugins/ui
+      mv $out/tempfile ${snacks}
     fi
     '';
 }
