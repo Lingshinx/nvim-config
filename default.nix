@@ -36,8 +36,8 @@ in mkDerivation {
 
     if test -n "${toString dashboardCommand}"
     then
-      chmod u+w ${snacks}
-      sed -i 's@cmd = \[\[.*\]\]@cmd = [[${toString dashboardCommand}]]@' ${snacks}
+      chmod +w ${snacks}
+      sed 's@cmd = \[\[.*\]\]@cmd = [[${toString dashboardCommand}]]@' ${snacks} > ${snacks}
     fi
     '';
 }
