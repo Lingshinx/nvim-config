@@ -49,15 +49,16 @@ in {
   };
 
   config = let
-    nvim-config = config.programs.neovim.lingshin-config;
-  in mkIf nvim-config.enable {
+    nvim = config.programs.neovim;
+    nvim-config = nvim.lingshin-config;
+  in mkIf (nvim.enable && nvim-config.enable) {
     home.packages = with pkgs; [
       gnumake
       ripgrep
     ];
 
     xdg.configFile."nvim".source = let
-        system = pkgs.stdenv.hostPlatform.system; 
+        system = pkgs.stdenv.hostPlatform.system;
       in self.packages.${system}.default.override {
         inherit (nvim-config) languages extraLanguages dashboardCommand;
       };
