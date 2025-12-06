@@ -46,7 +46,7 @@ local FileFlags = {
 local File = {
   condition = function() return vim.bo.buftype == "" end,
   init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
-  update = { "BufEnter", "TextChanged", "VimResized" },
+  update = { "BufWritePost", "BufEnter", "TextChanged", "VimResized" },
   FileIcon,
   WorkDir,
   FileName,
