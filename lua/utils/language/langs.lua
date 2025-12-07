@@ -44,6 +44,7 @@ local metatable = {
         end,
 
         config = function(langs)
+          langs.ok = true
           langs:config_lsp()
           langs:config_mason()
           langs:config_treesitter()
@@ -61,8 +62,11 @@ local metatable = {
           end
         end,
 
-        collect = function(langs, callback) return mapfold({}, callback, langs.get) end,
         ---@type config.language.Collect
+        collect = function(langs, callback)
+          vim.wait(1000, function() return langs.ok end)
+          return mapfold({}, callback, langs.get)
+        end,
       })[key]
   end,
 }

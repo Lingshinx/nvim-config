@@ -1,6 +1,7 @@
 ---@module 'lazy'
 
 ---@class config.language.Langs
+---@field ok boolean
 ---@field get table<string,config.language.Lang>
 ---@field formatters table<string,string[]>
 ---@field lsp (string|table<string,table>)[]
