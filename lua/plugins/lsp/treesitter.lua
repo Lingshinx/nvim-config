@@ -3,7 +3,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
-    lazy = true,
     init = function(plugin)
       require("lazy.core.loader").add_to_rtp(plugin)
       require "nvim-treesitter.query_predicates"
@@ -18,6 +17,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = { "LazyFile", "BufAdd" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       ---@type TSConfig
       ---@diagnostic disable-next-line: missing-fields
