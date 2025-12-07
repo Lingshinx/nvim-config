@@ -22,7 +22,7 @@ return {
         if not config[1] then config[1] = name end
         langs:solve(config)
       end
-    end, loaded and function() langs:config() end or nil)
+    end, loaded and vim.schedule_wrap(function() langs:config() end) or nil)
   end,
 
   ---@type config.workspace.file_handler
