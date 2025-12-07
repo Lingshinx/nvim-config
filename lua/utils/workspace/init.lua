@@ -53,14 +53,24 @@ local function detect_workspace(dir)
   end)
 end
 
+local loaded = {}
+
 return {
   setup = function(opts)
     config = vim.tbl_deep_extend("force", config, opts or {})
     local cwd = vim.uv.cwd()
-    if cwd then detect_workspace(cwd) end
+    if cwd then
+      loaded[cwd] = true
+      detect_workspace(cwd)
+    end
 
     vim.api.nvim_create_autocmd("DirChanged", {
-      callback = function(event) detect_workspace(event.file) end,
+      callback = function(event)
+        local file = event.file
+        if loaded[file] then return end
+        loaded[file] = true
+        detect_workspace(event.file)
+      end,
     })
   end,
 }
