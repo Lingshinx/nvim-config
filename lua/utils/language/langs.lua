@@ -2,7 +2,7 @@ local Lang = require "utils.language.lang"
 local append = require("utils.list").append
 local mapfold = require("utils.list").mapfold
 
----@alias Config.Langs.Collect fun(lang:Config.Langs, callback: fun(result:table, config:Config.Langs)):table
+---@alias config.language.Collect fun(lang:config.language.Langs, callback: fun(result:table, config:config.language.Langs)):table
 
 local metatable = {
   __index = function(self, key)
@@ -19,8 +19,8 @@ local metatable = {
     })[key]
     return result and self:collect(result)
       or ({
-        ---@param langs Config.Langs
-        ---@param config Config.LangConfig
+        ---@param langs config.language.Langs
+        ---@param config config.language.Config
         ---@param name string
         append = function(langs, name, config) langs.get[name] = Lang.new(name, config) end,
 
@@ -61,13 +61,13 @@ local metatable = {
           end
         end,
 
-        ---@type Config.Langs.Collect
         collect = function(langs, callback) return mapfold({}, callback, langs.get) end,
+        ---@type config.language.Collect
       })[key]
   end,
 }
 
----@type {new: fun():Config.Langs; config:fun(Config.Langs)}
+---@type {new: fun():config.language.Langs; config:fun(config.language.Langs)}
 return {
   new = function()
     return setmetatable({

@@ -1,7 +1,7 @@
 local fold = require("utils.list").fold
 
 return {
-  ---@param config Config.LangConfig
+  ---@param config config.language.Config
   ---@return table
   get_names = function(config)
     return fold({}, function(acc, cur)

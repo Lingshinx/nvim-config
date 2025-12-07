@@ -58,9 +58,9 @@ local metatable = {
   },
 }
 
----@alias Config.Lang.New fun(name: string, config: Config.LangConfig):Config.Lang?
+---@alias config.language.new fun(name: string, config: config.language.Config):config.language.Langs?
 
----@type Config.Lang.New
+---@type config.language.new
 function Lang.new(name, config)
   if not config or config.enabled == false then return end
   local result = setmetatable({
@@ -74,5 +74,5 @@ function Lang.new(name, config)
   return setmetatable(result, metatable)
 end
 
----@type {new: Config.Lang.New}
+---@type {new: config.language.new}
 return Lang

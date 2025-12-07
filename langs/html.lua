@@ -5,7 +5,7 @@ local filetypes = {
   "typescriptreact",
 }
 
----@type Config.LangConfig
+---@type config.language.Config
 return {
   "html",
   "css",

@@ -1,4 +1,4 @@
----@type Config.LangConfig
+---@type config.language.Config
 return {
   formatter = "sqlfmt",
   lsp = "postgres_lsp",

@@ -2,6 +2,7 @@ return {
   Lang = require "utils.language.lang",
   Langs = require "utils.language.langs",
 
+  ---@param opts config.language.Opts
   setup = function(opts)
     opts = vim.tbl_extend("keep", opts or {}, {
       rtp = vim.fn.stdpath "config",

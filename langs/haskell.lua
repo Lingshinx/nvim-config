@@ -1,4 +1,4 @@
----@type Config.LangConfig
+---@type config.language.Config
 return {
   { "haskell", formatter = "fourmolu" }, -- Install haskell language server by yourself plz
   { "cabal", formatter = "cabal_fmt", treesitter = false },
