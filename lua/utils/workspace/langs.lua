@@ -13,7 +13,6 @@ end
 return {
   ---@type config.workspace.dir_handler
   handle_dir = function(dir)
-    vim.print "hello"
     local loaded = plugins_loaded()
     local langs = loaded and Langs.new() or require "config.language"
     fs.ls(dir, function(file, type)
