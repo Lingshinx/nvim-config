@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-vim.g.root_pattern = { ".git", "lua" }
+vim.g.root_pattern = { ".git", "lua", ".nvim" }
 vim.g.autoformat = true
 
 vim.o.shada = "'100,<0"
