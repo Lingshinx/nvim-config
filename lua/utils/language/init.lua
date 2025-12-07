@@ -12,8 +12,7 @@ return {
     require("utils.fs").load_each(opts.rtp, opts.mod, function(name, config)
       if not config[1] then config[1] = name end
       langs:solve(config)
-    end)
-    if opts.auto_config then langs:config() end
+    end, vim.schedule_wrap(function() langs:config_lsp() end))
     return langs
   end,
 }

@@ -24,10 +24,30 @@ local metatable = {
         ---@param name string
         append = function(langs, name, config) langs.get[name] = Lang.new(name, config) end,
 
-        config = function(langs)
+        config_lsp = function(langs)
           for _, config in pairs(langs.get) do
             config:config_lsp()
           end
+        end,
+
+        config_mason = function(langs)
+          for _, pkg in ipairs(langs.mason) do
+            require("utils.plugin.mason").install(pkg)
+          end
+        end,
+
+        config_treesitter = function(langs) require("nvim-treesitter.install").ensure_installed(langs.treesitter) end,
+
+        config_formatter = function(langs)
+          local conform = require "conform"
+          conform.formatters_by_ft = vim.tbl_extend("force", conform.formatters_by_ft, langs.formatters)
+        end,
+
+        config = function(langs)
+          langs:config_lsp()
+          langs:config_mason()
+          langs:config_treesitter()
+          langs:config_formatter()
         end,
 
         solve = function(langs, mod)

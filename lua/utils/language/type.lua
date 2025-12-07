@@ -9,6 +9,10 @@
 ---@field plugins LazySpec
 ---@field append fun(langs: Config.Langs, name:string, config: Config.LangConfig)
 ---@field config fun()
+---@field config_lsp fun()
+---@field config_mason fun()
+---@field config_treesitter fun()
+---@field config_formatter fun()
 ---@field solve fun(langs: Config.Langs, config:Config.LangConfig)
 
 ---@class Config.Lang
