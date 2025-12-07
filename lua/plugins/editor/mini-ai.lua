@@ -1,4 +1,4 @@
-local function all_buffer()
+local function all_buffer(ai_type)
   local start_line, end_line = 1, vim.fn.line "$"
   if ai_type == "i" then
     -- Skip first and last blank lines for `i` textobject
