@@ -19,14 +19,16 @@ function M.match(pattern, path)
 end
 
 ---@param dir string
----@param callback fun(file: string)
+---@param callback fun(file: string, type: string)
 function M.ls(dir, callback)
-  local files = vim.uv.fs_scandir(dir)
-  while files do
-    local file, _ = vim.uv.fs_scandir_next(files)
-    if not file then break end
-    callback(file)
-  end
+  vim.uv.fs_scandir(dir, function(err, files)
+    if err then return end
+    while files do
+      local file, type = vim.uv.fs_scandir_next(files)
+      if not file then break end
+      callback(file, type)
+    end
+  end)
 end
 
 ---@param rtp string
