@@ -27,6 +27,7 @@ local config = {
     },
     file = {
       lang = require("utils.workspace.langs").handle_file,
+      options = require("utils.workspace.options").handle_file,
       debug = function(value) vim.print(value) end,
     },
   },
