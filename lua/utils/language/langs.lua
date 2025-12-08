@@ -30,6 +30,12 @@ local metatable = {
           end
         end,
 
+        config_options = function(langs)
+          for _, config in pairs(langs.get) do
+            config:config_options()
+          end
+        end,
+
         config_mason = function(langs)
           for _, pkg in ipairs(langs.mason) do
             require("utils.plugin.mason").install(pkg)
@@ -43,8 +49,15 @@ local metatable = {
           conform.formatters_by_ft = vim.tbl_extend("force", conform.formatters_by_ft, langs.formatters)
         end,
 
-        config = function(langs)
+        config = function(langs, opts)
           langs.ok = true
+          if opts then
+            for _, v in ipairs(opts) do
+              langs["config_" .. v](langs)
+            end
+            return
+          end
+          langs:config_options()
           langs:config_lsp()
           langs:config_mason()
           langs:config_treesitter()

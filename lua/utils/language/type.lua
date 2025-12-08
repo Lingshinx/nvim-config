@@ -13,6 +13,7 @@
 ---@field config_lsp fun()
 ---@field config_mason fun()
 ---@field config_treesitter fun()
+---@field config_options fun()
 ---@field config_formatter fun()
 ---@field solve fun(langs: config.language.Langs, config:config.language.Config)
 
@@ -35,6 +36,7 @@
 ---@field lsp? string|table<string|string,table>
 ---@field treesitter? string|string[]|boolean
 ---@field formatter? string|string[]
+---@field options? table<string,any>
 ---@field plugins? LazySpec
 ---@field pkgs? string[]
 ---@field enabled? boolean
