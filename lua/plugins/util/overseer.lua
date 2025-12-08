@@ -1,53 +1,43 @@
 return {
   "stevearc/overseer.nvim",
   cmd = {
-    "OverseerOpen",
+    "Make",
+    "Grep",
     "OverseerClose",
-    "OverseerToggle",
-    "OverseerSaveBundle",
-    "OverseerLoadBundle",
-    "OverseerDeleteBundle",
-    "OverseerRunCmd",
+    "OverseerOpen",
     "OverseerRun",
-    "OverseerInfo",
-    "OverseerBuild",
-    "OverseerQuickAction",
+    "OverseerShell",
     "OverseerTaskAction",
-    "OverseerClearCache",
+    "OverseerToggle",
+    "OverseerRestartLast",
   },
   keys = {
     { "<leader>ow", "<cmd>OverseerToggle<cr>", desc = "list" },
-    { "<leader>oo", "<cmd>OverseerRun<cr>", desc = "Run" },
-    { "<leader>oq", "<cmd>OverseerQuickAction<cr>", desc = "Quick action" },
-    { "<leader>oi", "<cmd>OverseerInfo<cr>", desc = "Info" },
-    { "<leader>ob", "<cmd>OverseerBuild<cr>", desc = "Builder" },
+    { "<leader>or", "<cmd>OverseerRun<cr>", desc = "Run" },
+    { "<leader>oo", "<cmd>OverseerRestartLast<cr>", desc = "Resume" },
+    { "<leader>os", "<cmd>OverseerShell<cr>", desc = "Shell" },
     { "<leader>ot", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
-    { "<leader>oc", "<cmd>OverseerClearCache<cr>", desc = "Clear cache" },
   },
-  config = function()
-    local overseer = require "overseer"
-    overseer.setup {
-      dap = false,
-      templates = { "make", "cargo", "shell" },
-      task_list = {
-        direction = "right",
-        bindings = {
-          ["<C-u>"] = false,
-          ["<C-d>"] = false,
-          ["<C-h>"] = false,
-          ["<C-j>"] = false,
-          ["<C-k>"] = false,
-          ["<C-l>"] = false,
-        },
+  opts = {
+    dap = false,
+    task_list = {
+      direction = "right",
+      keymaps = {
+        ["<C-s>"] = false,
+        ["<C-v>"] = false,
+        ["<C-e>"] = false,
+        ["o"] = false,
+        ["g?"] = false,
+        ["R"] = { "keymap.run_action", opts = { action = "watch" }, desc = "Auto task" },
+        ["r"] = { "keymap.run_action", opts = { action = "restart" }, desc = "Restart task" },
+        ["i"] = { "keymap.run_action", opts = { action = "edit" }, desc = "Edit task" },
+        ["|"] = { "keymap.open", opts = { dir = "vsplit" }, desc = "Open task output in vsplit" },
+        ["-"] = { "keymap.open", opts = { dir = "split" }, desc = "Open task output in split" },
       },
-    }
-    -- custom behavior of make templates
-    overseer.add_template_hook({
-      module = "^make$",
-    }, function(task_defn, util)
-      util.add_component(task_defn, { "on_output_quickfix", open_on_exit = "failure", close = true })
-      util.add_component(task_defn, "on_complete_notify")
-      util.add_component(task_defn, { "display_duration", detail_level = 1 })
-    end)
+    },
+  },
+  config = function(_, opts)
+    require("overseer").setup(opts)
+    require "utils.plugin.overseer"
   end,
 }

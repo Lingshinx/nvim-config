@@ -2,7 +2,18 @@ return {
   "folke/trouble.nvim",
   event = "LazyFile",
   cmd = "Trouble",
-  opts = {},
+  opts = {
+    auto_close = true,
+    win = {
+      size = 14,
+    },
+    keys = {
+      ["-"] = "jump_split",
+      ["|"] = "jump_vsplit",
+      ["<c-s>"] = false,
+      ["<c-v>"] = false,
+    },
+  },
   keys = {
     {
       "<leader>cs",
