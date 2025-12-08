@@ -1,5 +1,7 @@
 local Lang = {}
-local append = require("utils.list").append
+local list = require "utils.list"
+local append = list.append
+local filter = list.filter
 
 ---@module 'lazy'
 
@@ -39,6 +41,19 @@ local metatable = {
       end
     end,
 
+    config_options = function(self)
+      if not self.options then return end
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = self.name,
+        desc = string.format("Set options for filetype %s", self.name),
+        callback = function()
+          for opt, value in pairs(self.options) do
+            vim.opt_local[opt] = value
+          end
+        end,
+      })
+    end,
+
     get_lspnames = function(self)
       local lsp = self.lsp
       if type(self.lsp) == "string" then
@@ -58,9 +73,9 @@ local metatable = {
   },
 }
 
----@alias Config.Lang.New fun(name: string, config: Config.LangConfig):Config.Lang?
+---@alias config.language.new fun(name: string, config: config.language.Config):config.language.Langs?
 
----@type Config.Lang.New
+---@type config.language.new
 function Lang.new(name, config)
   if not config or config.enabled == false then return end
   local result = setmetatable({
@@ -71,8 +86,9 @@ function Lang.new(name, config)
   result.lsp = config.lsp
   result.plugins = config.plugins
   result.pkgs = config.pkgs
+  result.options = config.options
   return setmetatable(result, metatable)
 end
 
----@type {new: Config.Lang.New}
+---@type {new: config.language.new}
 return Lang

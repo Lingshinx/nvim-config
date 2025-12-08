@@ -10,6 +10,14 @@ M = {
     return false
   end,
 
+  filter = function(f, list)
+    local ret = {}
+    for _, value in ipairs(list) do
+      if f(value) then ret[#ret + 1] = value end
+    end
+    return ret
+  end,
+
   ---@generic A
   ---@generic B
   ---@param init A

@@ -3,29 +3,24 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = {
-    self,
+    flake-parts,
     nixpkgs,
     ...
-  }: {
-    homeModules.nvim-config = {pkgs, ...}: {
-      home.packages = with pkgs; [
-        gnumake
-        ripgrep
-        neovide
-      ];
-
-      xdg.configFile."nvim" = {
-        source = "${self}";
-        recursive = true;
-      };
-
-      programs.neovim = {
-        enable = true;
-        defaultEditor = true;
-      };
-    };
-  };
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} ({
+        self,
+        withSystem,
+        flake-parts-lib,
+        ...
+      } @ top: {
+        systems = nixpkgs.lib.platforms.all;
+        flake.homeModules.default = flake-parts-lib.importApply ./module.nix {inherit self;};
+        perSystem = {pkgs, ...}: {
+          packages.default = pkgs.callPackage ./default.nix {};
+        };
+      });
 }

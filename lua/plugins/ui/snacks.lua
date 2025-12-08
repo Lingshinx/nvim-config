@@ -43,8 +43,8 @@ return {
         { section = "header" },
         make_side_panel {
           section = "terminal",
-          cmd = [[ gh notify -san 5 | choose .. -f '#\d+'\033'\[0m\s+' -o '\n   ' ]],
-          height = 10,
+          cmd = [[gh notify -san 6 | choose .. -f \033'\[0;32m[\w#]\w+'\033'\[0m\s+' -o '\n   ']],
+          height = 12,
           ttl = 5 * 100,
           icon = "",
           title = "Notification",

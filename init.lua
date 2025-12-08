@@ -6,5 +6,6 @@ require("utils.fn").deter(function()
   require "config.keymaps"
   require "config.autocmds"
   require "config.highlight"
+  require "config.workspace"
   require "config.neovide"
 end)

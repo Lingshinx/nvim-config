@@ -1,4 +1,4 @@
----@type Config.LangConfig
+---@type config.language.Config
 return {
   "kdl",
   { "json", lsp = "json-lsp", formatter = "prettier" },

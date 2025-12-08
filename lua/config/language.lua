@@ -22,6 +22,11 @@ vim.filetype.add {
 
 vim.treesitter.language.register("bash", "kitty")
 
-local langs = require("utils.language").setup()
-langs:config()
+local langs = require("utils.language").setup {
+  afterall = function(langs)
+    langs:config_lsp()
+    langs:config_options()
+  end,
+}
+
 return langs

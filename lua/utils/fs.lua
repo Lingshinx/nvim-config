@@ -19,25 +19,30 @@ function M.match(pattern, path)
 end
 
 ---@param dir string
----@param callback fun(file: string)
-function M.ls(dir, callback)
-  local files = vim.uv.fs_scandir(dir)
-  while files do
-    local file, _ = vim.uv.fs_scandir_next(files)
-    if not file then break end
-    callback(file)
-  end
+---@param foreach fun(file: string, type: string)
+---@param callback? fun()
+function M.ls(dir, foreach, callback)
+  vim.uv.fs_scandir(dir, function(err, files)
+    if err then return end
+    while files do
+      local file, type = vim.uv.fs_scandir_next(files)
+      if not file then break end
+      foreach(file, type)
+    end
+    if callback then callback() end
+  end)
 end
 
 ---@param rtp string
 ---@param modname string
----@param callback fun(name: string, mod: any)
-function M.load_each(rtp, modname, callback)
+---@param foreach fun(name: string, mod: any)
+---@param callback? fun()
+function M.load_each(rtp, modname, foreach, callback)
   M.ls(rtp .. "/lua/" .. modname:gsub("%.", "/"), function(file)
     local name = file:sub(1, -5)
     local ok, mod = pcall(require, modname .. "." .. name)
-    if ok then callback(name, mod) end
-  end)
+    if ok then foreach(name, mod) end
+  end, callback)
 end
 
 ---@param path string
