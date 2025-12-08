@@ -1,3 +1,5 @@
+local function english_word(ai_type) return ai_type == "a" and { "%u?%f[%l%d][%l%d]+" } or { "%u?%f[%l][%l]+" } end
+
 local function all_buffer(ai_type)
   local start_line, end_line = 1, vim.fn.line "$"
   if ai_type == "i" then
@@ -77,7 +79,7 @@ return {
         c = ai.gen_spec.treesitter { a = "@class.outer", i = "@class.inner" }, -- class
         t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
         d = { "%f[%d]%d+" }, -- digits
-        e = { "%u?%f[%l%d][%l%d]+" }, -- word with case
+        e = english_word, -- word with case
         g = all_buffer,
         u = ai.gen_spec.function_call(), -- u for "usage"
         U = ai.gen_spec.function_call { name_pattern = "[%w_]" }, -- without dot in function name
