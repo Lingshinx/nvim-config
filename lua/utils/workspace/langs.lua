@@ -1,5 +1,7 @@
 local Langs = require "utils.language.langs"
 local fs = require "utils.fs"
+local fn = require "utils.workspace.fn"
+local is_file_in = fn.is_file_in
 
 ---@return boolean
 local plugins_loaded = function()
@@ -10,16 +12,11 @@ local plugins_loaded = function()
   })
 end
 
----@param dir string
----@param file string
----@return boolean
-local function isFileIn(dir, file) return file:find(dir, 1, true) == 1 end
-
 local function config_options(lang, opts)
   if not lang.options then return end
   local callback = function(event)
     local file = vim.api.nvim_buf_get_name(event and event.buf or 0)
-    if not isFileIn(opts.root, file) then return end
+    if not is_file_in(opts.root, file) then return end
     for opt, value in pairs(lang.options or {}) do
       vim.opt_local[opt] = value
     end
