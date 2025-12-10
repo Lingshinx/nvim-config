@@ -63,13 +63,13 @@ local keymaps = {
   xmap("n", "ZkNewFromTitleSelection", "New Title"),
   xmap("N", "ZkNewFromContentSelection", "New Content"),
 }
-
+local notebook
 local function set_keymaps()
   -- alias.where = "echo $ZK_NOTEBOOK_DIR"
   vim.system({ "zk", "where" }, { text = true }, function(result)
     if result.code ~= 0 then vim.notify(result.stderr, vim.log.ERROR) end
     vim.schedule(function()
-      local notebook = result.stdout:sub(1, -2)
+      notebook = result.stdout:sub(1, -2)
       vim.env.ZK_NOTEBOOK_DIR = notebook
       vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
         pattern = { notebook .. "/*.md" },
@@ -81,7 +81,8 @@ end
 
 return {
   setup = function(opts)
-    zk.setup(opts)
     set_keymaps()
+    zk.setup(opts)
+    vim.wait(1000, function() return notebook end)
   end,
 }
