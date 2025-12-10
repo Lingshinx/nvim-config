@@ -55,6 +55,8 @@ local function xmap(key, callback, desc) return map(key, callback, desc, "x") en
 local keymaps = {
   { "<leader>z", group = "zettlekasten", icon = "" },
   nmap("n", zk_new, "New"),
+  nmap("z", "ZkNotes", "Notes"),
+  nmap("c", "ZkCd", "Cd"),
   nmap("i", "ZkInsertLink", "Insert Link"),
   nmap("l", "ZkLinks", "Link"),
   nmap("L", "ZkBackLinks", "BackLinks"),
