@@ -17,6 +17,8 @@ return {
         { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>x", group = "diag/quickfix", icon = { icon = "󱖫 ", color = "green" } },
         { "<leader>o", group = "overseer", icon = { icon = " ", color = "purple" } },
+        { "<leader>r", group = "rest", icon = { icon = "", color = "blue" } },
+        { "<leader>a", group = "ai", icon = { icon = "", color = "blue" } },
         { "[", group = "prev" },
         { "]", group = "next" },
         { "g", group = "goto" },
