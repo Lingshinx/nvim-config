@@ -71,6 +71,8 @@ return {
       { "<BS>", "<cmd>Oil<CR>", desc = "Oil" },
     },
 
+    cmd = { "Oil" },
+
     config = function(_, opts)
       require("oil").setup(opts)
       vim.api.nvim_create_autocmd("User", {
