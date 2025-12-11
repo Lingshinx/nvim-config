@@ -1,10 +1,14 @@
 local zk = require "zk"
 local command = require "zk.commands"
+local notebook
 
+---@param input string
 local function resolve_input(input)
   local sep = input:find(":", 1, true)
-  return sep and { dir = vim.trim(input:sub(1, sep - 1)), title = vim.trim(input:sub(sep + 1)) }
-    or { title = vim.trim(input) }
+  if not sep then return { title = vim.trim(input) } end
+  local tags = vim.trim(input:sub(sep + 1)):gsub(" ", ", ")
+  local title = vim.trim(input:sub(1, sep - 1))
+  return { title = title, extra = { tags = tags } }
 end
 
 local function zk_new()
@@ -26,9 +30,6 @@ local function zk_new()
 end
 
 vim.api.nvim_create_user_command("ZkAdd", function(opts)
-  local notebook = vim.env.ZK_NOTEBOOK_DIR
-  if not notebook then notebook = vim.system({ "zk", "where" }, { text = true }):wait().stdout:sub(1, -2) end
-  vim.env.ZK_NOTEBOOK_DIR = notebook
   local nargs = #opts.fargs
   if nargs == 0 then
     zk_new()
@@ -37,7 +38,7 @@ vim.api.nvim_create_user_command("ZkAdd", function(opts)
   end
 end, { nargs = "*" })
 
-local function map(key, callback, desc, mode)
+local function map(mode, key, callback, desc)
   return {
     "<leader>z" .. key,
     type(callback) == "string" and command.get(callback) or callback,
@@ -48,9 +49,9 @@ local function map(key, callback, desc, mode)
   }
 end
 
-local function nmap(key, callback, desc) return map(key, callback, desc, "n") end
+local function nmap(...) return map("n", ...) end
 
-local function xmap(key, callback, desc) return map(key, callback, desc, "x") end
+local function xmap(...) return map("x", ...) end
 
 local keymaps = {
   { "<leader>z", group = "zettlekasten", icon = "" },
@@ -65,13 +66,15 @@ local keymaps = {
   xmap("n", "ZkNewFromTitleSelection", "New Title"),
   xmap("N", "ZkNewFromContentSelection", "New Content"),
 }
-local notebook
-local function set_keymaps()
+
+local function set_notebooks()
   -- alias.where = "echo $ZK_NOTEBOOK_DIR"
+  notebook = vim.env.ZK_NOTEBOOK_DIR
+  if notebook then return end
   vim.system({ "zk", "where" }, { text = true }, function(result)
     if result.code ~= 0 then vim.notify(result.stderr, vim.log.ERROR) end
     vim.schedule(function()
-      notebook = result.stdout:sub(1, -2)
+      notebook = result.stdout:sub(1, -2) -- remove tailing '\n'
       vim.env.ZK_NOTEBOOK_DIR = notebook
       vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
         pattern = { notebook .. "/*.md" },
@@ -83,7 +86,7 @@ end
 
 return {
   setup = function(opts)
-    set_keymaps()
+    set_notebooks()
     zk.setup(opts)
     vim.wait(1000, function() return notebook end)
   end,
