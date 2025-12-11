@@ -19,6 +19,7 @@ return {
         { "<leader>o", group = "overseer", icon = { icon = " ", color = "purple" } },
         { "<leader>r", group = "rest", icon = { icon = "", color = "blue" } },
         { "<leader>a", group = "ai", icon = { icon = "", color = "blue" } },
+        { "<leader>gh", group = "hunk" },
         { "[", group = "prev" },
         { "]", group = "next" },
         { "g", group = "goto" },
