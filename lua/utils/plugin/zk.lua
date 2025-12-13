@@ -57,14 +57,13 @@ local keymaps = {
   { "<leader>z", group = "zettlekasten", icon = "" },
   nmap("n", zk_new, "New"),
   nmap("z", "ZkNotes", "Notes"),
+  nmap("t", "ZkTags", "Notes"),
   nmap("c", "ZkCd", "Cd"),
   nmap("i", "ZkInsertLink", "Insert Link"),
   nmap("l", "ZkLinks", "Link"),
   nmap("L", "ZkBackLinks", "BackLinks"),
   nmap("s", "ZkMatch", "BackLinks"),
   xmap("i", "ZkInsertLinkAtSelection", "Insert Link"),
-  xmap("n", "ZkNewFromTitleSelection", "New Title"),
-  xmap("N", "ZkNewFromContentSelection", "New Content"),
 }
 
 local function set_notebooks()
