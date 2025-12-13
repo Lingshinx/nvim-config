@@ -4,6 +4,7 @@ require "config.lazy"
 
 require("utils.fn").deter(function()
   require "config.keymaps"
+  require "config.misc"
   require "config.autocmds"
   require "config.highlight"
   require "config.workspace"
