@@ -12,12 +12,10 @@ for abbr, full in pairs(require "config.keymaps.abbr") do
   map("ia", abbr, full)
 end
 
-map("n", "dm", "<cmd>delm!<CR>", { desc = "Delete Marks" })
 map("n", "<UP>", "<C-u>")
 map("n", "<Down>", "<C-d>")
 map("n", "<Left>", "<C-f>")
 map("n", "<Right>", "<C-b>")
--- map("n", "#", [[:%s/\<<C-r><C-w>\>/]], { desc = "Replace" })
 
 map("i", "<C-CR>", "<End><CR>")
 map({ "i", "c" }, "<C-S-V>", '<C-r>"')
@@ -70,5 +68,10 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 map("n", "<leader>n", Snacks.notifier.show_history, { desc = "Notifications" })
 map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy" })
+
+map("n", "gm", "m", { desc = "Mark" })
+map("n", "M", "mX", { desc = "Mark" })
+map("n", "dm", "<cmd>delm!<CR>", { desc = "Delete Marks" })
+map({ "o", "x" }, "M", "`X", { desc = "Goto Mark" })
 
 require("which-key").add { "<leader>K", "<cmd>norm! K<cr>", desc = "Keyword", icon = "" }
