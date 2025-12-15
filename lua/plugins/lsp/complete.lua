@@ -1,9 +1,14 @@
+local function complete(source)
+  return function() require("blink-cmp").show { providers = { source } } end
+end
+
 return {
   "saghen/blink.cmp",
   version = "1.*",
   -- build = "cargo build --release",
   dependencies = {
     "rafamadriz/friendly-snippets",
+    "archie-judd/blink-cmp-words",
     { "L3MON4D3/LuaSnip", version = "v2.*" },
     -- add blink.compat to dependencies
     {
@@ -15,6 +20,13 @@ return {
   },
   event = "InsertEnter",
 
+  keys = {
+    { "<M-f>", complete "path", mode = "i", desc = "Complete File" },
+    { "<M-b>", complete "buffer", mode = "i", desc = "Complete Buffer" },
+    { "<M-w>", complete "thesaurus", mode = "i", desc = "Complete Buffer" },
+    { "<M-d>", complete "dictionary", mode = "i", desc = "Complete Buffer" },
+  },
+
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
@@ -25,7 +37,7 @@ return {
       use_nvim_cmp_as_default = false,
       -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- adjusts spacing to ensure icons are aligned
-      nerd_font_variant = "mono",
+      nerd_font_variant = "normal",
       kind_icons = require("config.icons").kinds,
     },
     completion = {
@@ -33,6 +45,7 @@ return {
         -- experimental auto-brackets support
         auto_brackets = {
           enabled = true,
+          -- blocked_filetypes = { "kotlin" },
         },
       },
       menu = {
@@ -60,12 +73,42 @@ return {
       default = { "lsp", "path", "snippets", "buffer" },
       per_filetype = {
         lua = { inherit_defaults = true, "lazydev" },
+        text = { "dictionary", "thesaurus" },
+        markdown = { "dictionary", "thesaurus" },
       },
       providers = {
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           score_offset = 100,
+        },
+        thesaurus = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.thesaurus",
+          opts = {
+            score_offset = 0,
+            -- Default pointers define the lexical relations listed under each definition,
+            -- see Pointer Symbols below.
+            -- Default is as below ("antonyms", "similar to" and "also see").
+            definition_pointers = { "!", "@", "^" },
+            -- The pointers that are considered similar words when using the thesaurus,
+            -- see Pointer Symbols below.
+            -- Default is as below ("similar to", "also see" }
+            similarity_pointers = { "&", "^" },
+            -- The depth of similar words to recurse when collecting synonyms. 1 is similar words,
+            -- 2 is similar words of similar words, etc. Increasing this may slow results.
+            similarity_depth = 2,
+          },
+        },
+
+        dictionary = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.dictionary",
+          opts = {
+            dictionary_search_threshold = 2,
+            score_offset = 0,
+            definition_pointers = { "!", "&", "@", "^" },
+          },
         },
       },
     },
