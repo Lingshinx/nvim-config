@@ -9,8 +9,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "archie-judd/blink-cmp-words",
-    { "L3MON4D3/LuaSnip", version = "v2.*" },
-    -- add blink.compat to dependencies
+    "L3MON4D3/LuaSnip",
     {
       "saghen/blink.compat",
       optional = true, -- make optional so it's only enabled if any extras need it
