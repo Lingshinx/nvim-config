@@ -34,9 +34,56 @@ I'll even brag a bit that I have injected some **ingenuity** inside my configura
 > NVIM_APPNAME=nvim_lingshin nvim
 > ```
 
+### Nix
+
+#### Flake
+
+```nix
+inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nvim = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lingshinx/nvim-config/unstable";
+    };
+}
+```
+
+#### Module
+
+```nix
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.nvim-config.homeModules.default];
+  programs.neovim = {
+    enable = true;
+    lingshin-config = {
+      enable = true;
+      # Enable Language Configurations In Directory `Langs`
+      languages = ["nix" "fish" "lua"];
+      # Extra Language Configuration Files
+      extraLanguages = [];
+      dashboardCommand = "echo hello world"; 
+    };
+ 
+    extraPackages = with pkgs; [
+      stylua
+      luajitPackages.lua-lsp
+
+      fish-lsp
+
+      alejandra
+      nixd
+    ];
+  };
+}
+```
+
 ### Plugins manager
 
-You have to install [`lazy.nvim`](https://lazy.folke.io) manually because I didn't include the process to install
+You have to install [`lazy.nvim`](https://lazy.folke.io) manually because I didn't include the process to install.
 
 ```bash
 git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim
@@ -65,6 +112,7 @@ Each file should returns a table of type `Config.LangConfig`.
 | **formatter** | `string` or `string[]`  | name of formatters |
 | **pkgs** | `string[]` | if the package name in [mason](https://github.com/mason-org/mason.nvim) is different with name of LSP and formatter, you can set `pkgs` to tell to mason to install it |
 | **plugins** | `LazySpec` | plugin configurations related to this language |
+| **options** | `table<string,any>` | language-specific options |
 | **enabled** | `boolean` | no need to explain | 
 
 
@@ -73,7 +121,7 @@ Each file should returns a table of type `Config.LangConfig`.
 Also, my own language configurations are placed in `stdpath('config')/languages`, You can copy some of them to `stdpath('config')/lua/langs` to enable.
 
 Feel free to PR your own language configuration to me if you like this functionality.
-Since those configuration aren't applied automatically, so I'd really appreciate your contribution whatever the language is
+Since those configuration aren't applied automatically, so I'd really appreciate your contribution whatever the language is.
 
 ### FileType Picker
 
@@ -97,7 +145,7 @@ When root directory cannot be detected, default to parent directory.
 
 I agree with the opinion that *you should not turn your Neovim into a traditional IDE*.
 
-- Use **tabline** instead of **bufferline**
+- Use **tabline** instead of **bufferline**.
 
   Stack your buffers to overflowing and navigate with <kbd>H</kbd> / <kbd>L</kbd>? A true Vim ninja wouldn't do that.
 
@@ -108,27 +156,65 @@ I agree with the opinion that *you should not turn your Neovim into a traditiona
 
 - [**Oil.nvim**](https://github.com/stevearc/oil.nvim) is awesome, powerful and vim-like. You should try.
 
-  **Oil.nvim** is even more effective at filesystem editing than [yazi](https://github.com/sxyazi/yazi) in my practice
+  **Oil.nvim** is even more effective at filesystem editing than [yazi](https://github.com/sxyazi/yazi) in my practice.
 
 ### Kitty Scrollback
 
-I use Neovim as [kitty](https://github.com/kovidgoyal/kitty) scrollback pager
+I use Neovim as [kitty](https://github.com/kovidgoyal/kitty) scrollback pager.
 
 https://github.com/user-attachments/assets/4be81a21-441a-46ea-a361-4cfe66470cbb
 
 Inspired by [kitty-scrollback.nvim](https://github.com/mikesmithgh/kitty-scrollback.nvim)
 
-It just colorize the buffer and set some keymaps and options, more lightweight
+It just colorize the buffer and set some keymaps and options, more lightweight.
 
-To enable, please add this options in kitty configuration
+To enable, please add this options in kitty configuration.
 
 ```bash
 scrollback_pager nvim -c 'set filetype=scrollback'
 ```
 
+### Workspace Config
+
+Use the `./.nvim` directory to store local configurations. Refer to [Workspace](./Workspace.md) for more details.
+
+### Overseer
+
+> Vim has a special mode to speedup the **edit-compile-edit** cycle.
+
+I would like to use `:make` to compiler or run my codes.
+But `:make` is synchronous.
+So I do nothing but checking my phone while compiling my codes.
+
+[Overseer](https://github.com/stevearc/overseer.nvim) is a powerful plugin to manage tasks.
+
+- Convenient to launch a task from files like `Makefile`, `JustFile`, `package.json`, `tasks.json`, etc.
+- Easy to restart a process.
+- Dynamically tweak functionality by editing components.
+- Notify when task finish or failed.
+- Even able to watch file changes and then restart automatically.
+- Interoperable with `vim.quickfix` and `vim.diagnostic`.
+
+#### Usage
+
+`:Make` to run programs determined by `vim.o.makeprg`.
+Parse the error message with `vim.o.errorformat` and display it with [trouble.nvim](https://github.com/folke/trouble.nvim).
+
+`:Grep` to search keyworks with quickfix interactively.
+I use [ripgrep](https://github.com/BurntSushi/ripgrep) as `vim.o.grepprg`.
+So no need to worry about performance.
+
+`<leader>oo` to restart lastest tasks [^1].
+
+`<leader>os` to run a shell command.
+
+[^1]: Choose a task generated by task templates when no lastest available.
+
+https://github.com/user-attachments/assets/9325d15e-a4e9-4292-9022-b570e625042e
+
 ### Dashboard Header
 
-I manually painted a few [Logo](./Friends-Logo.txt) with unicode for me and friends of mine
+I manually painted a few [Logo](./Friends-Logo.txt) with unicode for me and friends of mine.
 
 <img width="935" height="1080" alt="图片" src="https://github.com/user-attachments/assets/548d24cb-bbde-41fd-9d82-36060d5f62ac" />
 
@@ -137,13 +223,5 @@ And feel free to open an issue if interested in my **nvim-config**.
 I'll draw a custom Logo for you when I have time.
 
 > I'm unable to make so many friends. So, hurry up?
-> 
+>
 > Okay, take it easy, I think there is no chance that I will be followed by 100+ friends.
-
-## Planned Features
-
-- [ ] Workspace Configuration
-
-  Inspired by [@aurora](https://github.com/aurora0x27)/[nvim-config](https://github.com/aurora0x27/nvim-config).
-
-  Add user commands, keymaps, and autocmds, and apply project-specific options when `.nvim/` was detected in root of project

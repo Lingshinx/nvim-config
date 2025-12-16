@@ -40,6 +40,53 @@
 > NVIM_APPNAME=nvim_lingshin nvim
 > ```
 
+### Nix
+
+#### Flake
+
+```nix
+inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nvim = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lingshinx/nvim-config/unstable";
+    };
+}
+```
+
+#### Module
+
+```nix
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.nvim-config.homeModules.default];
+  programs.neovim = {
+    enable = true;
+    lingshin-config = {
+      enable = true;
+      # Enable Language Configurations In Directory `Langs`
+      languages = ["nix" "fish" "lua"];
+      # Extra Language Configuration Files
+      extraLanguages = [];
+      dashboardCommand = "echo hello world"; 
+    };
+
+    extraPackages = with pkgs; [
+      stylua
+      luajitPackages.lua-lsp
+
+      fish-lsp
+
+      alejandra
+      nixd
+    ];
+  };
+}
+```
+
 ### 插件管理器（Plugins manager）
 
 我的配置不会自动安装 [`lazy.nvim`](https://lazy.folke.io), 所以需要你手动安装一下来着
@@ -72,6 +119,7 @@ git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.
 | **formatter** | `string` or `string[]`  | formmatter 的名字 |
 | **pkgs** | `string[]` | 如果 [mason](https://github.com/mason-org/mason.nvim) 包的名字和上面使用的 lsp/formmatter 的名字不一样 , 你可以用这个来指定要安装的包 |
 | **plugins** | `LazySpec` |和这个语言相关的 nvim 插件|
+| **options** | `table<string,any>` | 语言特定的选项 |
 | **enabled** | `boolean` | 赋能传统语言文化配置 | 
 
 
@@ -131,6 +179,45 @@ https://github.com/user-attachments/assets/4be81a21-441a-46ea-a361-4cfe66470cbb
 scrollback_pager nvim -c 'set filetype=scrollback'
 ```
 
+### Workspace Config
+
+你可以在 `./.nvim` 放一些文件，进行项目级别的配置
+参见 [Workspace](./Workspace.md)
+
+### Overseer
+
+> Vim has a special mode to speedup the **edit-compile-edit** cycle.
+> Vim 有一个特殊的模式来加速 **编辑-编译-编辑** 的循环
+
+我用 `:make` 命令来编译运行
+但它是同步运行的，所以它在编译时我就只能回消息水群 <del>然后忘记自己干什么</del>
+
+[Overseer](https://github.com/stevearc/overseer.nvim) 是很强的一个任务管理插件
+
+- 可以从 `Makefile`, `JustFile`, `package.json`, `tasks.json` 等文件中生成任务
+- 可以很方便地重启任务
+- 可以通过修改任务组件动态根据需求调整功能
+- 任务结束或者失败之后会发送通知（*当然是可选的*）
+- 当检测到文件变化时自动重启任务（*同上*）
+- 可以和 `vim.quickfix` 与 `vim.diagnostic` 互操作
+
+#### Usage
+
+用 `:Make` 命令来运行程序，该程序由 `vim.o.makeprg` 决定
+并由 `vim.o.errorformat` 解析错误信息，并展示在 [trouble.nvim](https://github.com/folke/trouble.nvim) 中
+
+`:Grep` 可以交互式搜索关键字
+你不用担心性能问题
+因为我的 `vim.o.grepprg` 是 [ripgrep](https://github.com/BurntSushi/ripgrep)
+
+`<leader>oo` 重启最近使用的命令 [^1]
+
+`<leader>os` 运行一个 shell 命令
+
+[^1]: 如果没有最近一次命令，从生成的任务中选择一个执行
+
+https://github.com/user-attachments/assets/9325d15e-a4e9-4292-9022-b570e625042e
+
 ### Dashboard Header
 
 我徒手用 Unicode 搓了一些 [Logo](./Friends-Logo.txt) 给自己和一些朋友
@@ -143,12 +230,4 @@ scrollback_pager nvim -c 'set filetype=scrollback'
 
 > 不过要是人太多了的话，就忙不过来了呢
 >
-> 我的配置被一群人围观么？我怎么会做这样的梦？ 
-
-## 正在咕的计划
-
-- [ ] 工作区配置
-
-  受朋友 [@aurora](https://github.com/aurora0x27) 的 [nvim-config](https://github.com/aurora0x27/nvim-config) 启发
-
-  我打算写一个功能，检测到根目录下有 `.nvim/` 时会自动应用一些配置，添加一些快捷键什么的
+> 我的配置被一群人围观么？我怎么会做这样的梦？
