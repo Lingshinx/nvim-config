@@ -45,8 +45,8 @@ return {
 }
 ```
 
-treesitter **kdl, bash, json and hyprlang** will be installed.
-and prettier will be set as json's formatter.
+Treesitter **kdl, bash, json and hyprlang** will be installed.
+And prettier will be set as json's formatter.
 
 Easy to understand, right?
 
@@ -64,13 +64,30 @@ return {
 }
 ```
 
-prettier will be set as formatter for **tsx, javascript, typescript, javascriptreact, typescriptreact**.
+Prettier will be set as formatter for **tsx, javascript, typescript, javascriptreact, typescriptreact**.
 
-treesitter **tsx, javascript, typescript** will be installed.
+Treesitter **tsx, javascript, typescript** will be installed.
+
+## Kotlin
+
+```lua
+-- lua/config/langs/kotlin.lua
+---@type config.language.Config
+return {
+  lsp = "kotlin_lsp",
+  formatter = "ktlint",
+  packages = "kotlin-lsp",
+  options = {
+    shiftwidth = 4,
+  },
+}
+```
+
+After `v0.3`, you can set filetype-specific options in language config files.
 
 ## Lua
 
-below is the example about how to configurate **lua_ls** for lua
+Below is the example about how to configurate **lua_ls** for lua
 
 ```lua
 -- lua/config/langs/lua.lua
