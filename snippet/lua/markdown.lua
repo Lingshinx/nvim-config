@@ -30,12 +30,19 @@ local function capture(n)
 end
 
 local function latex_(trig, node) return s(auto_trig(trig), node) end
+
+--- just Text
 local function latext(trig, ...) return s(auto_trig(trig), t(...)) end
+
+--- Pattern
 local function latexp(pattern, node) return s(auto_pattern(pattern), node) end
 
+--- Capture
 local function latexc(pattern, replace, ...)
   return latexp(pattern, fmta(replace, vim.tbl_map(function(index) return capture(index) end, { ... })))
 end
+
+--- Insert points
 local function latexi(trig, replace, ...)
   return latex_(
     trig,
@@ -46,8 +53,11 @@ local function latexi(trig, replace, ...)
   )
 end
 
-local function latexr(trig) return s(vim_pattern([[\v\\@<!]] .. trig), t("\\" .. trig)) end
+--- add Slash
+local function latexs(trig, replace) return s(trig), t("\\" .. replace or trig) end
+local function latexS(trig) return s(vim_pattern([[\v\\@<!]] .. trig), t("\\" .. trig)) end
 
+--- Begin end
 local function latexb(trig, replace)
   return latexi(
     trig,
@@ -60,6 +70,7 @@ local function latexb(trig, replace)
   )
 end
 
+--- Left and right
 ---@param lr string
 local function latexl(lr)
   local l = lr:sub(1, 1)
@@ -130,7 +141,7 @@ return {
   latexi("bf", "\\mathbf{<>}", 1),
 
   -- Linear algebra
-  latexr "det",
+  latexS "det",
 
   latexc("(%a)hat", "\\hat{<>}", 1),
   latexc("(%a)bar", "\\bar{<>}", 1),
@@ -162,8 +173,8 @@ return {
 
   -- Symbols
   latext("ooo", "\\infty"),
-  latexr "sum",
-  latexr "prod",
+  latexS "sum",
+  latexS "prod",
   latexi("\\sum", "\\sum_{<>=<>}^{<>}", 1, 2, 3),
   latexi("\\prod", "\\prod{<>=<>}^{<>}", 1, 2, 3),
   latexi("lim", "\\lim_{<> \\to <>}", 1, 2),
@@ -213,29 +224,29 @@ return {
   latexi("ddy", "\\frac{\\mathrm d<>}{\\mathrm dy}", 1),
   latexi("ddz", "\\frac{\\mathrm d<>}{\\mathrm dz}", 1),
   latexc("md(%a)", "\\mathrm d<>", 1),
-  latexr "int",
+  latexS "int",
   latexi("\\int", "\\int <> \\, \\mathrm d<>", 1, { 2, "x" }),
   latexi("dint", "\\int^{<>}_{<>} <> \\, \\mathrm d<>", { 1, "1" }, { 2, "0" }, 3, { 4, "x" }),
-  latexr "oint",
+  latexS "oint",
   latexi("iint", "\\iint\\limits_{<>}", { 1, "D" }),
   latexi("iiint", "\\iiint\\limits_{<>}", { 1, "D" }),
   latext("oinf", "\\int_{0}^{\\infty}"),
   latexi("iinf", "\\int_{0}^{\\infty} <> \\, \\mathrm d<>", 1, { 2, "x" }),
 
-  latexr "sinh",
-  latexr "cosh",
-  latexr "tanh",
-  latexr "coth",
+  latexS "sinh",
+  latexS "cosh",
+  latexS "tanh",
+  latexS "coth",
 
-  latexr "arcsin",
-  latexr "sin",
-  latexr "arccos",
-  latexr "cos",
-  latexr "arctan",
-  latexr "tan",
-  latexr "csc",
-  latexr "sec",
-  latexr "cot",
+  latexS "arcsin",
+  latexS "sin",
+  latexS "arccos",
+  latexS "cos",
+  latexS "arctan",
+  latexS "tan",
+  latexS "csc",
+  latexS "sec",
+  latexS "cot",
 
   latexc("\\arcsin([A-Za-gi-z])", "\\arcsin <>", 1),
   latexc("\\sin([A-Za-gi-z])", "\\sin <>", 1),
