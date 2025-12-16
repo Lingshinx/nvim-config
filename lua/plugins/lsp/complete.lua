@@ -2,6 +2,12 @@ local function complete(source)
   return function() require("blink-cmp").show { providers = { source } } end
 end
 
+local spell_source = { "path", "snippets", "dictionary", "thesaurus" }
+local no_spell_source = { "path", "snippets" }
+
+local function text_source()
+  return vim.o.spell and spell_source or no_spell_source
+end
 return {
   "saghen/blink.cmp",
   version = "1.*",
@@ -72,8 +78,8 @@ return {
       default = { "lsp", "path", "snippets", "buffer" },
       per_filetype = {
         lua = { inherit_defaults = true, "lazydev" },
-        text = { "dictionary", "thesaurus" },
-        markdown = { "dictionary", "thesaurus" },
+        text = text_source,
+        markdown = text_source,
       },
       providers = {
         lazydev = {
