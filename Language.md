@@ -68,12 +68,12 @@ prettier will be set as formatter for **tsx, javascript, typescript, javascriptr
 
 treesitter **tsx, javascript, typescript** will be installed.
 
-### Lua
+## Lua
 
 below is the example about how to configurate **lua_ls** for lua
 
 ```lua
--- lua/langs/lua.lua
+-- lua/config/langs/lua.lua
 return {
   formatter = "stylua",
   lsp = {
