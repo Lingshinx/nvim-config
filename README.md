@@ -65,7 +65,6 @@ inputs = {
       languages = ["nix" "fish" "lua"];
       # Extra Language Configuration Files
       extraLanguages = [];
-      dashboardCommand = "echo hello world"; 
     };
  
     extraPackages = with pkgs; [
@@ -90,7 +89,6 @@ git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.
 ```
 
 I know it'd be more convenient if this command ran automatically when lazy.nvim is not installed,
-
 but I just feel a little bit uncomfortable checking a condition every time for a task only executed for once,
 although I know it won't take any noticeable time
 

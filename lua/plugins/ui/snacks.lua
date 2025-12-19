@@ -4,18 +4,9 @@ end
 local function pickfiles(cwd)
   return function() Snacks.dashboard.pick("files", { cwd = cwd }) end
 end
-local function is_full_size() return vim.o.columns > 135 end
-local function make_side_panel(opts)
-  return vim.tbl_extend("keep", opts, {
-    section = opts.section,
-    icon = opts.icon,
-    title = opts.title,
-    indent = 3,
-    padding = 1,
-    pane = 2,
-    enabled = is_full_size,
-  })
-end
+local utils = require "utils.dashboard"
+local make_side_panel = utils.make_side_panel
+local notification = utils.notification
 
 local config_dir = vim.fn.stdpath "config"
 local dot_dir = vim.env.XDG_CONFIG_HOME or "~/.config"
@@ -42,12 +33,9 @@ return {
       sections = {
         { section = "header" },
         make_side_panel {
-          section = "terminal",
-          cmd = [[gh notify -san 6 | choose .. -f \033'\[0;32m[\w#]\w+'\033'\[0m\s+' -o '\n   ']],
-          height = 12,
-          ttl = 5 * 100,
-          icon = "",
           title = "Notification",
+          icon = "󰊤",
+          notification(),
         },
         make_side_panel {
           section = "projects",
@@ -65,7 +53,6 @@ return {
       preset = {
         header = logo,
         ---@type snacks.dashboard.Item[]
-
         keys = {
           { icon = " ", key = "f", desc = "Find File", action = pick "files" },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
