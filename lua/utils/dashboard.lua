@@ -26,8 +26,6 @@ local function gh_notify(cb, opts)
     "per_page=" .. tostring(math.floor(opts.height / 2)),
     "-f",
     "all=true",
-    "--cache",
-    "1h",
     "-q",
     query,
   }, {}, function(result)
@@ -89,7 +87,7 @@ function M.notification(opts)
     width = 57,
     height = 10,
   }, opts or {})
-  opts.text = ("\n"):rep(opts.height)
+  opts.text = ("\n"):rep(opts.height - 1)
   ---@type snacks.dashboard.Gen
   gh_notify(
     vim.schedule_wrap(function(result)
