@@ -13,7 +13,7 @@ map({ name: .repository.full_name, reason, unread, title: .subject.title, type: 
 
 local fn = require "utils.fn"
 
-local function is_full_size() return vim.o.columns > 135 end
+local is_full_size = require("utils.winbuf").is_full_size
 
 local function gh_notify(cb, opts)
   vim.system({
