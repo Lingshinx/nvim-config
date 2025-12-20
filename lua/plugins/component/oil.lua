@@ -68,7 +68,7 @@ return {
         "<BS>",
         function()
           if #require("utils.winbuf").norm_wins(0) == 1 and require("utils.winbuf").is_full_size() then
-            require("oil").open(nil, { preview = { vertical = true, split = "topleft" } })
+            require("oil").open(nil, { preview = { vertical = true } })
           else
             require("oil").open()
           end
