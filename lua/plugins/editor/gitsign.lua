@@ -18,7 +18,7 @@ return {
 
       local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc, silent = true }) end
 
-      map("n", "<leader>ghu", gitsign.undo_stage_hunk, "Undo")
+      map("n", "<leader>ghu", gitsign.stage_hunk, "Undo")
       map("n", "<leader>ghs", gitsign.stage_hunk, "Stage")
       map("n", "<leader>ghr", gitsign.reset_hunk, "Reset ")
       map("v", "<leader>ghs", function() gitsign.stage_hunk { vim.fn.line ".", vim.fn.line "v" } end)

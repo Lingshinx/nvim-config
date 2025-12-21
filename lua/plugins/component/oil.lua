@@ -63,13 +63,21 @@ return {
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
 
     keys = {
+      { "<leader>fo", function() require("oil").toggle_float() end, desc = "Oil" },
       {
-        "<leader>fo",
-        function() require("oil").toggle_float() end,
+        "<BS>",
+        function()
+          if #require("utils.winbuf").norm_wins(0) == 1 and require("utils.winbuf").is_full_size() then
+            require("oil").open(nil, { preview = { vertical = true, split = "topleft" } })
+          else
+            require("oil").open()
+          end
+        end,
         desc = "Oil",
       },
-      { "<BS>", "<cmd>Oil<CR>", desc = "Oil" },
     },
+
+    cmd = { "Oil" },
 
     config = function(_, opts)
       require("oil").setup(opts)

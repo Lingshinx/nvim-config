@@ -15,6 +15,9 @@ return {
           unselected = false,
         },
       },
+      actions = {
+        confirm = { action = "jump", cmd = "drop" },
+      },
       layouts = {
         vscode = {
           layout = {
@@ -44,6 +47,7 @@ return {
       win = {
         input = {
           keys = {
+            ["<C-CR>"] = { "tabdrop", mode = { "i" } },
             ["<C-BS>"] = { "<c-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
             ["<C-Delete>"] = { "<C-Right><C-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
           },

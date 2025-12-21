@@ -1,7 +1,6 @@
 local Lang = {}
 local list = require "utils.list"
 local append = list.append
-local filter = list.filter
 
 ---@module 'lazy'
 
@@ -73,7 +72,7 @@ local metatable = {
   },
 }
 
----@alias config.language.new fun(name: string, config: config.language.Config):config.language.Langs?
+---@alias config.language.new fun(name: string, config: config.language.Config):config.language.Lang?
 
 ---@type config.language.new
 function Lang.new(name, config)

@@ -1,7 +1,7 @@
 ---@type config.language.Config
 return {
   "kdl",
-  { "json", lsp = "json-lsp", formatter = "prettier" },
   "bash",
+  { "json", lsp = "json-lsp", formatter = "prettier" },
   { "hyprlang", lsp = "hyprls" },
 }
