@@ -11,6 +11,7 @@ return {
       width = 40,
       border = "rounded",
     },
+    tag_hook = require("utils.plugin.grapple").tag_hook,
   },
   keys = {
     { "'", function() require("grapple").toggle_tags() end, desc = "Toggle tags menu" },
