@@ -34,7 +34,7 @@ return {
       window:map(
         "n",
         string.format("%s", quick),
-        function() window:perform_close(TagActions.select, { index = i }) end,
+        function() window:perform_close(TagActions.select, { index = i, command = vim.cmd.drop }) end,
         { desc = string.format("Quick select %d", i) }
       )
     end
