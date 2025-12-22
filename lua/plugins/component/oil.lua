@@ -14,6 +14,7 @@ return {
         ["<CR>"] = "actions.select",
         ["|"] = { "actions.select", opts = { vertical = true } },
         ["-"] = { "actions.select", opts = { horizontal = true } },
+        ["<Tab>"] = { "actions.select", opts = { tab = true } },
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["K"] = { "actions.preview", mode = "n" },
         ["<BS>"] = { "actions.parent", mode = "n" },
