@@ -3,6 +3,16 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    keys = {
+      {
+        "K",
+        function()
+          if Snacks.image.supports_terminal() then Snacks.image.hover() end
+        end,
+        "image hover",
+        ft = "markdown",
+      },
+    },
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
@@ -15,7 +25,6 @@ return {
       quickfile = { enabled = true },
       explorer = { enabled = true },
       words = { enabled = true },
-      -- rename = { enabled = true },
       styles = {
         input = { relative = "cursor", row = -3, col = 3 },
         terminal = { border = "rounded" },
