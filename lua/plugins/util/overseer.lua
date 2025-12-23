@@ -33,6 +33,7 @@ return {
         ["i"] = { "keymap.run_action", opts = { action = "edit" }, desc = "Edit task" },
         ["|"] = { "keymap.open", opts = { dir = "vsplit" }, desc = "Open task output in vsplit" },
         ["-"] = { "keymap.open", opts = { dir = "split" }, desc = "Open task output in split" },
+        ["<Tab>"] = { "keymap.open", opts = { dir = "tab" }, desc = "Open task output in tab" },
       },
     },
   },
