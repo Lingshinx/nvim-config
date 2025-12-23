@@ -7,7 +7,11 @@ return {
       {
         "K",
         function()
-          if Snacks.image.supports_terminal() then Snacks.image.hover() end
+          if Snacks.image.supports_terminal() then
+            Snacks.image.hover()
+          else
+            Snacks.image.doc.at_cursor(vim.ui.open)
+          end
         end,
         "image hover",
         ft = "markdown",
