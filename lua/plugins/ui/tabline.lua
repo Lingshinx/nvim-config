@@ -2,6 +2,25 @@ return {
   "nanozuki/tabby.nvim",
   event = "VeryLazy",
   keys = {
+    { "<leader><tab>s", function() require("tabby.feature.win_picker").select() end, desc = "Select" },
+    { "<leader><tab>p", function() require("tabby.feature.tab_jumper").start() end, desc = "Pick" },
+    {
+      "<leader><tab>r",
+      function()
+        Snacks.input({
+          prompt = "New Tab Name",
+          win = {
+            relative = "editor",
+            col = false, ---@diagnostic disable-line:assign-type-mismatch
+            row = 0.3,
+          },
+        }, function(input)
+          if not input then return end
+          require("tabby.feature.tab_name").set(0, input)
+        end)
+      end,
+      desc = "Rename",
+    },
   },
   config = function()
     local get = require("utils.highlight.fn").getter
