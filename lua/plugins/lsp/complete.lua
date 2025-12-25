@@ -5,9 +5,7 @@ end
 local spell_source = { "path", "snippets", "dictionary", "thesaurus" }
 local no_spell_source = { "path", "snippets" }
 
-local function text_source()
-  return vim.o.spell and spell_source or no_spell_source
-end
+local function text_source() return vim.o.spell and spell_source or no_spell_source end
 return {
   "saghen/blink.cmp",
   version = "1.*",
