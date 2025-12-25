@@ -2,10 +2,6 @@ return {
   "nanozuki/tabby.nvim",
   event = "VeryLazy",
   keys = {
-    { "<S-l>", "<cmd>tabn<cr>", desc = "Tab Next" },
-    { "<S-h>", "<cmd>tabp<cr>", desc = "Tab Prev" },
-    { "<leader><tab>H", "<cmd>-tabm<cr>", desc = "Next" },
-    { "<leader><tab>L", "<cmd>+tabm<cr>", desc = "Previous" },
   },
   ---
   config = function()
