@@ -48,7 +48,7 @@ return {
         -- experimental auto-brackets support
         auto_brackets = {
           enabled = true,
-          -- blocked_filetypes = { "kotlin" },
+          blocked_filetypes = { "kotlin" },
         },
       },
       menu = {
