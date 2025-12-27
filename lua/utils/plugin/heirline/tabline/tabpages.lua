@@ -1,12 +1,7 @@
 local utils = require "heirline.utils"
-local resolver = require "utils.plugin.heirline.tabline.resolver"
+local name = require "utils.plugin.heirline.tabline.name"
 local events = require("utils.plugin.heirline.utils").eventsToUpdateTabline
 local labels = require("utils.plugin.heirline.utils").labels
-
-local function formatname(name)
-  if name and name ~= "" then return vim.fn.fnamemodify(name, ":t") end
-  return "[Empty]"
-end
 
 local function get_picker(tabpage) return labels:sub(tabpage, tabpage):upper() end
 local function not_empty_or(str, other) return str ~= "" and str or other end
@@ -27,7 +22,7 @@ local TabIcon = {
 
 local TabName = {
   TabIcon,
-  { provider = function(self) return " " .. formatname(resolver.tabname(self.tabnr)) .. " " end },
+  { provider = function(self) return " " .. name.get(self.tabpage) .. " " end },
   hl = function(self) return self.is_active and "Normal" or { fg = "gray" } end,
 }
 

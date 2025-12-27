@@ -1,4 +1,5 @@
 local picktab = require("utils.plugin.heirline.utils").pick
+local rename = require("utils.plugin.heirline.tabline.name").set
 require("which-key").add {
   -- buffers
   { "<leader>bb", "<cmd>e #<cr>", desc = "Switch" },
@@ -33,4 +34,5 @@ require("which-key").add {
   { "<S-h>", "<cmd>tabp<cr>", desc = "Tab Prev" },
 
   { "<leader><tab>p", picktab, desc = "Pick" },
+  { "<leader><tab>r", rename, desc = "Rename" },
 }
