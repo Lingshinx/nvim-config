@@ -19,7 +19,7 @@ return {
       "m",
       function()
         require("grapple").toggle()
-        vim.schedule(function() vim.cmd.redraw { bang = true } end)
+        vim.api.nvim_exec_autocmds("User", { pattern = "GrappleToggled" })
       end,
       desc = "Tag a file",
     },

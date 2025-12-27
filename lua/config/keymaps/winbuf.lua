@@ -1,3 +1,4 @@
+local picktab = require("utils.plugin.heirline.utils").pick
 require("which-key").add {
   -- buffers
   { "<leader>bb", "<cmd>e #<cr>", desc = "Switch" },
@@ -30,4 +31,6 @@ require("which-key").add {
   { "<leader><tab>L", "<cmd>+tabm<cr>", desc = "Next" },
   { "<S-l>", "<cmd>tabn<cr>", desc = "Tab Next" },
   { "<S-h>", "<cmd>tabp<cr>", desc = "Tab Prev" },
+
+  { "<leader><tab>p", picktab, desc = "Pick" },
 }

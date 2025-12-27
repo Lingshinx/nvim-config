@@ -3,8 +3,9 @@ local Ruler = require "utils.plugin.heirline.statusline.ruler"
 local Noice = require "utils.plugin.heirline.statusline.noice"
 local Diagnostic = require "utils.plugin.heirline.statusline.diagnostic"
 local File = require "utils.plugin.heirline.statusline.file"
-local Cut = { provider = "%<" }
-local Align = { provider = " %= " }
+local utils = require "utils.plugin.heirline.utils"
+local Cut = utils.Cut
+local Align = utils.Align
 
 return {
   Mode,

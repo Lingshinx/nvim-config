@@ -34,6 +34,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 return {
   statusline = require "utils.plugin.heirline.statusline",
+  tabline = require "utils.plugin.heirline.tabline",
   opts = {
     colors = colors(),
   },
