@@ -14,8 +14,7 @@ local TabIcon = {
     hl = function(self) return { fg = self.is_active and "orange" or "cyan" } end,
   },
   {
-    static = { icons = { "󰲡", "󰲣", "󰲥", "󰲧", "󰲩", "󰲫", "󰲭", "󰲯", "󰲱", "󰿭" } },
-    provider = function(self) return " " .. (self.is_active and "󰻂" or self.icons[self.tabnr] or "󰆣") end,
+    provider = function(self) return " " .. name.get_icons(self.tabnr, self.is_active) end,
     hl = function(self) return self.is_active and { fg = "cyan" } end,
   },
 }

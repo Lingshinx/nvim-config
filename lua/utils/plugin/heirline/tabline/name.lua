@@ -1,6 +1,10 @@
 local M = {}
 local resolver = require "utils.plugin.heirline.tabline.resolver"
 
+local icons = { "󰲡", "󰲣", "󰲥", "󰲧", "󰲩", "󰲫", "󰲭", "󰲯", "󰲱", "󰿭" }
+
+function M.get_icons(tabnr, is_active) return is_active and "󰻂" or icons[tabnr] or "󰆣" end
+
 M.tabname = {}
 
 local function formatname(name)
@@ -35,7 +39,6 @@ end
 function M.load()
   local global = vim.g.LingshinTab
   global = global and vim.json.decode(global, { luanil = { array = true } })
-  Snacks.debug(global)
   if global then M.tabname = global end
 end
 
