@@ -3,11 +3,8 @@ local grapple = require "grapple"
 local events = require("utils.plugin.heirline.utils").eventsToUpdateTabline
 
 local WinIcon = {
-  init = function(self)
-    self.icon, self.hl = Snacks.util.icon(self.winname)
-  end,
   provider = function(self) return " " .. self.icon end,
-  hl = function(self) return self.hl end,
+  hl = function(self) return self.icon_hl end,
 }
 
 local Grapple = {

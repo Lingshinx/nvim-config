@@ -2,15 +2,18 @@ local resolver = require "utils.plugin.heirline.tabline.resolver"
 
 local function not_float_win(winid) return vim.api.nvim_win_get_config(winid).relative == "" end
 
-local function regular_wins()
+local function regular_wins(tab)
   return vim
-    .iter(vim.api.nvim_tabpage_list_wins(0))
+    .iter(vim.api.nvim_tabpage_list_wins(tab))
     :filter(not_float_win)
-    :map(function(winid) return { id = winid, name = resolver.winname(winid) } end)
-    :filter(function(win) return win.name ~= "" end)
+    :map(function(winid)
+      local iconname = resolver.winicon(winid)
+      iconname.id = winid
+      return iconname
+    end)
+    :filter(function(win) return win.name and win.name ~= "" end)
     :totable()
 end
-
 local function add_index(str)
   local ret = {}
   local count = 1
@@ -30,6 +33,8 @@ return {
 
   labels = labels,
   labelToNum = labelToNum,
+
+  regular_wins = regular_wins,
 
   pick = function()
     local tabline = require("heirline").tabline
@@ -68,7 +73,7 @@ return {
   make_winlist = function(tab_component)
     return {
       init = function(self)
-        local wins = regular_wins()
+        local wins = regular_wins(0)
         local cur_win = vim.api.nvim_get_current_win()
         for i, win in ipairs(wins) do
           local child = self[i]
@@ -77,6 +82,8 @@ return {
             self[i] = self:new(tab_component, i)
             child = self[i]
             child.winnr = win.id
+            child.icon_hl = win.hl
+            child.icon = win.icon
             child.winname = win.name
           end
           child.is_active = win.id == cur_win
