@@ -60,7 +60,7 @@ autocmd("VimResized", {
   group = augroup "resize_splits",
   desc = "Resize splits on Window resized",
   callback = function()
-    local tabpagenr = vim.api.nvim_tabpage_get_number(0)
+    local tabpagenr = vim.api.nvim_get_current_tabpage()
     vim.cmd "tabdo wincmd ="
     vim.api.nvim_set_current_tabpage(tabpagenr)
   end,

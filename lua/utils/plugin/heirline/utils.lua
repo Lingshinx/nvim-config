@@ -39,11 +39,11 @@ return {
     vim.cmd.redrawtabline()
     local char = vim.fn.getcharstr()
     local tab = labelToNum[char]
-
+    local tabs = vim.api.nvim_list_tabpages()
     ---@diagnostic disable-next-line
     tabline._show_picker = false
-    if tab and vim.api.nvim_list_tabpages()[tab] then
-      vim.api.nvim_set_current_tabpage(tab)
+    if tab and tabs[tab] then
+      vim.api.nvim_set_current_tabpage(tabs[tab])
     else
       vim.api.nvim_feedkeys(char, "n", false)
     end

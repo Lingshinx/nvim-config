@@ -10,12 +10,12 @@ local TabIcon = {
   fallthrough = false,
   {
     condition = function(self) return self._show_picker == true end,
-    provider = function(self) return " " .. not_empty_or(get_picker(self.tabpage), "󰆣") end,
+    provider = function(self) return " " .. not_empty_or(get_picker(self.tabnr), "󰆣") end,
     hl = function(self) return { fg = self.is_active and "orange" or "cyan" } end,
   },
   {
     static = { icons = { "󰲡", "󰲣", "󰲥", "󰲧", "󰲩", "󰲫", "󰲭", "󰲯", "󰲱", "󰿭" } },
-    provider = function(self) return " " .. (self.is_active and "󰻂" or self.icons[self.tabpage] or "󰆣") end,
+    provider = function(self) return " " .. (self.is_active and "󰻂" or self.icons[self.tabnr] or "󰆣") end,
     hl = function(self) return self.is_active and { fg = "cyan" } end,
   },
 }
