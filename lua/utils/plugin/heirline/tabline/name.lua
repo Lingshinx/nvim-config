@@ -1,5 +1,5 @@
 local M = {}
-local resolver = require "utils.plugin.heirline.tabline.resolver"
+local resolver = require "utils.winbuf"
 
 local icons = { "󰲡", "󰲣", "󰲥", "󰲧", "󰲩", "󰲫", "󰲭", "󰲯", "󰲱", "󰿭" }
 

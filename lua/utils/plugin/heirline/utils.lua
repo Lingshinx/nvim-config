@@ -1,4 +1,4 @@
-local resolver = require "utils.plugin.heirline.tabline.resolver"
+local resolver = require "utils.winbuf"
 
 local function not_float_win(winid) return vim.api.nvim_win_get_config(winid).relative == "" end
 
