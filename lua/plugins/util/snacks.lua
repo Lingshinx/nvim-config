@@ -5,6 +5,12 @@ return {
     lazy = false,
     keys = {
       {
+        "<C-\\>",
+        function() Snacks.terminal.toggle() end,
+        "ToggleTerm",
+        mode = { "n", "t" },
+      },
+      {
         "K",
         function()
           if Snacks.image.supports_terminal() then
@@ -31,7 +37,19 @@ return {
       words = { enabled = true },
       styles = {
         input = { relative = "cursor", row = -3, col = 3 },
-        terminal = { border = "rounded" },
+        terminal = {
+          border = "rounded",
+          relative = "editor",
+          position = "float",
+          width = 0.8,
+          max_width = 130,
+          height = 0.85,
+          min_height = 20,
+          backdrop = 100,
+          wo = {
+            winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
+          },
+        },
       },
     },
   },
