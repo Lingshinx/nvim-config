@@ -3,7 +3,7 @@ return {
   priority = 1001,
   opts = {
     window = {
-      open = "alternate",
+      open = "tab",
     },
   },
 }
