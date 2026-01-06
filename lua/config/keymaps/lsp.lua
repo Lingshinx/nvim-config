@@ -74,5 +74,6 @@ map(
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd "noh"
   if require("luasnip").expand_or_jumpable() then require("luasnip").unlink_current() end
+  require("substitute.range").clear_match()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
