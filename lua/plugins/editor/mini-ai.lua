@@ -15,7 +15,7 @@ local function all_buffer(ai_type)
 end
 
 return {
-  "echasnovski/mini.ai",
+  "nvim-mini/mini.ai",
   event = "VeryLazy",
   opts = function()
     ---@module "which-key"
