@@ -13,6 +13,8 @@ map({ name: .repository.full_name, reason, unread, title: .subject.title, type: 
 
 local fn = require "utils.fn"
 
+local data = require "utils.plugin.dashboard.fake-data"
+
 local is_full_size = require("utils.winbuf").is_full_size
 
 local function gh_notify(cb, opts)
@@ -57,14 +59,14 @@ local space = { " " }
 local function format(result, opts)
   local max = vim
     .iter(result)
-    :map(function(x) return #x.reason end)
+    :map(function(x) return vim.api.nvim_strwidth(x.reason) end)
     :fold(0, function(acc, v) return math.max(acc, v) end)
   local ret = vim
     .iter(result)
     :map(
       function(notification)
         return {
-          { notification.time, hl = notification.unread or "Comment", width = max },
+          { notification.time, hl = notification.unread and "@variable" or "Comment", width = max },
           space,
           { notification.name, hl = "Include" },
           space,
@@ -87,7 +89,7 @@ function M.notification(opts)
     width = 57,
     height = 10,
   }, opts or {})
-  opts.text = ("\n"):rep(opts.height - 1)
+  opts.text = format(data, opts)
   ---@type snacks.dashboard.Gen
   gh_notify(
     vim.schedule_wrap(function(result)

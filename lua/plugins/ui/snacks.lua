@@ -4,7 +4,7 @@ end
 local function pickfiles(cwd)
   return function() Snacks.dashboard.pick("files", { cwd = cwd }) end
 end
-local utils = require "utils.dashboard"
+local utils = require "utils.plugin.dashboard"
 local make_side_panel = utils.make_side_panel
 local notification = utils.notification
 
