@@ -27,10 +27,4 @@ require("which-key").add {
     Snacks.scratch.select,
     desc = "Select Scratch Buffer",
   },
-  {
-    "<leader>fy",
-    function() require("toggleterm.terminal").Terminal:new({ cmd = "yazi" }):toggle() end,
-    desc = "Explorer Yazi",
-    icon = "󰇥",
-  },
 }
