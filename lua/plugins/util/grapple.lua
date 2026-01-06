@@ -1,6 +1,12 @@
 return {
   "cbochs/grapple.nvim",
-  dependencies = { { "nvim-tree/nvim-web-devicons", lazy = true } },
+  dependencies = {
+    "nvim-mini/mini.icons",
+    config = function()
+      require("mini.icons").setup()
+      MiniIcons.mock_nvim_web_devicons()
+    end,
+  },
   ---@type grapple.settings
   opts = {
     scope = "cwd", -- also try out "git_branch"
