@@ -42,6 +42,7 @@ return {
     ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
+      image = { enabled = true },
       zen = { enabled = true },
       input = { enabled = true },
       dim = { enabled = true },
