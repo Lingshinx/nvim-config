@@ -210,6 +210,16 @@ So no need to worry about performance.
 
 https://github.com/user-attachments/assets/9325d15e-a4e9-4292-9022-b570e625042e
 
+### LaTeX Suite
+
+https://github.com/user-attachments/assets/d117ab08-c766-45c9-a294-b65614349734
+
+Obsidian-like LaTeX Suite powered by [LuaSnip](https://github.com/L3MON4D3/LuaSnip).
+
+> [!NOTE]
+> Only available in Markdown math blocks, since I'm not using LaTeX.  
+> `<leader>ut` to toggle **Auto Snippets Trigger**.
+
 ### Dashboard Header
 
 I manually painted a few [Logo](./Friends-Logo.txt) with unicode for me and friends of mine.
