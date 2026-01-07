@@ -27,6 +27,23 @@ return {
         ["<leader>os"] = { "actions.change_sort", desc = "Oil change sort", mode = "n" },
         ["<leader>uh"] = { "actions.toggle_hidden", desc = "Oil toggle hidden", mode = "n" },
         ["<leader>or"] = { "actions.toggle_trash", desc = "Oil trash", mode = "n" },
+        ["<leader>sr"] = {
+          desc = "Search / Replace",
+          callback = function()
+            local prefills = { paths = require("oil").get_current_dir() }
+            local grug_far = require "grug-far"
+            if not grug_far.has_instance "explorer" then
+              grug_far.open {
+                instanceName = "explorer",
+                prefills = prefills,
+                staticTitle = "Find and Replace from Explorer",
+              }
+            else
+              grug_far.get_instance("explorer"):open()
+              grug_far.get_instance("explorer"):update_input_values(prefills, false)
+            end
+          end,
+        },
         ["<leader>od"] = {
           desc = "Oil toggle detail",
           callback = function()
