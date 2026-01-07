@@ -1,6 +1,7 @@
 # Neovim Configuration
 
-<img width="2516" height="1348" alt="Image" src="https://github.com/user-attachments/assets/9849a4e0-aa54-4dae-81d2-5d6e97787d73" />
+<img width="2516" height="1348" alt="图片" src="https://github.com/user-attachments/assets/a92379ab-223b-4a2e-9cec-d4ece66af217" />
+
 
 ## Introduction [zh_CN](./README-CN.md)
 
