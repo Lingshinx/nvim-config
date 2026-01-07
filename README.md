@@ -10,6 +10,16 @@ But I found it kind of hard to keep tweaking Neovim on top of LazyVim.
 It's more convenient to manage if I have a LazyVim in `stdpath('config')` instead of `stdpath('data')`.
 And most importantly — It's really cool to have my own Neovim configuration, isn't it?
 
+## Requirements
+
+- Neovim latest. I use Arch, btw.
+- [ripgrep](https://github.com/BurntSushi/ripgrep) for [snacks](https://github.com/folke/snacks.nvim) and [grug-far](https://github.com/MagicDuck/grug-far.nvim)
+- [fd](https://github.com/sharkdp/fd) for [snacks](https://github.com/folke/snacks.nvim)
+- One of [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
+- [github-cli](https://cli.github.com/) for notifications on dashboard
+- [lazygit](https://github.com/jesseduffield/lazygit)
+- C compiler fo [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#requirements)
+
 ## Installation
 
 Honestly, I wouldn't recommend using my configuration directly.
@@ -144,18 +154,31 @@ When root directory cannot be detected, default to parent directory.
 
 I agree with the opinion that *you should not turn your Neovim into a traditional IDE*.
 
-- Use **tabline** instead of **bufferline**.
+#### Use **tabline** instead of **bufferline**.
 
-  Stack your buffers to overflowing and navigate with <kbd>H</kbd> / <kbd>L</kbd>? A true Vim ninja wouldn't do that.
+Stack your buffers to overflowing and navigate with <kbd>H</kbd> / <kbd>L</kbd>? A true Vim ninja wouldn't do that.
 
-- Don't rely on **File Tree Explorer**, Instead, use **File Fuzzy Picker** and **Harpoon** to jump around files.
+Here's lots of ways to open new windows in a new tab,
+<kbd>Tab</kbd> on Oil, Grapple, Overseer and <kbd>Ctrl-Enter</kbd> on Snacks picker.  
+[fatten.nvim](https://github.com/willothy/flatten.nvim) also open a new Tab for files open in terminal builtin.
 
-  Actually, I still use [snacks.explorer](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md).
-  It's not bad to have a file tree for a quick overview of the project's structure.
+By the way, You can <kbd>\<Ctrl-w\>T</kbd> to move current window to a new tab.
 
-- [**Oil.nvim**](https://github.com/stevearc/oil.nvim) is awesome, powerful and vim-like. You should try.
+> [!NOTE]
+> Statusline and Tabline are all powered by [heirline](https://github.com/rebelot/heirline.nvim)
 
-  **Oil.nvim** is even more effective at filesystem editing than [yazi](https://github.com/sxyazi/yazi) in my practice.
+##### Reference
+
+[Why do Vim experts prefer buffers over tabs? - Stack Overflow](https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166)
+
+#### Don't rely on **File Tree Explorer**, Instead, use **File Fuzzy Picker** and **Harpoon** to jump around files.
+
+Actually, I still use [snacks.explorer](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md).
+It's not bad to have a file tree for a quick overview of the project's structure.
+
+#### [**Oil.nvim**](https://github.com/stevearc/oil.nvim) is awesome, powerful and vim-like. You should try.
+
+**Oil.nvim** is even more effective at filesystem editing than [yazi](https://github.com/sxyazi/yazi) in my practice.
 
 ### Kitty Scrollback
 

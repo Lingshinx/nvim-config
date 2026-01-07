@@ -18,6 +18,16 @@
 也有一两个朋友会来这里提建议和讨论呢。
 当然也欢迎你随时来**参考，讨论，建议**！
 
+## Requirements
+
+- 尽可能新的 Neovim，顺便一提我用 Arch
+- [ripgrep](https://github.com/BurntSushi/ripgrep) 用来查找内容，for [snacks](https://github.com/folke/snacks.nvim) and [grug-far](https://github.com/MagicDuck/grug-far.nvim)
+- [fd](https://github.com/sharkdp/fd) 用来搜索文件，for [snacks](https://github.com/folke/snacks.nvim)
+- 随便一款 [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
+- [github-cli](https://cli.github.com/)，用来在 dashboard 上查看 github 通知
+- [lazygit](https://github.com/jesseduffield/lazygit)，好用
+- C 编译器，比如说 [gcc](https://www.gnu.org/software/gcc/) 或者 [clang](https://clang.llvm.org/)，给 [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#requirements) 用
+
 ## 安装
 
 这个配置相当个性，可以会依赖一些你用不上的工具，并且也不打算讨好他人。
@@ -149,19 +159,32 @@ https://github.com/user-attachments/assets/bbcee4b8-3e6b-42e8-ae0a-dbfd991ac677
 
 我挺赞同一些视频说：你不应该把 Neovim 定制成传统 IDE 那样
 
-- 用 **tabline** 而不是 **bufferline**
+#### 用 **tabline** 而不是 **bufferline**
 
-  让 buffer 堆满你的 tabline 然后用 <kbd>H</kbd> / <kbd>L</kbd> 没头没脑地找吗? Vim 高尔夫大师是不会这样做的
+让 buffer 堆满你的 tabline 然后用 <kbd>H</kbd> / <kbd>L</kbd> 没头没脑地找吗? Vim 高尔夫大师是不会这样做的
 
-- 不要依赖文件树来跳转文件，你应该用 File Picker 和 Harpoon
+可以在 Oil, Grapple, Overseer 上用 <kbd>Tab</kbd> 打开一个新的 Tab
+也可以在 Snacks Picker 里用 <kbd>Ctrl-Enter</kbd>  
+[fatten.nvim](https://github.com/willothy/flatten.nvim) 也会用 Tab 打开在内置终端中打开的文件
 
-  不过虽然这么说，我还是在用 [snacks.explorer](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md)
+顺便一提，Vim 用 <kbd>\<Ctrl-w\>T</kbd> 将当前窗口移动到新的 Tab
 
-  用 File Tree 来总览一下项目结构还是蛮不错的
+> [!NOTE]
+> 状态栏和标签栏我都是用 [heirline](https://github.com/rebelot/heirline.nvim) 写的噢
 
-- [**Oil.nvim**](https://github.com/stevearc/oil.nvim) 真的很好用，而且很有 Vim 的风格，我很推荐你去试一试
+##### 参考
 
-  在日常的文件操作里，我一般会去用 Oil 而不是 [yazi](https://github.com/sxyazi/yazi)，Oil 高效又直观
+[为什么 Vim 专家更喜欢使用缓冲区而不是制表符？ - Stack Overflow](https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs/26710166#26710166)
+
+#### 不要依赖文件树来跳转文件，你应该用 File Picker 和 Harpoon
+
+不过虽然这么说，我还是在用 [snacks.explorer](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md)
+
+用 File Tree 来总览一下项目结构还是蛮不错的
+
+#### [**Oil.nvim**](https://github.com/stevearc/oil.nvim) 真的很好用，而且很有 Vim 的风格，我很推荐你去试一试
+
+在日常的文件操作里，我一般会去用 Oil 而不是 [yazi](https://github.com/sxyazi/yazi)，Oil 高效又直观
 
 ### Kitty Scrollback
 
