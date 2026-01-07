@@ -4,7 +4,7 @@ end
 local function pickfiles(cwd)
   return function() Snacks.dashboard.pick("files", { cwd = cwd }) end
 end
-local utils = require "utils.dashboard"
+local utils = require "utils.plugin.dashboard"
 local make_side_panel = utils.make_side_panel
 local notification = utils.notification
 
@@ -59,14 +59,8 @@ return {
           { icon = " ", key = "r", desc = "Recent Files", action = pick "oldfiles" },
           { icon = " ", key = ".", desc = "Dot Files", action = pickfiles(dot_dir) },
           { icon = " ", key = "c", desc = "Config", action = pickfiles(config_dir) },
-          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-          {
-            icon = "󰒲 ",
-            key = "l",
-            desc = "Lazy",
-            action = ":Lazy",
-            enabled = package.loaded.lazy ~= nil,
-          },
+          { icon = " ", key = "z", desc = "Zettle Kastle", action = ":ZkNotes" },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },

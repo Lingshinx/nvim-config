@@ -14,6 +14,7 @@ return {
         ["<CR>"] = "actions.select",
         ["|"] = { "actions.select", opts = { vertical = true } },
         ["-"] = { "actions.select", opts = { horizontal = true } },
+        ["<Tab>"] = { "actions.select", opts = { tab = true } },
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["K"] = { "actions.preview", mode = "n" },
         ["<BS>"] = { "actions.parent", mode = "n" },
@@ -26,6 +27,23 @@ return {
         ["<leader>os"] = { "actions.change_sort", desc = "Oil change sort", mode = "n" },
         ["<leader>uh"] = { "actions.toggle_hidden", desc = "Oil toggle hidden", mode = "n" },
         ["<leader>or"] = { "actions.toggle_trash", desc = "Oil trash", mode = "n" },
+        ["<leader>sr"] = {
+          desc = "Search / Replace",
+          callback = function()
+            local prefills = { paths = require("oil").get_current_dir() }
+            local grug_far = require "grug-far"
+            if not grug_far.has_instance "explorer" then
+              grug_far.open {
+                instanceName = "explorer",
+                prefills = prefills,
+                staticTitle = "Find and Replace from Explorer",
+              }
+            else
+              grug_far.get_instance("explorer"):open()
+              grug_far.get_instance("explorer"):update_input_values(prefills, false)
+            end
+          end,
+        },
         ["<leader>od"] = {
           desc = "Oil toggle detail",
           callback = function()
@@ -36,8 +54,16 @@ return {
         ["<c-\\>"] = {
           desc = "Terminal",
           callback = function()
-            vim.cmd.chdir(require("oil").get_current_dir(0))
-            require("toggleterm").toggle_command()
+            Snacks.terminal.toggle(nil, {
+              cwd = require("oil").get_current_dir(0),
+              win = {
+                style = "minimal",
+                position = "right",
+                wo = {
+                  winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
+                },
+              },
+            })
           end,
         },
         ["<leader>fz"] = {
@@ -60,7 +86,7 @@ return {
       },
     },
     -- Optional dependencies
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { { "nvim-mini/mini.icons", config = function() end } },
 
     keys = {
       { "<leader>fo", function() require("oil").toggle_float() end, desc = "Oil" },
@@ -68,7 +94,7 @@ return {
         "<BS>",
         function()
           if #require("utils.winbuf").norm_wins(0) == 1 and require("utils.winbuf").is_full_size() then
-            require("oil").open(nil, { preview = { vertical = true, split = "topleft" } })
+            require("oil").open(nil, { preview = { vertical = true } })
           else
             require("oil").open()
           end

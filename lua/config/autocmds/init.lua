@@ -1,5 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = function(name) return vim.api.nvim_create_augroup("lingshin_" .. name, { clear = true }) end
+local name = require "utils.plugin.heirline.tabline.name"
 
 -- Auto Chdir
 autocmd({ "BufEnter", "BufWinEnter" }, {
@@ -36,7 +37,6 @@ autocmd("BufWritePre", {
   end,
 })
 
--- close some filetypes with <q>
 autocmd("FileType", {
   desc = "Create keymap 'q'",
   pattern = require "config.autocmds.quit_filetypes",
@@ -58,8 +58,22 @@ autocmd("FileType", {
 -- resize splits if window got resized
 autocmd("VimResized", {
   group = augroup "resize_splits",
+  desc = "Resize splits on Window resized",
   callback = function()
+    local tabpagenr = vim.api.nvim_get_current_tabpage()
     vim.cmd "tabdo wincmd ="
-    vim.cmd("tabnext " .. vim.fn.tabpagenr())
+    vim.api.nvim_set_current_tabpage(tabpagenr)
   end,
+})
+
+-- load tabname after session file loaded
+autocmd("SessionLoadPost", {
+  desc = "Load tab names",
+  callback = name.load,
+})
+
+autocmd("User", {
+  desc = "Save tab names",
+  pattern = "PersistenceSavePre",
+  callback = name.save,
 })

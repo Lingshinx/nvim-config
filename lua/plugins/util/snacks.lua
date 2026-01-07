@@ -3,10 +3,46 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    keys = {
+      {
+        "<C-\\>",
+        function()
+          Snacks.terminal.toggle(nil, {
+            win = {
+              wo = {
+                winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
+              },
+              relative = "editor",
+              position = "float",
+              width = 0.8,
+              max_width = 130,
+              height = 0.85,
+              min_height = 20,
+              backdrop = 100,
+            },
+          })
+        end,
+        "ToggleTerm",
+        mode = { "n", "t" },
+      },
+      {
+        "K",
+        function()
+          if Snacks.image.supports_terminal() then
+            Snacks.image.hover()
+          else
+            Snacks.image.doc.at_cursor(vim.ui.open)
+          end
+        end,
+        "image hover",
+        ft = "markdown",
+      },
+    },
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
+      image = { enabled = true },
       zen = { enabled = true },
       input = { enabled = true },
       dim = { enabled = true },
@@ -15,10 +51,11 @@ return {
       quickfile = { enabled = true },
       explorer = { enabled = true },
       words = { enabled = true },
-      -- rename = { enabled = true },
       styles = {
         input = { relative = "cursor", row = -3, col = 3 },
-        terminal = { border = "rounded" },
+        terminal = {
+          border = "rounded",
+        },
       },
     },
   },

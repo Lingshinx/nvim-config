@@ -17,7 +17,7 @@ del("n", "gri")
 del("n", "grt")
 
 require("which-key").add {
-  { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+  { "<leader>ca", vim.lsp.buf.code_action, desc = "Line Diagnostics" },
   { "[d", diagnostic_goto(-1), desc = "Diagnostic", icon = "" },
   { "]d", diagnostic_goto(1), desc = "Diagnostic", icon = "" },
   { "[D", desc = "First Diagnostic", icon = "" },
@@ -74,5 +74,6 @@ map(
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd "noh"
   if require("luasnip").expand_or_jumpable() then require("luasnip").unlink_current() end
+  require("substitute.range").clear_match()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })

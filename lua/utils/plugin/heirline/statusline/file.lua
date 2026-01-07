@@ -66,7 +66,7 @@ local OilName = {
   condition = function() return vim.bo.buftype == "acwrite" and vim.bo.filetype == "oil" end,
   { provider = " ", hl = { fg = "yellow" } },
   {
-    provider = function() return fs.tilde(vim.api.nvim_buf_get_name(0):sub(7)) end,
+    provider = function() return require("oil").get_current_dir() end,
     hl = { bold = true, fg = "white" },
   },
 }

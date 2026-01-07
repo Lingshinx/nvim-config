@@ -13,4 +13,6 @@ M.getter = setmetatable({}, {
   __index = function(_, index) return M.get_by_name(index) end,
 })
 
+function M.link(hl) return { link = hl } end
+
 return M

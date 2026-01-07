@@ -53,18 +53,21 @@ local function nmap(...) return map("n", ...) end
 
 local function xmap(...) return map("x", ...) end
 
-local keymaps = {
-  { "<leader>z", group = "zettlekasten", icon = "" },
-  nmap("n", zk_new, "New"),
-  nmap("z", "ZkNotes", "Notes"),
-  nmap("t", "ZkTags", "Notes"),
-  nmap("c", "ZkCd", "Cd"),
-  nmap("i", "ZkInsertLink", "Insert Link"),
-  nmap("l", "ZkLinks", "Link"),
-  nmap("L", "ZkBackLinks", "BackLinks"),
-  nmap("s", "ZkMatch", "BackLinks"),
-  xmap("i", "ZkInsertLinkAtSelection", "Insert Link"),
-}
+local keymaps = {}
+local mk_keymaps = function()
+  keymaps = {
+    { "<leader>z", group = "zettlekasten", icon = "" },
+    nmap("n", zk_new, "New"),
+    nmap("z", "ZkNotes", "Notes"),
+    nmap("t", "ZkTags", "Notes"),
+    nmap("c", "ZkCd", "Cd"),
+    nmap("i", "ZkInsertLink", "Insert Link"),
+    nmap("l", "ZkLinks", "Link"),
+    nmap("L", "ZkBackLinks", "BackLinks"),
+    nmap("s", "ZkMatch", "BackLinks"),
+    xmap("i", "ZkInsertLinkAtSelection", "Insert Link"),
+  }
+end
 
 local function set_notebooks()
   -- alias.where = "echo $ZK_NOTEBOOK_DIR"
@@ -88,5 +91,6 @@ return {
     set_notebooks()
     zk.setup(opts)
     vim.wait(1000, function() return notebook end)
+    mk_keymaps()
   end,
 }

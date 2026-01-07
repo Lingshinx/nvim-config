@@ -23,7 +23,7 @@ vim.opt.fillchars = {
   eob = " ",
 }
 vim.o.foldlevel = 99
-vim.o.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
+vim.o.formatexpr = "v:lua.require('conform').formatexpr()"
 vim.o.formatoptions = "jcroqlnt" -- tcqj
 vim.o.grepformat = "%f:%l:%c:%m"
 vim.o.grepprg = "rg --vimgrep"
