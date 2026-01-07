@@ -7,18 +7,14 @@ return {
   opts = {
     picker = {
       enabled = true,
-      matcher = {
-        frecency = true,
-      },
       main = { current = true },
+      matcher = { frecency = true },
       formatters = {
         selected = {
           unselected = false,
         },
       },
-      actions = {
-        confirm = { action = "jump", cmd = "drop" },
-      },
+      actions = { confirm = { action = "jump", cmd = "drop" } },
       layouts = {
         vscode = {
           layout = {
