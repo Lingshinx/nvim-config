@@ -6,7 +6,22 @@ return {
     keys = {
       {
         "<C-\\>",
-        function() Snacks.terminal.toggle() end,
+        function()
+          Snacks.terminal.toggle(nil, {
+            win = {
+              wo = {
+                winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
+              },
+              relative = "editor",
+              position = "float",
+              width = 0.8,
+              max_width = 130,
+              height = 0.85,
+              min_height = 20,
+              backdrop = 100,
+            },
+          })
+        end,
         "ToggleTerm",
         mode = { "n", "t" },
       },
@@ -39,16 +54,6 @@ return {
         input = { relative = "cursor", row = -3, col = 3 },
         terminal = {
           border = "rounded",
-          relative = "editor",
-          position = "float",
-          width = 0.8,
-          max_width = 130,
-          height = 0.85,
-          min_height = 20,
-          backdrop = 100,
-          wo = {
-            winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
-          },
         },
       },
     },
