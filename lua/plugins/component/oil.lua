@@ -54,8 +54,16 @@ return {
         ["<c-\\>"] = {
           desc = "Terminal",
           callback = function()
-            vim.cmd.chdir(require("oil").get_current_dir(0))
-            require("toggleterm").toggle_command()
+            Snacks.terminal.toggle(nil, {
+              cwd = require("oil").get_current_dir(0),
+              win = {
+                style = "minimal",
+                position = "right",
+                wo = {
+                  winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
+                },
+              },
+            })
           end,
         },
         ["<leader>fz"] = {
