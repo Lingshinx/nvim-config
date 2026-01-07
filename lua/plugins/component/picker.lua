@@ -10,6 +10,7 @@ return {
       matcher = {
         frecency = true,
       },
+      main = { current = true },
       formatters = {
         selected = {
           unselected = false,
