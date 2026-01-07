@@ -15,8 +15,6 @@ local fn = require "utils.fn"
 
 local data = require "utils.plugin.dashboard.fake-data"
 
-local is_full_size = require("utils.winbuf").is_full_size
-
 local function gh_notify(cb, opts)
   vim.system({
     "gh",
@@ -46,7 +44,6 @@ function M.make_side_panel(opts)
     indent = 3,
     padding = 1,
     pane = 2,
-    enabled = is_full_size,
   })
 end
 
