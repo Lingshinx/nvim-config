@@ -215,7 +215,7 @@ https://github.com/user-attachments/assets/9325d15e-a4e9-4292-9022-b570e625042e
 
 https://github.com/user-attachments/assets/d117ab08-c766-45c9-a294-b65614349734
 
-Obsidian-like LaTeX Suite powered by [LuaSnip](https://github.com/L3MON4D3/LuaSnip).
+[Obsidian-like](https://github.com/artisticat1/obsidian-latex-suite) LaTeX Suite powered by [LuaSnip](https://github.com/L3MON4D3/LuaSnip).
 
 > [!NOTE]
 > Only available in Markdown math blocks, since I'm not using LaTeX.  

@@ -1,6 +1,6 @@
 # Neovim Configuration
 
-<img width="2516" height="1348" alt="Image" src="https://github.com/user-attachments/assets/9849a4e0-aa54-4dae-81d2-5d6e97787d73" />
+<img width="2516" height="1348" alt="图片" src="https://github.com/user-attachments/assets/a92379ab-223b-4a2e-9cec-d4ece66af217" />
 
 ## 介绍
 
@@ -217,6 +217,16 @@ scrollback_pager nvim -c 'set filetype=scrollback'
 [^1]: 如果没有最近一次命令，从生成的任务中选择一个执行
 
 https://github.com/user-attachments/assets/9325d15e-a4e9-4292-9022-b570e625042e
+
+### LaTeX Suite
+
+https://github.com/user-attachments/assets/d117ab08-c766-45c9-a294-b65614349734
+
+用 [LuaSnip](https://github.com/L3MON4D3/LuaSnip) 整了个类似 [Obsidian](https://github.com/artisticat1/obsidian-latex-suite) 的 LaTex Suite
+
+> [!NOTE]
+> 仅在 Markdown 的公式块里面可用，因为我不用破 LaTeX  
+> 用 <kbd>\<leader\>ut</kbd> 来切换启用 **Auto Snippets Trigger**
 
 ### Dashboard Header
 
