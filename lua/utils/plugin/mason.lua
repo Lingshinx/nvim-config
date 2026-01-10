@@ -4,7 +4,9 @@ return {
   end,
   install = function(pkg_name)
     local registry = require "mason-registry"
-    if not registry.is_installed(pkg_name) and registry.has_package(pkg_name) then
+    if vim.fn.executable(pkg_name) then
+      vim.notify(pkg_name .. " found locally, skipping")
+    elseif not registry.is_installed(pkg_name) and registry.has_package(pkg_name) then
       vim.notify("installing " .. pkg_name .. "..")
       local pkg = registry.get_package(pkg_name)
       pkg:install():once("closed", function()
