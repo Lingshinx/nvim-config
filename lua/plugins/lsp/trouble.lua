@@ -5,7 +5,7 @@ return {
   opts = {
     auto_close = true,
     win = {
-      size = 14,
+      size = 0.3,
     },
     keys = {
       ["-"] = "jump_split",

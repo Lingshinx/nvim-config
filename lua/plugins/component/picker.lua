@@ -14,6 +14,13 @@ return {
           unselected = false,
         },
       },
+      sources = {
+        lsp_symbols = {
+          focus = "list",
+          auto_close = false,
+          layout = "sidebar",
+        },
+      },
       actions = { confirm = { action = "jump", cmd = "drop" } },
       layouts = {
         vscode = {
