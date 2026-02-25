@@ -58,18 +58,12 @@ local function detect_workspace(root)
   local dot_nvim = string.format("%s/%s", root, config.dir)
   uv.fs_stat(dot_nvim, function(err, stat)
     if err then return end
+    local opts = {
+      root = root,
+      dir = config.dir,
+    }
     if stat and stat.type == "directory" then
-      fs.ls(
-        dot_nvim,
-        vim.schedule_wrap(
-          function(file, type)
-            handle_each(file, type, {
-              root = root,
-              dir = config.dir,
-            })
-          end
-        )
-      )
+      fs.ls(dot_nvim, vim.schedule_wrap(function(file, type) handle_each(file, type, opts) end))
     end
   end)
 end
