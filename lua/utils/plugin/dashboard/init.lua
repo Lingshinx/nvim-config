@@ -18,6 +18,7 @@ local data = require "utils.plugin.dashboard.fake-data"
 local is_full_size = require("utils.winbuf").is_full_size
 
 local function gh_notify(cb, opts)
+  if not vim.fn.executable "gh" then return end
   vim.system({
     "gh",
     "api",
