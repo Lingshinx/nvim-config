@@ -19,7 +19,7 @@ return {
       end,
       vim.schedule_wrap(function()
         langs.ok = true
-        local callback = opts.afterall
+        local callback = opts.hook
         if callback then callback(langs) end
       end)
     )
