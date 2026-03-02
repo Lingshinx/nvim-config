@@ -1,3 +1,4 @@
+/.direnv
 /lua/plugins/dankcolors.lua
 lua/config/langs/*
 !lua/config/langs/lua.lua
