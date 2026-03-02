@@ -35,13 +35,31 @@ return {
         },
         ensure_installed = require("config.language").treesitter,
         textobjects = {
+          lsp_interop = {
+            enable = true,
+            border = "none",
+            floating_preview_opts = {},
+            peek_definition_code = {
+              ["<leader>K"] = "@function.outer",
+            },
+          },
           swap = {
             enable = true,
-            swap_next = {
-              [">a"] = "@parameter.inner",
-            },
             swap_previous = {
-              ["<a"] = "@parameter.inner",
+              ["<aa"] = "@parameter.inner",
+              ["<ia"] = "@parameter.inner",
+              ["<af"] = "@function.outer",
+              ["<if"] = "@function.inner",
+              ["<ac"] = "@class.outer",
+              ["<ic"] = "@class.outer",
+            },
+            swap_next = {
+              [">aa"] = "@parameter.inner",
+              [">ia"] = "@parameter.inner",
+              [">af"] = "@function.outer",
+              [">if"] = "@function.outer",
+              [">ac"] = "@class.outer",
+              [">ic"] = "@class.outer",
             },
           },
           select = {
