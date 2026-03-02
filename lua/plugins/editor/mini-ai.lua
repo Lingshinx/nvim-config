@@ -54,10 +54,10 @@ return {
     local mappings = {
       a = "around",
       i = "inside",
-      ["a]"] = "next",
-      ["i]"] = "next",
-      ["a["] = "prev",
-      ["i["] = "prev",
+      ["]a"] = "next",
+      ["]i"] = "next",
+      ["[a"] = "prev",
+      ["[i"] = "prev",
     }
     for prefix, name in pairs(mappings) do
       list.append(keys, { prefix, group = name })
@@ -70,6 +70,12 @@ return {
     local ai = require "mini.ai"
     return {
       n_lines = 500,
+      mappings = {
+        around_next = "]a",
+        inside_next = "]i",
+        around_last = "[a",
+        inside_last = "[i",
+      },
       custom_textobjects = {
         o = ai.gen_spec.treesitter { -- code block
           a = { "@block.outer", "@conditional.outer", "@loop.outer" },
