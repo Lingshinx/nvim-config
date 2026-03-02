@@ -7,7 +7,7 @@ M = {
   ---@return string?
   lsp = function(buf)
     local bufpath = fs.bufpath(buf)
-    if not bufpath then return nil end
+    if not bufpath then return end
     local roots = {}
     local clients = vim.lsp.get_clients { bufnr = buf }
     for _, client in pairs(clients) do
