@@ -96,7 +96,7 @@ function M.notification(opts)
     vim.schedule_wrap(function(result)
       opts.text = format(result, opts)
       vim.wait(1000, function() return Snacks ~= nil end)
-      Snacks.dashboard.update()
+      if Snacks then Snacks.dashboard.update() end
     end),
     opts
   )
