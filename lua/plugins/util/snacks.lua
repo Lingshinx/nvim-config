@@ -23,7 +23,7 @@ return {
           })
         end,
         "ToggleTerm",
-        mode = { "n", "t" },
+        mode = { "n", "t", "i", "x" },
       },
       {
         "K",
