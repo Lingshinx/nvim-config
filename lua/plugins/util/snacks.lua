@@ -34,7 +34,7 @@ return {
             Snacks.image.doc.at_cursor(vim.ui.open)
           end
         end,
-        "image hover",
+        desc = "Image hover",
         ft = "markdown",
       },
     },
