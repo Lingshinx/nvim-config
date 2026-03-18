@@ -47,7 +47,7 @@ return {
       input = { enabled = true },
       dim = { enabled = true },
       indent = { enabled = true },
-      notifier = { enabled = true, timeout = 3000 },
+      notifier = { enabled = true },
       quickfile = { enabled = true },
       explorer = { enabled = true },
       words = { enabled = true },
