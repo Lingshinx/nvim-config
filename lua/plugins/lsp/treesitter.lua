@@ -9,8 +9,8 @@ return {
     end,
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
-      { "<c-space>", desc = "Increment Selection", mode = { "n", "x" } },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
+      { "<Up>", desc = "Increment Selection", mode = { "n", "x" } },
+      { "<Down>", desc = "Decrement Selection", mode = "x" },
     },
   },
 
@@ -27,10 +27,10 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
+            init_selection = "<Up>",
+            node_incremental = "<Up>",
             scope_incremental = false,
-            node_decremental = "<bs>",
+            node_decremental = "<Down>",
           },
         },
         ensure_installed = require("config.language").treesitter,

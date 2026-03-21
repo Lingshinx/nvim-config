@@ -12,11 +12,6 @@ for abbr, full in pairs(require "config.keymaps.abbr") do
   map("ia", abbr, full)
 end
 
-map("n", "<UP>", "<C-u>")
-map("n", "<Down>", "<C-d>")
-map("n", "<Left>", "<C-f>")
-map("n", "<Right>", "<C-b>")
-
 map("i", "<C-CR>", "<End><CR>")
 map({ "i", "c" }, "<C-S-V>", '<C-r>"')
 map({ "i", "c" }, "<S-Insert>", '<C-r>"')
