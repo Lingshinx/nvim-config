@@ -39,7 +39,18 @@ local lang_functions = {
     end
   end,
 
-  config_treesitter = function(langs) require("nvim-treesitter.install").ensure_installed(langs.treesitter) end,
+  config_treesitter = function(langs)
+    require("utils.plugin.treesitter").ensure_installed(langs.treesitter)
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = langs.treesitter,
+      callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo.foldmethod = "expr"
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
+  end,
 
   config_formatter = function(langs)
     local conform = require "conform"
