@@ -5,11 +5,13 @@ local is_file_in = fn.is_file_in
 
 ---@return boolean
 local plugins_loaded = function()
-  return require("utils.list").any(function(plugin) return package.loaded[plugin] end, {
-    "conform",
-    "nvim-treesitter",
-    "mason",
-  })
+  return vim
+    .iter({
+      "conform",
+      "nvim-treesitter",
+      "mason",
+    })
+    :any(function(plugin) return package.loaded[plugin] end)
 end
 
 local function config_options(lang, opts)
