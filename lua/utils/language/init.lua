@@ -5,24 +5,24 @@ return {
   ---@param opts config.language.Opts
   setup = function(opts)
     opts = vim.tbl_extend("keep", opts or {}, {
-      rtp = vim.fn.stdpath "config",
-      mod = "config.langs",
+      mod = "langs",
     })
 
     local langs = require("utils.language.langs").new()
-    require("utils.fs").load_each(
-      opts.rtp,
-      opts.mod,
-      function(name, config)
+
+    coroutine.wrap(function()
+      local files = vim.api.nvim_get_runtime_file(opts.mod .. "/*.lua", true)
+      for _, file in ipairs(files) do
+        local name = vim.fn.fnamemodify(file, ":t:r")
+        local config = dofile(file)
         if not config[1] then config[1] = name end
         langs:solve(config)
-      end,
-      vim.schedule_wrap(function()
-        langs.ok = true
-        local callback = opts.hook
-        if callback then callback(langs) end
-      end)
-    )
+      end
+      langs.ok = true
+      local callback = opts.hook
+      if callback then callback(langs) end
+    end)()
+
     return langs
   end,
 }

@@ -19,7 +19,6 @@ return {
           border = "thin",
           below = "",
           language_border = "",
-          highlight = "",
           right_pad = 1,
         },
         heading = {
