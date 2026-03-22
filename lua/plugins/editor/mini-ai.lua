@@ -60,9 +60,9 @@ return {
       ["[i"] = "prev",
     }
     for prefix, name in pairs(mappings) do
-      list.append(keys, { prefix, group = name })
+      keys[#keys + 1] = { prefix, group = name }
       for _, obj in pairs(objects) do
-        list.append(keys, { prefix .. obj[1], desc = obj.desc })
+        keys[#keys + 1] = { prefix .. obj[1], desc = obj.desc }
       end
     end
     require("which-key").add(keys, { notify = false })
