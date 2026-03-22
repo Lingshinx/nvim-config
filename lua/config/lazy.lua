@@ -13,7 +13,6 @@ require("lazy").setup {
   change_detection = { enabled = false },
   rocks = { enabled = false },
   spec = {
-    { import = "plugins.component" },
     { import = "plugins.ui" },
     { import = "plugins.lsp" },
     { import = "plugins.util" },
