@@ -86,7 +86,7 @@ return {
       },
     },
     -- Optional dependencies
-    dependencies = { { "nvim-mini/mini.icons", config = function() end } },
+    dependencies = { { "nvim-mini/mini.icons" } },
 
     keys = {
       { "<leader>fo", function() require("oil").toggle_float() end, desc = "Oil" },
