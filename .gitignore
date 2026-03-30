@@ -1,5 +1,4 @@
 /.envrc
 /.direnv
-/lua/plugins/dankcolors.lua
 /langs/*
 !/langs/lua.lua
