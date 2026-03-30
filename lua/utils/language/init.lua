@@ -5,13 +5,13 @@ return {
   ---@param opts config.language.Opts
   setup = function(opts)
     opts = vim.tbl_extend("keep", opts or {}, {
-      mod = "langs",
+      rtp = "langs",
     })
 
     local langs = require("utils.language.langs").new()
 
     coroutine.wrap(function()
-      local files = vim.api.nvim_get_runtime_file(opts.mod .. "/*.lua", true)
+      local files = vim.api.nvim_get_runtime_file(opts.rtp .. "/*.lua", true)
       for _, file in ipairs(files) do
         local name = vim.fn.fnamemodify(file, ":t:r")
         local config = dofile(file)

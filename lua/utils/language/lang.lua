@@ -1,6 +1,4 @@
 local Lang = {}
-local list = require "utils.list"
-local append = list.append
 
 ---@module 'lazy'
 
@@ -60,11 +58,7 @@ local metatable = {
       elseif type(lsp) == "table" then
         local result = {}
         for k, v in pairs(lsp) do
-          if type(k) == "number" then
-            append(result, v)
-          else
-            append(result, k)
-          end
+          result[#result + 1] = type(k) == "number" and v or k
         end
         return result
       end

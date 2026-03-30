@@ -9,12 +9,12 @@
 ---@field treesitter string[]
 ---@field plugins LazySpec
 ---@field append fun(langs: config.language.Langs, name:string, config: config.language.Config)
----@field config fun()
----@field config_lsp fun()
----@field config_mason fun()
----@field config_treesitter fun()
----@field config_options fun()
----@field config_formatter fun()
+---@field config fun(langs: config.language.Langs)
+---@field config_lsp fun(langs: config.language.Langs)
+---@field config_mason fun(langs: config.language.Langs)
+---@field config_treesitter fun(langs: config.language.Langs)
+---@field config_options fun(langs: config.language.Langs)
+---@field config_formatter fun(langs: config.language.Langs)
 ---@field solve fun(langs: config.language.Langs, config:config.language.Config)
 
 ---@class config.language.Lang
@@ -27,9 +27,8 @@
 ---@field get_lspnames fun(self: config.language.Lang):string
 
 ---@class config.language.Opts
----@field afterall? fun(langs: config.language.Langs)
+---@field hook? fun(langs: config.language.Langs)
 ---@field rtp? string
----@field mod? string
 
 ---@class config.language.Config
 ---@field [integer] string|config.language.Config
