@@ -50,7 +50,10 @@ return {
         if not config[1] then config[1] = name end
         langs:solve(config)
       end
-    end, loaded and vim.schedule_wrap(function() config_langs(langs, opts) end) or nil)
+    end, loaded and vim.schedule_wrap(function()
+      langs.ok = true
+      config_langs(langs, opts)
+    end) or nil)
   end,
 
   ---@type config.workspace.file_handler
