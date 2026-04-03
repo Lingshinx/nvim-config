@@ -46,7 +46,7 @@ return {
       {
         "<UP>",
         require("utils.plugin.treesitter").incremental_select,
-        mode = { "n", "o", "x" },
+        mode = { "n", "o" },
         desc = "increment Selection",
       },
       {
