@@ -7,7 +7,9 @@ return {
       {
         "<C-\\>",
         function()
+          if vim.v.count ~= 0 then vim.t.snacks_recent_terminal = vim.v.count end
           Snacks.terminal.toggle(nil, {
+            count = vim.g.snacks_recent_terminal,
             win = {
               wo = {
                 winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
