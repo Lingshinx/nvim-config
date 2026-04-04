@@ -1,6 +1,11 @@
 return {
   get_path = function(pkg_name, path)
-    return (vim.env.MASON or (vim.fn.stdpath "data" .. "/mason")) .. "/packages" .. pkg_name .. "/" .. path
+    return vim.fs.joinpath(
+      (vim.env.MASON or vim.fs.joinpath(vim.fn.stdpath "data", "mason")),
+      "packages",
+      pkg_name,
+      path
+    )
   end,
   install = function(pkg_name)
     local registry = require "mason-registry"
