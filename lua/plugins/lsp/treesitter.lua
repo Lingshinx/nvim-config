@@ -42,45 +42,49 @@ return {
     branch = "main",
     build = ":TSUpdate",
     cmd = { "TSInstall", "TSInstallFromGrammar", "TSLog", "TSUninstall", "TSUpdate" },
+    config = function() require("config.language"):config_treesitter() end,
+  },
+
+  {
+    "Lingshinx/treesitter-select.nvim",
     keys = {
       {
         "<UP>",
-        require("utils.plugin.treesitter").incremental_select,
-        mode = { "n", "o" },
+        "<Plug>(TreesitterSelectParent)",
+        mode = { "n", "x" },
         desc = "increment Selection",
       },
       {
         "<Down>",
-        require("utils.plugin.treesitter").decremental_select,
-        mode = { "x" },
+        "<Plug>(TreesitterSelectChild)",
+        mode = "x",
         desc = "Decrement Selection",
       },
       {
         "<Left>",
-        require("utils.plugin.treesitter").prev_select,
-        mode = { "x" },
+        "<Plug>(TreesitterSelectPrev)",
+        mode = "x",
         desc = "Prev Selection",
       },
       {
         "<Right>",
-        require("utils.plugin.treesitter").next_select,
-        mode = { "x" },
+        "<Plug>(TreesitterSelectNext)",
+        mode = "x",
         desc = "Next Selection",
       },
       {
         "<Home>",
-        require("utils.plugin.treesitter").first_select,
-        mode = { "x" },
+        "<Plug>(TreesitterSelectFirst)",
+        mode = "x",
         desc = "Prev Selection",
       },
       {
         "<End>",
-        require("utils.plugin.treesitter").last_select,
-        mode = { "x" },
+        "<Plug>(TreesitterSelectLast)",
+        mode = "x",
         desc = "Next Selection",
       },
     },
-    config = function() require("config.language"):config_treesitter() end,
   },
 
   {
