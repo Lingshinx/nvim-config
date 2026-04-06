@@ -50,7 +50,7 @@ map({ "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Sear
 map({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
 -- save file
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr>", { desc = "Save File" })
 
 --keywordprg
 
