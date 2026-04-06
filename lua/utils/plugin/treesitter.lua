@@ -1,11 +1,14 @@
 return {
   ---@param langs string[]
   ensure_installed = function(langs)
+    local ts = require "nvim-treesitter"
+
     local installed = {}
-    for f in vim.fs.dir(require("nvim-treesitter.config").get_install_dir "parser") do
-      installed[vim.fn.fnamemodify(f, ":r")] = true
+    for lang in ipairs(ts.get_installed()) do
+      installed[lang] = true
     end
+
     local not_installed = vim.iter(langs):filter(function(lang) return not installed[lang] end):totable()
-    require("nvim-treesitter").install(not_installed)
+    ts.install(not_installed)
   end,
 }
