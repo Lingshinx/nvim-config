@@ -10,9 +10,12 @@ return {
     end, config)
   end,
 
-  ---@param name string
-  ---@return string
-  get_path = function(name) return vim.fn.stdpath "config" .. "/lua/config/langs/" .. name .. ".lua" end,
+  with_languages = function(cb)
+    coroutine.wrap(function()
+      local files = vim.api.nvim_get_runtime_file("langs/*.lua", true)
+      cb(files)
+    end)()
+  end,
 
   diagnostic_goto = function(count, severity)
     return function()

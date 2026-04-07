@@ -2,16 +2,11 @@ return {
   Lang = require "utils.language.lang",
   Langs = require "utils.language.langs",
 
-  ---@param opts config.language.Opts
-  setup = function(opts)
-    opts = vim.tbl_extend("keep", opts or {}, {
-      rtp = "langs",
-    })
-
+  ---@param hook? fun(langs: config.language.Langs)
+  setup = function(hook)
     local langs = require("utils.language.langs").new()
 
-    coroutine.wrap(function()
-      local files = vim.api.nvim_get_runtime_file(opts.rtp .. "/*.lua", true)
+    require("utils.language.fn").with_languages(function(files)
       for _, file in ipairs(files) do
         local name = vim.fn.fnamemodify(file, ":t:r")
         local config = dofile(file)
@@ -19,9 +14,8 @@ return {
         langs:solve(config)
       end
       langs.ok = true
-      local callback = opts.hook
-      if callback then callback(langs) end
-    end)()
+      if hook then hook(langs) end
+    end)
 
     return langs
   end,
