@@ -10,17 +10,10 @@ local notification = utils.notification
 
 local config_dir = vim.fn.stdpath "config"
 local dot_dir = vim.env.XDG_CONFIG_HOME or "~/.config"
-local logo = [[
-         ████                                             
-        ██  ──聆噺讨厌写代码─󰫢─ █                    
-    𓇼  ██                 ████ █  ⟡                   
-      ██ ██ ████ █████ █     ██████ ██     
-     ██ ██ ████ ████████████ █ ████      
-    ██ ██ ████ █ █ █  █ █ ████      ⟡ 
-  ████████████ ████████████ ████████ ████       
-                        █                                 
-          ███████████████       ⛧                         
-]]
+
+local logos = require "config.logo"
+local logo = vim.g.header and logos[vim.g.header] or logos.lingshin
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
