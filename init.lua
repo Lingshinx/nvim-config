@@ -1,12 +1,16 @@
 -- require "utils.profiler"
 require "config.options"
-require "config.lazy"
+local wait_plugins = require "load.packs"
+require "load.langs"
+require "load.colorscheme"
 
-require("utils.fn").deter(function()
-  require "config.keymaps"
-  require "config.misc"
-  require "config.autocmds"
-  require "config.highlight"
-  require "config.workspace"
-  require "config.neovide"
-end)
+vim.api.nvim_create_autocmd("User", {
+  pattern = "DeferredUIEnter",
+  callback = function()
+    require "load.keymap"
+    require "config.autocmds"
+    require "config.neovide"
+  end,
+})
+
+wait_plugins()

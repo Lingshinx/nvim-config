@@ -1,5 +1,6 @@
 return {
   "gbprod/yanky.nvim",
+  lazy = true,
   opts = {
     highlight = { timer = 150 },
     textobj = {
@@ -32,8 +33,8 @@ return {
 		{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
 	},
 
-  config = function(_, opts)
-    require("yanky").setup(opts)
+  after = function(spec)
+    require("yanky").setup(spec.opts)
     vim.api.nvim_del_augroup_by_name "lingshin_highlight_yank"
   end,
 }

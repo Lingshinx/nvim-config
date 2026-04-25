@@ -1,6 +1,7 @@
 return {
   "nvim-mini/mini.pairs",
-  event = "VeryLazy",
+  lazy = true,
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   opts = {
     modes = { insert = true, command = true, terminal = false },
     -- skip autopair when next character is one of these
@@ -14,8 +15,8 @@ return {
     markdown = true,
   },
 
-  config = function(opts)
-    require("mini.pairs").setup(opts)
+  after = function(spec)
+    require("mini.pairs").setup(spec.opts)
 
     Snacks.toggle({
       name = "Pairs",

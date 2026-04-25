@@ -1,6 +1,7 @@
 return {
   "gbprod/substitute.nvim",
-  event = "VeryLazy",
+  lazy = true,
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   keys = {
     { "ds", desc = "Substitute" },
     { "dss", desc = "Substitute Line" },
@@ -12,7 +13,7 @@ return {
     { "dxx", desc = "Exchange" },
     { "x", desc = "Exchange", mode = "x" },
   },
-  config = function()
+  after = function()
     require("substitute").setup {
       on_substitute = require("yanky.integration").substitute(),
     }

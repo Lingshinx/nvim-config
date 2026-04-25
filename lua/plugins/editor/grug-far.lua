@@ -1,5 +1,7 @@
 return {
   "MagicDuck/grug-far.nvim",
+  lazy = true,
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   opts = {},
   keys = {
     {

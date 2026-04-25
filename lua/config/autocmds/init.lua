@@ -12,14 +12,6 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
   end,
 })
 
--- Auto Format
-autocmd("BufWritePre", {
-  desc = "Auto Format buffer",
-  callback = function(args)
-    if vim.g.autoformat and vim.b.autoformat ~= false then require("conform").format { bufnr = args.buf } end
-  end,
-})
-
 -- Highlight on yank
 autocmd("TextYankPost", {
   desc = "Highlight on yank",

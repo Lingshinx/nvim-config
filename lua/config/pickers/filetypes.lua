@@ -2,8 +2,8 @@ local config = require "config.language"
 local file_name_of = {}
 local lang_fn = require "utils.language.fn"
 
-require("utils.fs").load_each(vim.fn.stdpath "config", "config.langs", function(file_name, mod)
-  local names = lang_fn.get_names(mod)
+require("utils.fs").load_each(vim.fs.joinpath(vim.fn.stdpath "config", "langs"), function(value, file_name)
+  local names = lang_fn.get_names(value)
   if vim.tbl_isempty(names) then
     file_name_of[file_name] = file_name
   else

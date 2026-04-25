@@ -16,8 +16,9 @@ end
 
 return {
   "nvim-mini/mini.ai",
-  event = "VeryLazy",
-  opts = function()
+  lazy = true,
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+  after = function()
     ---@module "which-key"
     ---@type wk.Spec[]
     local list = require "utils.list"
@@ -68,7 +69,7 @@ return {
     require("which-key").add(keys, { notify = false })
 
     local ai = require "mini.ai"
-    return {
+    ai.setup {
       n_lines = 500,
       mappings = {
         around_next = "]a",

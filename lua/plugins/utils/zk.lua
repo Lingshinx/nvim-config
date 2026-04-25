@@ -1,0 +1,25 @@
+return {
+  "zk-org/zk-nvim",
+  lazy = true,
+  cmd = {
+    "ZkBacklinks",
+    "ZkBuffers",
+    "ZkCd",
+    "ZkIndex",
+    "ZkInsertLink",
+    "ZkInsertLinkAtSelection",
+    "ZkLinks",
+    "ZkMatch",
+    "ZkNew",
+    "ZkNewFromContentSelection",
+    "ZkNewFromTitleSelection",
+    "ZkNotes",
+    "ZkTags",
+    "ZkAdd",
+  },
+  after = function()
+    require("utils.plugin.zk").setup {
+      picker = "snacks_picker",
+    }
+  end,
+}

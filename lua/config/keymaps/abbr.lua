@@ -1,4 +1,6 @@
+local function iabbr(l, r) return { l, r, mode = "ia" } end
+
 return {
-  cosnt = "const",
-  mian = "main",
+  iabbr("cosnt", "const"),
+  iabbr("mian", "main"),
 }
