@@ -1,6 +1,5 @@
 return {
   "rachartier/tiny-inline-diagnostic.nvim",
-  lazy = true,
   event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   opts = {
     preset = "powerline",

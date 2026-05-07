@@ -9,7 +9,6 @@ return {
 
   {
     "JezerM/oil-lsp-diagnostics.nvim",
-    lazy = true,
   },
 
   {

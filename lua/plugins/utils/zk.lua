@@ -1,6 +1,5 @@
 return {
   "zk-org/zk-nvim",
-  lazy = true,
   cmd = {
     "ZkBacklinks",
     "ZkBuffers",

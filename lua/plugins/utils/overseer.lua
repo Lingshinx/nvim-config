@@ -2,7 +2,6 @@ local cmd = require("utils.keymaps").cmd
 
 return {
   "stevearc/overseer.nvim",
-  lazy = true,
   cmd = {
     "Make",
     "Grep",

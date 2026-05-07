@@ -1,6 +1,5 @@
 return {
   "brenoprata10/nvim-highlight-colors",
-  lazy = true,
   event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   main = "nvim-highlight-colors",
   opts = {

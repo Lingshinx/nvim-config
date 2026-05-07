@@ -1,6 +1,5 @@
 return {
   "nvim-mini/mini.pairs",
-  lazy = true,
   event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   opts = {
     modes = { insert = true, command = true, terminal = false },

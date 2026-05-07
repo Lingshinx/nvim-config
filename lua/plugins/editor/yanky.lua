@@ -1,6 +1,5 @@
 return {
   "gbprod/yanky.nvim",
-  lazy = true,
   opts = {
     highlight = { timer = 150 },
     textobj = {

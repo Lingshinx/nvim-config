@@ -16,7 +16,6 @@ end
 
 return {
   "nvim-mini/mini.ai",
-  lazy = true,
   event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   after = function()
     ---@module "which-key"

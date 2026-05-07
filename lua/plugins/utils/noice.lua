@@ -1,8 +1,7 @@
 return {
-  { "MunifTanjim/nui.nvim", lazy = true },
+  { "MunifTanjim/nui.nvim" },
   {
     "folke/noice.nvim",
-    lazy = true,
     event = "DeferredUIEnter",
     opts = {
       routes = {

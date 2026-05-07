@@ -38,14 +38,11 @@ end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = true,
     cmd = { "TSInstall", "TSInstallFromGrammar", "TSLog", "TSUninstall", "TSUpdate" },
-    after = function() require("config.language"):config_treesitter() end,
   },
 
   {
     "Lingshinx/treesitter-select.nvim",
-    lazy = true,
     keys = {
       {
         "<UP>",
@@ -88,7 +85,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    lazy = true,
+    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     opts = {
       select = {
         lookahead = true,

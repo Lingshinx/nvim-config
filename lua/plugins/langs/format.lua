@@ -1,6 +1,5 @@
 return {
   "stevearc/conform.nvim",
-  lazy = true,
   event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   keys = {
     {
@@ -10,4 +9,14 @@ return {
       desc = "Format",
     },
   },
+  after = function()
+    local conform = require "conform"
+    conform.formatters_by_ft = require("load.langs").formatters_by_ft
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      desc = "Auto Format buffer",
+      callback = function(args)
+        if vim.g.autoformat and vim.b.autoformat ~= false then conform.format { bufnr = args.buf } end
+      end,
+    })
+  end,
 }
