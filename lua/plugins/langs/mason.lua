@@ -14,13 +14,12 @@ return {
         },
       },
     },
-    after = function(spec)
-      require("mason").setup(spec.opts)
-    end,
+    after = function(spec) require("mason").setup(spec.opts) end,
   },
 
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+    after = function() require("lz.n").trigger_load "mason.nvim" end,
   },
 }
