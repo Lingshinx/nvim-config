@@ -1,3 +1,1 @@
-return {
-  lsp = "fish_lsp",
-}
+return { lsp = "fish_lsp" }
