@@ -48,7 +48,7 @@ M = {
   { ">", ">gv", mode = "v" },
 
   { "<leader>n", plug "Notifications", desc = "Notifications" },
-  { "<leader>qq", cmd "quitall", desc = "Quit All"},
+  { "<leader>qq", cmd "quitall", desc = "Quit All" },
   { [[<C-\>]], plug "OpenTerminal", desc = "ToggleTerm" },
 
   { "M", "mX", desc = "Mark" },
@@ -71,7 +71,7 @@ M = {
       -- require("substitute.range").clear_match()
       return "<esc>"
     end,
-    mode = { "i", "n", "s" },
+    mode = { "n", "i", "s" },
     expr = true,
     desc = "Escape and Clear hlsearch",
   },
