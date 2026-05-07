@@ -6,8 +6,10 @@ local M = {}
 ---@field [1]? string
 ---@field name? string
 ---@field url? string
+---@field version? string
 ---@field main? string
 ---@field enabled? boolean|fun():boolean
+---@field loaded? boolean
 ---@field before? fun()
 ---@field beforeAll? fun()
 ---@field after? fun()
@@ -29,20 +31,26 @@ local lazies = {}
 local spec_map = {}
 
 ---@param spec utils.pack.Spec
----@return string url, string name
+---@return string url, string name, string? version
 local function parse_pack(spec)
-  local url, name
+  local url, name, version
   if spec[1] then
-    url = "https://github.com/" .. spec[1]
-    name = vim.split(spec[1], "/", { trimempty = true, plain = true })[2]
+    local components = vim.split(spec[1], "/", { trimempty = true, plain = true })
+    url = "https://github.com/" .. components[1] .. "/" .. components[2]
+    name, version = components[2], components[3]
+  else
+    local spec_url = spec.url
+    if spec_url then
+      url = spec_url
+      local components = vim.split(url:gsub("%a+://", ""), "/", { trimempty = true, plain = true })
+      name, version = components[2], components[3]
+    end
   end
-  if url then
-    url = url
-    local components = vim.split(url, "/", { trimempty = true, plain = true })
-    name = components[#components]
-  end
-  if name then name = name end
-  return url, name
+  if spec.name then name = spec.name end
+  if spec.version then version = spec.version end
+  if url == nil then error(("url not specified in %s"):format(vim.inspect(spec))) end
+  if name == nil then error(("name not specified in %s"):format(vim.inspect(spec))) end
+  return url, name, version
 end
 
 local default_loader = vim.g.package_load or vim.g.lz_n or vim.cmd.packadd
@@ -77,24 +85,31 @@ local merge = require("utils.fn").merge
 
 ---@param spec utils.pack.Spec
 function M.register(spec)
-  if spec.enabled == false then return end
-  local url, name = parse_pack(spec)
-  spec.main = spec.main or get_main(name)
-  local config = spec_map[name] or { keys = {}, opts = {} }
+  if spec.loaded or spec.enabled == false then return end
+  spec.loaded = true
 
+  local url, name, version = parse_pack(spec)
+  if packs[name] and not spec.optional then return end
+
+  spec.main = spec.main or get_main(name)
+
+  local config = spec_map[name] or { keys = {}, opts = {} }
   if spec.opts then spec.opts = merge(config.opts, spec.opts) end
   if spec.keys then spec.keys = merge(config.keys, spec.keys) end
-
   spec_map[name] = config
 
   if spec.optional then return end
+  packs[name] = { src = url, name = name, version = version }
 
   lazies[#lazies + 1] = transform(name, spec)
 end
 
 function M.load()
-  vim.pack.add(packs)
+  local pkgs = {}
+  for _, pkg in pairs(packs) do
+    pkgs[#pkgs + 1] = pkg
   end
+  vim.pack.add(pkgs)
   if not vim.tbl_isempty(lazies) then require("lz.n").load(lazies) end
   packs = nil
   lazies = nil
