@@ -1,5 +1,5 @@
 local map = require "utils.keymaps"
-local plug, cmd = map.config, map.cmd
+local plug, cmd, pick = map.config, map.cmd, map.pick
 return {
   -- buffers
   { "<leader>bb", cmd "e #", desc = "Switch" },
@@ -35,5 +35,5 @@ return {
 
   { "<leader><tab>p", plug "TabPick", desc = "Pick" },
   { "<leader><tab>r", plug "TabRename", desc = "Rename" },
-  { "<leader><tab>s", plug "TabSelect", desc = "Select" },
+  { "<leader><tab>s", pick "tabpages", desc = "Select" },
 }
