@@ -1,6 +1,5 @@
 local tabname = require "utils.plugin.heirline.tabline.name"
 local winnames = require "utils.plugin.heirline.utils"
-local active_tab = vim.api.nvim_get_current_tabpage()
 
 ---@type snacks.picker.Config|fun(snacks.picker.Config):snacks.picker.Config>
 return {
@@ -41,7 +40,7 @@ return {
       :totable()
 
     return {
-      { align(tabicon, 2), item.is_active and "LingshinPickerFtFormatter" or "Special" },
+      { align(tabicon, 2), item.is_active and "@constant" or "Special" },
       {
         align(item.name, left - 2, { truncate = true }),
         not item.is_active and "SnacksPickerDimmed",
@@ -63,7 +62,7 @@ return {
           tabpage = tab,
           name = name,
           tabnr = tabnr,
-          is_active = tab == active_tab,
+          is_active = tab == vim.api.nvim_get_current_tabpage(),
         }
       end)
       :totable()
