@@ -76,7 +76,7 @@ return {
     },
   },
   after = function(spec)
-    require("lz.n").trigger_load "luasnip"
+    require("lz.n").trigger_load "LuaSnip"
     require("blink-cmp").setup(spec.opts)
   end,
 }
