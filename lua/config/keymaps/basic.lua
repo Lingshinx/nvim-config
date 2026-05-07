@@ -58,19 +58,9 @@ M = {
 
   { [[<C-\>]], plug "OpenTerminal", desc = "Toggle Term", mode = { "n", "t", "i", "x" } },
 
-  escapes = {
-    vim.cmd.noh,
-  },
   {
     "<esc>",
-    function()
-      for _, func in ipairs(M.escapes) do
-        func()
-      end
-      -- if require("luasnip").expand_or_jumpable() then require("luasnip").unlink_current() end
-      -- require("substitute.range").clear_match()
-      return "<esc>"
-    end,
+    require("utils.escapes").escape,
     mode = { "n", "i", "s" },
     expr = true,
     desc = "Escape and Clear hlsearch",
