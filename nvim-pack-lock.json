@@ -16,6 +16,18 @@
       "rev": "1454f14a8d855a578ceeba77c62538fa1459a67c",
       "src": "https://github.com/saghen/blink.compat"
     },
+    "blink.lib": {
+      "rev": "f29d8bac6549bc1e7d699c83f680823d7def98bd",
+      "src": "https://github.com/saghen/blink.lib"
+    },
+    "clangd_extensions.nvim": {
+      "rev": "78c2ecd659d54972be17aa6ba2deac3c53223b80",
+      "src": "https://github.com/p00f/clangd_extensions.nvim"
+    },
+    "coerce.nvim": {
+      "rev": "49bf22e7f3f69403d9efb68eda1fa2f8492d2fb2",
+      "src": "https://github.com/gregorias/coerce.nvim"
+    },
     "conform.nvim": {
       "rev": "dca1a190aa85f9065979ef35802fb77131911106",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -23,6 +35,21 @@
     "coop.nvim": {
       "rev": "98760ee1a2f964454f2daef57eb80ec7df71f281",
       "src": "https://github.com/gregorias/coop.nvim"
+    },
+    "coq.artifacts": {
+      "rev": "ef5f21d638ccc456cfa5b8d0ab37093cefe48c8b",
+      "src": "https://github.com/ms-jpq/coq.artifacts/",
+      "version": "'artifact'"
+    },
+    "coq.thirdparty": {
+      "rev": "2bd969a2bcd2624f9c260b1000957c7e665e308e",
+      "src": "https://github.com/ms-jpq/coq.thirdparty/",
+      "version": "'3p'"
+    },
+    "coq_nvim": {
+      "rev": "bcc1bf327b98042e6a77a9637cd465cbceca2679",
+      "src": "https://github.com/ms-jpq/coq_nvim",
+      "version": "'coq'"
     },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
@@ -59,6 +86,10 @@
     "lz.n": {
       "rev": "2f7e0a010045f8dfbcf6e2f0e41455cd5809b04e",
       "src": "https://github.com/lumen-oss/lz.n"
+    },
+    "markdown-preview.nvim": {
+      "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
+      "src": "https://github.com/iamcco/markdown-preview.nvim"
     },
     "mason.nvim": {
       "rev": "12ddd182d9efbdc848b540f16484a583d52da0fb",
@@ -120,6 +151,10 @@
       "rev": "b20b2a7887bd39c1a356980b45e03250f3dce49c",
       "src": "https://github.com/folke/persistence.nvim"
     },
+    "render-markdown.nvim": {
+      "rev": "3f3eea97b80839f629c951ca660ffd125bfa5b34",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
@@ -147,6 +182,10 @@
     "trouble.nvim": {
       "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
       "src": "https://github.com/folke/trouble.nvim"
+    },
+    "ts-autotag.nvim": {
+      "rev": "35f79f6253dff5cc43cf943d74c4b2734370a81d",
+      "src": "https://github.com/tronikelis/ts-autotag.nvim"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
