@@ -1,6 +1,6 @@
 return {
   "gbprod/substitute.nvim",
-  event = "VeryLazy",
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   keys = {
     { "ds", desc = "Substitute" },
     { "dss", desc = "Substitute Line" },
@@ -12,13 +12,12 @@ return {
     { "dxx", desc = "Exchange" },
     { "x", desc = "Exchange", mode = "x" },
   },
-  config = function()
-    require("substitute").setup {
-      on_substitute = require("yanky.integration").substitute(),
-    }
+  after = function()
+    local substitute = require "substitute"
+    substitute.setup { on_substitute = require("yanky.integration").substitute() }
+    table.insert(require("config.keymaps.basic").escapes, function() error "hello" end)
 
     local map = vim.keymap.set
-    local substitute = require "substitute"
     map("n", "ds", substitute.operator, { noremap = true })
     map("n", "dss", substitute.line, { noremap = true })
     map("n", "dS", substitute.eol, { noremap = true })

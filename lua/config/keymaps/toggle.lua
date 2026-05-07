@@ -14,3 +14,19 @@ Snacks.toggle.scroll():map "<leader>uS"
 Snacks.toggle.zoom():map("<leader>wm"):map "<leader>uZ"
 Snacks.toggle.zen():map "<leader>uz"
 Snacks.toggle.inlay_hints():map "<leader>uh"
+
+Snacks.toggle.new {
+  id = "format",
+  name = "Auto Format (Buffer)",
+  get = function() return vim.b.autoformat end,
+  set = function(state) vim.b.autoformat = state end,
+}:map "<leader>uf"
+
+Snacks.toggle.new({
+  id = "format_global",
+  name = "Auto Format",
+  get = function() return vim.g.autoformat end,
+  set = function(state) vim.g.autoformat = state end,
+}):map "<leader>uF"
+
+Snacks.toggle.new(require("utils.cliapend")):map "<leader>uy"

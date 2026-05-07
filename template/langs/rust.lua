@@ -19,8 +19,7 @@ return {
     },
     {
       "mrcjkb/rustaceanvim",
-      ft = { "rust" },
-      config = function()
+      after = function()
         vim.g.rustaceanvim = {
           server = {
             on_attach = function(_, bufnr)

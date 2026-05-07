@@ -1,27 +1,32 @@
-local map = vim.keymap.set
-local del = vim.keymap.del
 local diagnostic_icon = require("config.icons").diagnostics
-local picker = require("utils.plugin.snacks").picker
-local diagnostic_goto = require("utils.language.fn").diagnostic_goto
+local pick = require("utils.keymaps").pick
 local reference_goto = require("utils.plugin.snacks").word_goto
+
+local diagnostic_goto = function(count, severity)
+  return function()
+    vim.diagnostic.jump {
+      count = count,
+      severity = severity and vim.diagnostic.severity[severity] or nil,
+    }
+  end
+end
 
 local function diagnostic_preview()
   vim.diagnostic.open_float()
   vim.diagnostic.open_float()
 end
 
+local del = vim.keymap.del
 del("n", "grn")
 del("n", "gra")
 del("n", "grr")
 del("n", "gri")
 del("n", "grt")
 
-require("which-key").add {
+return {
   { "<leader>ca", vim.lsp.buf.code_action, desc = "Line Diagnostics" },
   { "[d", diagnostic_goto(-1), desc = "Diagnostic", icon = "" },
   { "]d", diagnostic_goto(1), desc = "Diagnostic", icon = "" },
-  { "[D", desc = "First Diagnostic", icon = "" },
-  { "]D", desc = "Last Diagnostic", icon = "" },
   { "[e", diagnostic_goto(-1, "ERROR"), desc = "Error", icon = { icon = diagnostic_icon.Error, color = "red" } },
   { "]e", diagnostic_goto(1, "ERROR"), desc = "Error", icon = { icon = diagnostic_icon.Error, color = "red" } },
   { "[w", diagnostic_goto(-1, "WARN"), desc = "Warning", icon = { icon = diagnostic_icon.Warn, color = "yellow" } },
@@ -30,16 +35,16 @@ require("which-key").add {
   { "]]", reference_goto(1), desc = "Reference", icon = { icon = "", color = "purple" } },
   { "<leader>xp", diagnostic_preview, desc = "Preview" },
 
-  { "gD", picker "lsp_declarations", desc = "Goto Definition" },
-  { "gd", picker "lsp_definitions", desc = "Goto Definition" },
-  { "gr", picker "lsp_references", desc = "References" },
-  { "gI", picker "lsp_implementations", desc = "Goto Implementation" },
-  { "gt", picker "lsp_type_definitions", desc = "Goto T[y]pe Definition" },
+  { "gD", pick "lsp_declarations", desc = "Goto Definition" },
+  { "gd", pick "lsp_definitions", desc = "Goto Definition" },
+  { "gr", pick "lsp_references", desc = "References" },
+  { "gI", pick "lsp_implementations", desc = "Goto Implementation" },
+  { "gt", pick "lsp_type_definitions", desc = "Goto T[y]pe Definition" },
 
-  { "<leader>ss", picker "lsp_symbols", desc = "LSP Symbols" },
-  { "<leader>sS", picker "lsp_workspace_symbols", desc = "LSP Workspace Symbols" },
+  { "<leader>ss", pick "lsp_symbols", desc = "LSP Symbols" },
+  { "<leader>sS", pick "lsp_workspace_symbols", desc = "LSP Workspace Symbols" },
 
-  { "<leader>cl", picker "lsp_config", desc = "LSP" },
+  { "<leader>cl", pick "lsp_config", desc = "LSP" },
   { "<leader>ci", vim.show_pos, desc = "Inspect Pos" },
   { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
   { "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", desc = "Add Comment Below" },
@@ -47,33 +52,35 @@ require("which-key").add {
 
   -- treesitter
   -- highlights under cursor
-  {
-    "<leader>cI",
-    function()
-      vim.treesitter.inspect_tree()
-      vim.api.nvim_input "I"
-    end,
-    desc = "Inspect Tree",
-  },
-}
 
--- snippet
-map(
-  "s",
-  "<Tab>",
-  function() return vim.snippet.active { direction = 1 } and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>" end,
-  { expr = true, desc = "Jump Next" }
-)
-map(
-  { "i", "s" },
-  "<S-Tab>",
-  function() return vim.snippet.active { direction = -1 } and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>" end,
-  { expr = true, desc = "Jump Previous" }
-)
+  { "<leader>cI", vim.treesitter.inspect_tree, desc = "Inspect Tree" },
+  {
+    "<Tab>",
+    function() return vim.snippet.active { direction = 1 } and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>" end,
+    mode = "s",
+    expr = true,
+    desc = "Jump Next",
+  },
+
+  -- snippet
+  {
+    "<S-Tab>",
+    function() return vim.snippet.active { direction = -1 } and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>" end,
+    mode = { "i", "s" },
+    expr = true,
+    desc = "Jump Previous",
+  },
+  -- {
+  --   "<esc>",
+  --   function()
+  --     vim.cmd "noh"
+  --     if require("luasnip").expand_or_jumpable() then require("luasnip").unlink_current() end
+  --     require("substitute.range").clear_match()
+  --     return "<esc>"
+  --   end,
+  --   mode = { "n", "i", "s" },
+  --   expr = true,
+  --   desc = "Escape and Clear hlsearch",
+  -- },
+}
 -- Clear search and stop snippet on escape
-map({ "i", "n", "s" }, "<esc>", function()
-  vim.cmd "noh"
-  if require("luasnip").expand_or_jumpable() then require("luasnip").unlink_current() end
-  require("substitute.range").clear_match()
-  return "<esc>"
-end, { expr = true, desc = "Escape and Clear hlsearch" })

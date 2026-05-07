@@ -1,4 +1,15 @@
-local fs = require "utils.fs"
+---@param path string
+---@return string
+local function shorten_path(path, opts)
+  opts = vim.tbl_extend("keep", opts or {}, {
+    length = 2,
+  })
+  local parts = vim.split(path, "/")
+  -- handle situation when path start with "/"
+  parts = parts[1] == "" and { "", parts[2], "…", unpack(parts, #parts - opts.length + 2, #parts) }
+    or { parts[1], "…", unpack(parts, #parts - opts.length + 2, #parts) }
+  return #parts < opts.length and path or table.concat(parts, "/")
+end
 
 local TermName = {
   provider = function() return " " .. vim.api.nvim_buf_get_name(0):gsub("^.*:", ""):gsub(";#toggleterm#[0-9]$", "") end,
@@ -15,7 +26,7 @@ local WorkDir = {
     end,
   },
   {
-    provider = function(self) return " " .. fs.shorten_path(vim.fn.fnamemodify(self.filename, ":.:h")) .. "/" end,
+    provider = function(self) return " " .. shorten_path(vim.fn.fnamemodify(self.filename, ":.:h")) .. "/" end,
   },
   { provider = " " },
 }

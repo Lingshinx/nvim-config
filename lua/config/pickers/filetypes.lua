@@ -2,16 +2,13 @@ local config = require "config.language"
 local file_name_of = {}
 local lang_fn = require "utils.language.fn"
 
-require("utils.language.fn").with_languages(function(files)
-  for _, file in ipairs(files) do
-    local names = lang_fn.get_names(dofile(file))
-    if vim.tbl_isempty(names) then
-      local name = vim.fn.fnamemodify(file, ":t:r")
-      file_name_of[name] = file
-    else
-      for _, name in ipairs(names) do
-        file_name_of[name] = file
-      end
+require("utils.fs").load_each(vim.fs.joinpath(vim.fn.stdpath "config", "langs"), function(value, file_name)
+  local names = lang_fn.get_names(value)
+  if vim.tbl_isempty(names) then
+    file_name_of[file_name] = file_name
+  else
+    for _, lang_name in ipairs(names) do
+      file_name_of[lang_name] = file_name
     end
   end
 end)

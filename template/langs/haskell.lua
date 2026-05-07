@@ -5,15 +5,13 @@ return {
   plugins = {
     {
       "mrcjkb/haskell-snippets.nvim",
-      dependencies = { "L3MON4D3/LuaSnip" },
       ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-      config = function()
+      after = function()
         require("luasnip").add_snippets("haskell", require("haskell-snippets").all, { key = "haskell" })
       end,
     },
     {
       "mrcjkb/haskell-tools.nvim",
-      version = false,
       ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
       keys = {
         {
