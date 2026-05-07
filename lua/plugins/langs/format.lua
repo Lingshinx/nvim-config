@@ -10,6 +10,8 @@ return {
     },
   },
   after = function()
+    vim.g.autoformat = true
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     local conform = require "conform"
     conform.formatters_by_ft = require("load.langs").formatters_by_ft
     vim.api.nvim_create_autocmd("BufWritePre", {
