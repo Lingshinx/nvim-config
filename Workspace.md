@@ -119,5 +119,3 @@ fun directory_handlers(dir: string, opts: Opts)
 ### No Example
 
 It's complex, and I consider you don't need it.
-
-
