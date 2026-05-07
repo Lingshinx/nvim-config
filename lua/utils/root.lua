@@ -14,7 +14,7 @@ M = {
   ---@param buf integer
   ---@param bufpath string
   ---@return string?
-  lsp = function(buf, bufpath)
+  lsp = function(buf, bufpath) ---@diagnostic disable-line
     if not bufpath then return end
     local roots = {}
     local clients = vim.lsp.get_clients { bufnr = buf }
@@ -26,10 +26,11 @@ M = {
       roots[#roots + 1] = client.root_dir
     end
 
-    return vim
+    local longest_path = vim
       .iter(roots)
       :filter(function(path) return path and bufpath:find(path, 1, true) == 1 end)
       :fold("", function(acc, cur) return #cur > #acc and cur or acc end)
+    if longest_path ~= "" then return longest_path end
   end,
 
   ---@param from string
