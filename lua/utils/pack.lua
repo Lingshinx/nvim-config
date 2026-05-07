@@ -26,7 +26,6 @@ local M = {}
 
 local packs = {}
 local lazies = {}
-local eagers = {}
 local spec_map = {}
 
 ---@param spec utils.pack.Spec
@@ -90,32 +89,16 @@ function M.register(spec)
 
   if spec.optional then return end
 
-  packs[#packs + 1] = { src = url, name = name }
-  if spec.lazy then
-    lazies[#lazies + 1] = transform(name, spec)
-  else
-    eagers[#eagers + 1] = transform(name, spec)
-  end
+  lazies[#lazies + 1] = transform(name, spec)
 end
 
 function M.load()
   vim.pack.add(packs)
+  end
   if not vim.tbl_isempty(lazies) then require("lz.n").load(lazies) end
-  for _, spec in ipairs(eagers) do
-    if spec.beforeAll then spec.beforeAll(spec) end
-  end
-  local mappings = {}
-  for _, spec in ipairs(eagers) do
-    if spec.before then spec.before(spec) end
-    spec.load(spec[1])
-    if spec.after then spec.after(spec) end
-    if spec.keys then vim.list_extend(mappings, spec.keys) end
-  end
-  require("utils.keymaps").add(mappings)
+  packs = nil
+  lazies = nil
+  spec_map = nil
 end
 
-M.packs = packs
-M.lazies = lazies
-M.eagers = eagers
-M.spec_map = spec_map
 return M
