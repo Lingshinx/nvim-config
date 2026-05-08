@@ -1,7 +1,7 @@
 return {
   {
     "L3MON4D3/LuaSnip",
-    lazy = true,
+    load_before = "blink.cmp",
     after = function()
       local types = require "luasnip.util.types"
       local luasnip = require "luasnip"

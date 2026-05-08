@@ -1,4 +1,5 @@
 vim.pack.add { "https://github.com/lumen-oss/lz.n" }
+require("lz.n").register_handler(require "utils.pack.handler.load_before")
 
 local pack = require "utils.pack"
 local dir = vim.fn.stdpath "config" .. "/lua/plugins"

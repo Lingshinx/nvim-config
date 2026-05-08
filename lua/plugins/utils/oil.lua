@@ -9,6 +9,7 @@ return {
 
   {
     "JezerM/oil-lsp-diagnostics.nvim",
+    load_before = "oil.nvim",
   },
 
   {
@@ -116,8 +117,6 @@ return {
     cmd = { "Oil" },
 
     after = function(spec)
-      require("lz.n").trigger_load "mini.icons"
-      require("lz.n").trigger_load "oil-lsp-diagnostics"
       require("oil").setup(spec.opts)
       vim.api.nvim_create_autocmd("User", {
         pattern = "OilActionsPost",

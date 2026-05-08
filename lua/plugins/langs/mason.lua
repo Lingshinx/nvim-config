@@ -1,6 +1,7 @@
 return {
   {
     "mason-org/mason.nvim",
+    load_before = "nvim-lspconfig",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ui = {
@@ -20,6 +21,5 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
-    after = function() require("lz.n").trigger_load "mason.nvim" end,
   },
 }

@@ -1,8 +1,9 @@
 return {
-  { "rafamadriz/friendly-snippets" },
-  { "saghen/blink.lib" },
+  { "rafamadriz/friendly-snippets", load_before = "blink-cmp" },
+  { "saghen/blink.lib", load_before = "blink-cmp" },
   {
     "saghen/blink.cmp",
+    main = "blink-cmp",
     event = "InsertEnter",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -75,8 +76,4 @@ return {
       },
     },
   },
-  after = function(spec)
-    require("lz.n").trigger_load "LuaSnip"
-    require("blink-cmp").setup(spec.opts)
-  end,
 }

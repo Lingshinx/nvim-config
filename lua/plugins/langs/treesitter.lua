@@ -85,16 +85,13 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    main = "nvim-treesitter-textobjects",
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     opts = {
       select = {
         lookahead = true,
       },
     },
-    after = function(spec)
-      require("nvim-treesitter-textobjects").setup(spec.opts)
-      require("lz.n").trigger_load "nvim-treesitter"
-    end,
     keys = mk_keymaps {
       swap = {
         ["<M-h>"] = { "swap_previous", "@parameter.inner", desc = "Swap prev parameter" },

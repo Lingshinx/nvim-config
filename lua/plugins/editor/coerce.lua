@@ -1,5 +1,5 @@
 return {
-  { "gregorias/coop.nvim" },
+  { "gregorias/coop.nvim", load_before = "coerce.nvim" },
   {
     "gregorias/coerce.nvim",
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
