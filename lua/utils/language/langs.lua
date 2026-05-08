@@ -9,17 +9,19 @@
 ---@field ipair? fun(index: number, value: any, name: string, lang: table):any
 
 ---@generic T,U
----@class utils.language.Collector
----@field extract utils.language.TypedExtractor | boolean | fun(property:any, name: string, lang: table):T?
+---@class utils.language.Property
+---@field extract? utils.language.TypedExtractor | boolean | fun(property:any, name: string, lang: table):T?
+---@field collect? string | fun(accumulate:any,property:any, name: string, lang: table):T?
 ---@field load? fun(lang: utils.language.Langs)
+---@field default any
 ---@field each? fun(property:any, name: string ,lang: table)
 
----@alias utils.language.Collectors table<string, utils.language.Collector>
+---@alias utils.language.Properties table<string, utils.language.Property>
 
 ---@class utils.language.Langs
----@field collectors utils.language.Collectors
+---@field properties utils.language.Properties
 ---@field data table<string,table<string,any>>
----@field new fun(opts: utils.language.Collectors)
+---@field new fun(opts: utils.language.Properties)
 ---@field solve fun(self:self, spec:table)
 ---@field extract fun(self:self, name:string, spec:table)
 ---@field fold fun(self:self, property: string, fold: fun(acc, cur):any, init:any?):any
@@ -29,13 +31,17 @@
 local Langs = {}
 Langs.__index = Langs ---@diagnostic disable-line
 
----@param collectors utils.language.Collector?
+---@param properties utils.language.Properties?
 ---@return utils.language.Langs
-function Langs.new(collectors)
-  return setmetatable(
-    { collectors = vim.tbl_deep_extend("force", require "utils.language.collectors", collectors or {}), data = {} },
-    Langs
-  )
+function Langs.new(properties)
+  local self = {
+    data = {},
+    properties = vim.tbl_deep_extend("force", require "utils.language.properties", properties or {}),
+  }
+  for property, handler in pairs(self.properties) do
+    if handler.collect then self[property] = {} end
+  end
+  return setmetatable(self, Langs)
 end
 
 ---@param extractor boolean|fun(property, name:string, lang: table)
@@ -96,16 +102,41 @@ end
 ---@param spec table
 function Langs:extract(name, spec)
   local extracted = {}
-  for property, collector in pairs(self.collectors) do
-    local extractor = collector.extract
-    if type(extractor) == "boolean" and extractor then
-      extracted[property] = spec[property]
-    elseif type(extractor) == "function" then
-      extracted[property] = extractor(spec[property], name, spec)
-    elseif type(extractor) == "table" then
-      extracted[property] = extract_by_table(extractor, spec[property], name, spec)
-    end
+  local properties = self.properties
+  for property, handler in pairs(self.properties) do
+    if handler.default and not spec[property] then spec[property] = handler.default end
   end
+  for property, value in pairs(spec) do
+    local handler = properties[property]
+    if not handler then goto continue end
+    local extractor = handler.extract
+    if extractor then
+      if type(extractor) == "boolean" and extractor then
+        extracted[property] = value
+      elseif type(extractor) == "function" then
+        extracted[property] = extractor(value, name, spec)
+      elseif type(extractor) == "table" then
+        extracted[property] = extract_by_table(extractor, value, name, spec)
+      end
+    end
+    local collector = handler.collect
+    if not collector then goto continue end
+    if type(collector) == "function" then
+      collector(self[property], value, name, spec)
+    elseif type(collector) == "string" then
+      if collector == "table" then
+        vim.tbl_extend("force", self[property], value)
+      elseif collector == "list" then
+        if type(value) ~= "table" then
+          vim.list_extend(self[property], value)
+        else
+          table.insert(self[property], value)
+        end
+      end
+    end
+    ::continue::
+  end
+
   return extracted
 end
 
@@ -136,13 +167,11 @@ end
 
 ---@param self utils.language.Langs
 function Langs:load()
-  for property, collector in pairs(self.collectors) do
+  for property, collector in pairs(self.properties) do
     if collector.load then collector.load(self) end
     if collector.each then
       for name, lang in pairs(self.data) do
-        if(lang[property]) then
-          collector.each(lang[property], name, lang)
-        end
+        if lang[property] then collector.each(lang[property], name, lang) end
       end
     end
   end

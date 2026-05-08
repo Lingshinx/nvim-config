@@ -1,4 +1,4 @@
----@type utils.language.Collectors
+---@type utils.language.Properties
 return {
   lsp = {
     extract = true,
@@ -19,18 +19,20 @@ return {
   },
 
   treesitter = {
-    extract = function(treesitter, name)
+    default = true,
+    extract = function(treesitter) return treesitter ~= false end,
+    collect = function(acc, treesitter, name)
       if type(treesitter) == "table" then
-        return treesitter
+        vim.list_extend(acc, treesitter)
       elseif type(treesitter) == "string" then
-        return { treesitter }
-      elseif treesitter ~= false then
-        return { name }
+        acc[#acc + 1] = treesitter
+      elseif treesitter == true then
+        acc[#acc + 1] = name
       end
     end,
     load = function(langs)
-      local treesitters = langs:fold("treesitter", function(acc, cur) return vim.list_extend(acc, cur) end)
-      if not treesitters then return end
+      local treesitters = langs.treesitter
+      if not treesitters or vim.tbl_isempty(treesitters) then return end
       require("utils.plugin.treesitter").ensure_installed(treesitters)
       vim.api.nvim_create_autocmd("FileType", {
         pattern = treesitters,
@@ -56,12 +58,15 @@ return {
       table = true,
       string = function(formatter) return { formatter } end,
     },
-    load = function(langs)
-      local formatters_by_ft = {}
-      for name, lang in pairs(langs.data) do
-        formatters_by_ft[name] = lang.formatter
+    collect = function(acc, formatter, name)
+      if type(formatter) == "string" then
+        acc[name] = { formatter }
+      elseif type(formatter) == "table" then
+        acc[name] = formatter
       end
-      langs.formatters_by_ft = formatters_by_ft
+    end,
+    load = function(langs)
+      if package.loaded["conform"] then require("conform").formatters_by_ft = langs.formatter end
     end,
   },
 
