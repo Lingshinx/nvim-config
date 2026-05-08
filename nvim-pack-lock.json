@@ -83,6 +83,10 @@
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
+    "live-preview.nvim.git": {
+      "rev": "c1fcf75c5f9c9c01dd392852de44204b60f1b5b1",
+      "src": "https://github.com/brianhuster/live-preview.nvim.git"
+    },
     "lz.n": {
       "rev": "2f7e0a010045f8dfbcf6e2f0e41455cd5809b04e",
       "src": "https://github.com/lumen-oss/lz.n"
