@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd("User", {
     langs:load()
     require "load.keymap"
     require "config.autocmds"
+    require "config.after"
     require "config.neovide"
   end,
 })
