@@ -1,3 +1,5 @@
+local after = require("utils.pack").after_wrap
+
 ---@type utils.language.Properties
 return {
   lsp = {
@@ -65,9 +67,7 @@ return {
         acc[name] = formatter
       end
     end,
-    load = function(langs)
-      if package.loaded["conform"] then require("conform").formatters_by_ft = langs.formatter end
-    end,
+    load = after("conform.nvim", function(langs) require("conform").formatters_by_ft = langs.formatter end),
   },
 
   option = {

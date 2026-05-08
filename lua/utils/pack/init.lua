@@ -104,6 +104,28 @@ function M.register(spec)
   lazies[#lazies + 1] = transform(name, spec)
 end
 
+---@param name string
+---@param callback fun(...)
+function M.after(name, callback, ...)
+  local pack = require("lz.n").lookup(name)
+  if not pack then
+    callback(...)
+  else
+    local args = { ... }
+    local old_after = pack.after
+    if old_after then pack.after = function()
+      old_after(pack)
+      callback(unpack(args))
+    end end
+  end
+end
+
+---@param name string
+---@param callback fun(...)
+function M.after_wrap(name, callback)
+  return function(...) M.after(name, callback, ...) end
+end
+
 function M.load()
   local pkgs = {}
   for _, pkg in pairs(packs) do

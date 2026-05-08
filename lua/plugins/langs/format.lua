@@ -13,9 +13,6 @@ return {
     vim.g.autoformat = true
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     local conform = require "conform"
-    conform.setup {
-      formatters_by_ft = require("load.langs").formatter,
-    }
     vim.api.nvim_create_autocmd("BufWritePre", {
       desc = "Auto Format buffer",
       callback = function(args)
