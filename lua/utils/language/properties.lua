@@ -84,4 +84,33 @@ return {
       })
     end,
   },
+
+  filetype = {
+    collect = function(acc, filetype, name)
+      if not acc.inited then
+        acc.inited = true
+        acc.extension = {}
+        acc.filename = {}
+        acc.pattern = {}
+      end
+      for _, key in ipairs { "extension", "filename", "pattern" } do
+        local value = filetype[key]
+        local property_acc = acc[key]
+        if value then
+          if type(value) == "string" then
+            property_acc[value] = name
+          elseif type(value) == "table" then
+            for k, v in pairs(value) do
+              if type(k) == "number" then
+                property_acc[value] = name
+              elseif type(k) == "string" then
+                property_acc[k] = v
+              end
+            end
+          end
+        end
+      end
+    end,
+    load = function(langs) vim.filetype.add(langs.filetype) end,
+  },
 }
