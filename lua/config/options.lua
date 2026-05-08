@@ -13,6 +13,7 @@ vim.o.swapfile = false
 vim.opt.sessionoptions:append { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 
 -- Appearance
+vim.o.background = "dark"
 vim.o.number = true -- Print line number
 vim.o.laststatus = 3 -- global statusline
 vim.o.wrap = false -- Disable line wrap
