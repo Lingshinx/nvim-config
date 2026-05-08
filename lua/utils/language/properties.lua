@@ -110,4 +110,16 @@ return {
     end,
     load = function(langs) vim.filetype.add(langs.filetype) end,
   },
+
+  parser = {
+    extract = {
+      table = true,
+      string = function(parser) return { url = parser } end,
+    },
+    load = after("nvim-treesitter", function(langs)
+      for name, lang in ipairs(langs.data) do
+        if lang.parser then require("nvim-treesitter.parsers")[name] = lang.parser end
+      end
+    end),
+  },
 }
