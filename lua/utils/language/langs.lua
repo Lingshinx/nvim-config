@@ -104,7 +104,7 @@ function Langs:extract(name, spec)
   local extracted = {}
   local properties = self.properties
   for property, handler in pairs(self.properties) do
-    if handler.default and not spec[property] then spec[property] = handler.default end
+    if handler.default and spec[property] == nil then spec[property] = handler.default end
   end
   for property, value in pairs(spec) do
     local handler = properties[property]
