@@ -2,10 +2,9 @@ return {
   lsp = "marksman",
   plugins = {
     {
-      "iamcco/markdown-preview.nvim",
+      "brianhuster/live-preview.nvim.git",
+      cmd = "LivePreview",
       ft = { "markdown" },
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      before = function() vim.g.mkdp_filetypes = { "markdown" } end,
     },
     {
       "MeanderingProgrammer/render-markdown.nvim",
