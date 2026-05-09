@@ -48,6 +48,16 @@ return {
       },
     },
     after = function(spec)
+      ---@diagnostic disable-next-line
+      require("snacks.dashboard").sections.session = function(item)
+        return setmetatable({ -- add the action and disable the section
+          action = function()
+            require("lz.n").trigger_load "persistence.nvim"
+            require("persistence").load()
+          end,
+          section = false,
+        }, { __index = item })
+      end
       local snacks = require "snacks"
       snacks.setup(spec.opts)
       require("load.pickers")
