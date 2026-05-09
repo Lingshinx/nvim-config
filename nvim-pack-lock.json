@@ -107,9 +107,17 @@
       "rev": "bac6317300e205335df425296570d84322730067",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
+    "mini.nvim": {
+      "rev": "199b3344d4c0dab13e45483834ce11bb7744fa3a",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
     "mini.pairs": {
       "rev": "42387c7fe68fc0b6e95eaf37f1bb76e7bffaa0d9",
       "src": "https://github.com/nvim-mini/mini.pairs"
+    },
+    "mini.test": {
+      "rev": "4b187876dc134c820677f9e67f0b28910be739ea",
+      "src": "https://github.com/nvim-mini/mini.test"
     },
     "noice.nvim": {
       "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
