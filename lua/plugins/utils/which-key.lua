@@ -1,5 +1,6 @@
 return {
   "folke/which-key.nvim",
+  event = "DeferredUIEnter",
   opts = {
     preset = "helix",
     sort = { "local", "order", "group", "alphanum", "mod" },
