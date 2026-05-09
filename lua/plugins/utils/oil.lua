@@ -1,6 +1,8 @@
 return {
   {
     "nvim-mini/mini.icons",
+    event = "DeferredUIEnter",
+    load_before = "oil.nvim",
     after = function()
       require("mini.icons").setup()
       MiniIcons.mock_nvim_web_devicons()

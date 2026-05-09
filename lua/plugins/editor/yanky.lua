@@ -1,5 +1,6 @@
 return {
   "gbprod/yanky.nvim",
+  load_before = { "substitute.nvim" },
   opts = {
     highlight = { timer = 150 },
     textobj = {
