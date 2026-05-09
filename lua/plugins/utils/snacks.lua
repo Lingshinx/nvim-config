@@ -50,9 +50,7 @@ return {
     after = function(spec)
       local snacks = require "snacks"
       snacks.setup(spec.opts)
-      local sources = require "snacks.picker.config.sources"
-      sources.filetypes = require "config.pickers.filetypes"
-      sources.tabpages = require "config.pickers.tabpages"
+      require("load.pickers")
       vim.o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
       vim.api.nvim_create_user_command("Pick", function(opts) snacks.picker[opts.args]() end, {
         nargs = 1,
