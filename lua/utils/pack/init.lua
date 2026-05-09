@@ -111,12 +111,16 @@ function M.after(name, callback, ...)
   if not pack then
     callback(...)
   else
-    local args = { ... }
+    local args = select("#", ...) > 0 and { ... }
     local old_after = pack.after
-    if old_after then pack.after = function()
-      old_after(pack)
-      callback(unpack(args))
-    end end
+    if old_after then
+      pack.after = function()
+        old_after(pack)
+        callback(args and unpack(args))
+      end
+    else
+      pack.after = args and function() callback(unpack(args)) end or callback
+    end
   end
 end
 

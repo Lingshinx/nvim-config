@@ -1,4 +1,4 @@
-vim.pack.add { "https://github.com/lumen-oss/lz.n" }
+vim.pack.add { "https://github.com/Lingshinx/lz.n" }
 require("lz.n").register_handler(require "utils.pack.handler.load_before")
 
 local pack = require "utils.pack"

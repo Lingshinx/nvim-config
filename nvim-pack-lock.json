@@ -88,8 +88,8 @@
       "src": "https://github.com/brianhuster/live-preview.nvim.git"
     },
     "lz.n": {
-      "rev": "2f7e0a010045f8dfbcf6e2f0e41455cd5809b04e",
-      "src": "https://github.com/lumen-oss/lz.n"
+      "rev": "d1632c908ea7d6a768a5694da457a855477dbddd",
+      "src": "https://github.com/Lingshinx/lz.n"
     },
     "markdown-preview.nvim": {
       "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
