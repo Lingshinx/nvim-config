@@ -1,5 +1,6 @@
 return {
   "folke/which-key.nvim",
+  load_before = { "mini.ai" },
   event = "DeferredUIEnter",
   opts = {
     preset = "helix",
