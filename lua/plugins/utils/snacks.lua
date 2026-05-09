@@ -38,7 +38,7 @@ return {
       indent = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },
-      explorer = { enabled = true },
+      explorer = { enabled = false },
       words = { enabled = true },
       styles = {
         input = { relative = "cursor", row = -3, col = 3 },
