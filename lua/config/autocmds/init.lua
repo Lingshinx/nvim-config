@@ -12,13 +12,6 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
   end,
 })
 
--- Highlight on yank
-autocmd("TextYankPost", {
-  desc = "Highlight on yank",
-  group = augroup "highlight_yank",
-  callback = function() vim.highlight.on_yank() end,
-})
-
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 autocmd("BufWritePre", {
   desc = "Auto Mkdir",

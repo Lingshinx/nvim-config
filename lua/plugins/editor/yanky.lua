@@ -32,9 +32,4 @@ return {
 		{ "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
 		{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
 	},
-
-  after = function(spec)
-    require("yanky").setup(spec.opts)
-    vim.api.nvim_del_augroup_by_name "lingshin_highlight_yank"
-  end,
 }
