@@ -131,7 +131,7 @@ function M.load()
   for _, pkg in pairs(packs) do
     pkgs[#pkgs + 1] = pkg
   end
-  vim.pack.add(pkgs)
+  vim.pack.add(pkgs, { load = function() end })
   if not vim.tbl_isempty(lazies) then require("lz.n").load(lazies) end
   packs = nil
   lazies = nil
