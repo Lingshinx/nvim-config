@@ -2,7 +2,7 @@
 return {
   { "haskell", formatter = "fourmolu" }, -- Install haskell language server by yourself plz
   { "cabal", formatter = "cabal_fmt", treesitter = false },
-  plugins = {
+  plugin = {
     {
       "mrcjkb/haskell-snippets.nvim",
       ft = { "haskell", "lhaskell", "cabal", "cabalproject" },

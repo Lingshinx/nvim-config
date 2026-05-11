@@ -48,7 +48,7 @@ return {
     end,
   },
 
-  plugins = {
+  plugin = {
     extract = function(plugin) require("utils.pack").add(plugin) end,
   },
 

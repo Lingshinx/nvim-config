@@ -1,6 +1,6 @@
 return {
   lsp = "marksman",
-  plugins = {
+  plugin = {
     {
       "brianhuster/live-preview.nvim.git",
       cmd = "LivePreview",

@@ -1,5 +1,5 @@
 return {
-  plugins = {
+  plugin = {
     {
       "Saecki/crates.nvim",
       event = { "BufRead Cargo.toml" },

@@ -1,5 +1,5 @@
 return {
-  plugins = {
+  plugin = {
     {
       "mistweaverco/kulala.nvim",
       ft = "http",

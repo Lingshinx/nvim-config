@@ -15,5 +15,5 @@ return {
   },
   formatter = "prettier",
   lsp = "tailwindcss",
-  plugins = { "tronikelis/ts-autotag.nvim" },
+  plugin = { "tronikelis/ts-autotag.nvim" },
 }
