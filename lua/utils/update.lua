@@ -12,7 +12,10 @@ function updaters.plugins()
   vim.pack.update()
 end
 
-function updaters.treesitter() require("nvim-treesitter").update() end
+function updaters.treesitter()
+  if not package.loaded["nvim-treesitter"] then require("lz.n").trigger_load "nvim-treesitter" end
+  require("nvim-treesitter").update()
+end
 
 function M.update(name)
   if name then
