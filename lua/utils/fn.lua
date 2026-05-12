@@ -12,9 +12,21 @@ local function merge(a, b)
   return a
 end
 
+---@param list any[]
+---@return table<any,boolean>
+local function contains_map(list)
+  local ret = {}
+  for _, it in ipairs(list) do
+    ret[it] = true
+  end
+  return ret
+end
+
 local M = {}
 M = {
   merge = merge,
+
+  contains_map = contains_map,
 
   ---@param str string
   ---@return string
