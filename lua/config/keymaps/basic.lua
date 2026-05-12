@@ -41,7 +41,7 @@ M = {
   { "N", "'nN'[v:searchforward]", mode = { "x", "o" }, expr = true, desc = "Prev Search Result" },
 
   -- save file
-  { "<C-s>", "<cmd>w<cr>", mode = { "n", "x", "o" }, desc = "Save File" },
+  { "<C-s>", "<cmd>w<cr>", mode = { "n", "x", "o", "i" }, desc = "Save File" },
 
   -- better indenting
   { "<", "<gv", mode = "v" },
