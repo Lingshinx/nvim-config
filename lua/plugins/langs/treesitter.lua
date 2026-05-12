@@ -38,6 +38,7 @@ end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     cmd = { "TSInstall", "TSInstallFromGrammar", "TSLog", "TSUninstall", "TSUpdate" },
   },
 
