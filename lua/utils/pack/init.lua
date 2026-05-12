@@ -6,6 +6,7 @@ local M = {}
 ---@field [1]? string
 ---@field name? string
 ---@field url? string
+---@field dir? string
 ---@field version? string
 ---@field main? string
 ---@field enabled? boolean|fun():boolean
@@ -34,17 +35,15 @@ local spec_map = {}
 ---@return string url, string name, string? version
 local function parse_pack(spec)
   local url, name, version
-  if spec[1] then
+  if spec.dir then spec.url = "file://" .. vim.fs.normalize(spec.dir) end
+  if spec.url then
+    url = spec.url --[[@as string]]
+    local components = vim.split(url:gsub("%a+://", ""), "/", { trimempty = true, plain = true })
+    name = components[#components]
+  elseif spec[1] then
     local components = vim.split(spec[1], "/", { trimempty = true, plain = true })
     url = "https://github.com/" .. components[1] .. "/" .. components[2]
     name, version = components[2], components[3]
-  else
-    local spec_url = spec.url
-    if spec_url then
-      url = spec_url
-      local components = vim.split(url:gsub("%a+://", ""), "/", { trimempty = true, plain = true })
-      name, version = components[2], components[3]
-    end
   end
   if spec.name then name = spec.name end
   if spec.version then version = spec.version end
@@ -71,7 +70,7 @@ function M.add(config)
   if type(config) == "string" then
     M.register { config }
   elseif type(config) == "table" then
-    if type(config[1]) == "string" then
+    if type(config[1]) == "string" or not config[1] then
       M.register(config)
     else
       for _, spec in ipairs(config) do
