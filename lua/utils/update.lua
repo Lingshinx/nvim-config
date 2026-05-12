@@ -1,34 +1,52 @@
-local M = {}
-
 local updaters = {}
+local cleaners = {}
 
-function updaters.plugins()
+function cleaners.plugins()
   local inactives = vim
     .iter(vim.pack.get())
     :filter(function(pack) return not pack.active end)
     :map(function(pack) return pack.spec.name end)
     :totable()
   vim.pack.del(inactives)
-  vim.pack.update()
 end
 
-function updaters.treesitter()
+---@param names string[]
+function updaters.plugins(names) vim.pack.update(names) end
+
+local function load_treesitter()
   if not package.loaded["nvim-treesitter"] then require("lz.n").trigger_load "nvim-treesitter" end
-  require("nvim-treesitter").update()
+  return require "nvim-treesitter"
 end
 
-function M.update(name)
-  if name then
-    local updater = updaters[name]
-    if not updater then error("no updater called " .. name, vim.log.levels.ERROR) end
-    updater()
-  else
-    for _, value in pairs(updaters) do
-      value()
-    end
+function cleaners.treesitter()
+  local treesitter = load_treesitter()
+  local neededs = require("utils.fn").contains_map(require("load.langs").treesitter)
+  local unneededs = vim
+    .iter(treesitter().get_installed())
+    :filter(function(parser) return not neededs[parser] end)
+    :totable()
+  treesitter.uninstall(unneededs)
+end
+
+---@param languages string|string[]
+function updaters.treesitter(languages)
+  load_treesitter()
+  require("nvim-treesitter").update(languages)
+end
+
+function updaters.all()
+  for _, value in pairs(updaters) do
+    value()
   end
 end
 
-M.updaters = updaters
+function cleaners.all()
+  for _, value in pairs(cleaners) do
+    value()
+  end
+end
 
-return M
+return {
+  update = updaters,
+  clean = cleaners,
+}
