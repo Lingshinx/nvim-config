@@ -2,7 +2,8 @@
 
 ---@class config.command.SubcommandOpt
 ---@field cmd fun(args:string[], opts: vim.api.keyset.create_user_command.command_args) The command implementation
----@field complete? fun(): string[] (optional) Command completions callback, taking the lead of the subcommand's arguments
+---@field comp? fun(arg_lead: string): string[] (optional) Command completions callback, taking the lead of the subcommand's arguments
+---@field complist? fun(arg_lead: string): string[] (optional) Command completions callback, taking the lead of the subcommand's arguments
 
 return {
   ---@param subcommands table<string, config.command.SubcommandOpt|config.command.Subcommand>
@@ -33,9 +34,18 @@ return {
           subcmd_key
           and subcmd_arg_lead
           and type(subcommands[subcmd_key]) == "table"
-          and subcommands[subcmd_key].complete
+          and subcommands[subcmd_key].comp
         then
-          return subcommands[subcmd_key].complete(subcmd_arg_lead)
+          local subcommand = subcommands[subcmd_key]
+          if subcommand.comp then
+            return subcommand.comp(subcmd_arg_lead)
+          elseif subcommand.complist then
+            local list = subcommand.complist(subcmd_arg_lead)
+            if arg_lead:sub(-1) == " " then return list end
+            local args = vim.split(subcmd_arg_lead, "%s+")
+            local last_args = args[#args]
+            return vim.iter(list):filter(function(item) return item:find("^" .. last_args) end):totable()
+          end
         end
         if cmdline:match "^['<,'>]*" .. name .. "[!]*%s+%w*$" then
           local subcommand_keys = vim.tbl_keys(subcommands)

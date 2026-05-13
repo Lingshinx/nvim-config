@@ -1,16 +1,40 @@
-require("utils.command").create("Update", {
-  treesitter = {
+if vim.g.config_manager_loaded then return end
+vim.g.config_manager_loaded = true
+
+---@type table<string, config.command.SubcommandOpt|config.command.Subcommand>
+local commands = {
+  all = function(_, opts)
+    local bang = opts.bang
+    for _, manager in pairs(require "utils.manager") do
+      if manager.clean and bang then manager.clean() end
+      manager.update()
+    end
+  end,
+}
+
+local init = {}
+
+local function get(name, before)
+  if before and not init[name] then
+    local self = {}
+    before(self)
+    init[name] = self
+  end
+  return init[name]
+end
+
+local function set(name) init[name] = nil end
+
+for name, manager in pairs(require "utils.manager") do
+  commands[name] = {
     cmd = function(args, opts)
-      if opts.bang then require("utils.update").clean.treesitter() end
-      require("utils.update").update.treesitter(args)
+      if opts.bang and manager.clean then manager.clean() end
+      manager.update(args, get(name, manager.before))
+      set(name)
     end,
-    complete = function(arg_lead)
-      if not package.loaded["nvim-treesitter"] then require("lz.n").trigger_load "nvim-treesitter" end
-      local installed = require("nvim-treesitter").get_installed()
-      if arg_lead:sub(-1) == " " then return installed end
-      local args = vim.split(arg_lead, "%s+")
-      local last_args = args[#args]
-      return vim.iter(installed):filter(function(parser) return parser:find("^" .. last_args) end):totable()
-    end,
-  },
-})
+    complist = manager.complist and function(arg_lead) return manager.complist(get(name, manager.before), arg_lead) end,
+    comp = manager.comp and function(arg_lead) return manager.comp(get(name, manager.before), arg_lead) end,
+  }
+end
+
+require("utils.command").create("Update", commands)
