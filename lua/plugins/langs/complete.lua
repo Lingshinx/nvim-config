@@ -1,5 +1,5 @@
 return {
-  { "rafamadriz/friendly-snippets", load_before = "blink-cmp" },
+  { "rafamadriz/friendly-snippets", load_before = "blink.cmp" },
   { "saghen/blink.lib", load_before = "blink.cmp" },
   {
     "saghen/blink.cmp",
