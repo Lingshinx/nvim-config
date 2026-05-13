@@ -28,12 +28,12 @@ local function set(name) init[name] = nil end
 for name, manager in pairs(require "utils.manager") do
   commands[name] = {
     cmd = function(args, opts)
-      if opts.bang and manager.clean then manager.clean() end
-      manager.update(args, get(name, manager.before))
+      local self = get(name, manager.before)
+      if opts.bang and manager.clean then manager.clean(self) end
+      manager.update(args, self)
       set(name)
     end,
-    complist = manager.complist and function(arg_lead) return manager.complist(get(name, manager.before), arg_lead) end,
-    comp = manager.comp and function(arg_lead) return manager.comp(get(name, manager.before), arg_lead) end,
+    complete = function(arg_lead) return manager.complete(arg_lead, get(name, manager.before)) end,
   }
 end
 
