@@ -1,11 +1,11 @@
----@alias nix-mason.Subcommand fun(args:string[], opts: vim.api.keyset.create_user_command.command_args)
+---@alias config.command.Subcommand fun(args:string[], opts: vim.api.keyset.create_user_command.command_args)
 
----@class nix-mason.SubcommandOpt
+---@class config.command.SubcommandOpt
 ---@field cmd fun(args:string[], opts: vim.api.keyset.create_user_command.command_args) The command implementation
----@field complete? fun(subcmd_arg_lead: string): string[] (optional) Command completions callback, taking the lead of the subcommand's arguments
+---@field complete? fun(): string[] (optional) Command completions callback, taking the lead of the subcommand's arguments
 
 return {
-  ---@param subcommands table<string, nix-mason.SubcommandOpt|nix-mason.Subcommand>
+  ---@param subcommands table<string, config.command.SubcommandOpt|config.command.Subcommand>
   create = function(name, subcommands)
     vim.api.nvim_create_user_command(name, function(opts)
       local fargs = opts.fargs
