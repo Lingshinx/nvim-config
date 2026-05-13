@@ -1,2 +1,0 @@
----@alias Config.HighlightTable table<string, vim.api.keyset.highlight>
----@alias Config.Highlight {lingshin: Config.HighlightTable, override: Config.HighlightTable}
