@@ -20,7 +20,6 @@ return {
   after = function()
     ---@module "which-key"
     ---@type wk.Spec[]
-    local list = require "utils.list"
     local keys = { mode = { "o", "x" } }
     local objects = {
       { " ", desc = "whitespace" },
