@@ -1,5 +1,6 @@
 -- require "utils.profiler"
 require "config.options"
+require "load.workspace"
 pcall(require, "config.custom")
 local wait = require "load.packs"
 local langs = require "load.langs"
