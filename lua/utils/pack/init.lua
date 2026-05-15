@@ -24,11 +24,10 @@ local M = {}
 ---@field load? fun(string)?
 ---@field opts? table
 ---@field optional? boolean
+---@field load_before? any
 
 ---@alias utils.pack.Config (string|utils.pack.Spec)[]|utils.pack.Spec
 
-local packs = {}
-local lazies = {}
 local spec_map = {}
 
 ---@param spec utils.pack.Spec
@@ -82,25 +81,65 @@ end
 
 local merge = require("utils.fn").merge
 
+local function list_extend(left, right)
+  if type(left) ~= "table" then left = { left } end
+  if type(right) ~= "table" then
+    left[#left + 1] = right
+  else
+    local length = #left
+    for index, value in ipairs(right) do
+      left[length + index] = value
+    end
+  end
+  return left
+end
+
+local list_field = { "event", "keys", "load_before", "cmd" }
+local keep_field = { "before", "beforeAll", "after", "lazy" }
+
+---@param left utils.pack.Spec
+---@param right utils.pack.Spec
+---@return utils.pack.Spec
+local function merge_spec(left, right)
+  for _, field in ipairs(list_field) do
+    if right[field] then left[field] = list_extend(left[field], right[field]) end
+  end
+  for _, field in ipairs(keep_field) do
+    if left[field] == nil and right[field] ~= nil then left[field] = right[field] end
+  end
+  if right.opts then left.opts = merge(left.opts, right.opts) end
+  return left
+end
+
 ---@param spec utils.pack.Spec
 function M.register(spec)
   if spec.loaded or spec.enabled == false then return end
   spec.loaded = true
 
   local url, name, version = parse_pack(spec)
-  if packs[name] and not spec.optional then return end
 
   spec.main = spec.main or get_main(name)
+  spec.url = url
+  spec.name = name
+  spec.version = version
 
-  local config = spec_map[name] or { keys = {}, opts = {} }
-  if spec.opts then spec.opts = merge(config.opts, spec.opts) end
-  if spec.keys then spec.keys = merge(config.keys, spec.keys) end
-  spec_map[name] = config
+  if spec_map[name] then
+    spec_map[name] = merge_spec(spec_map[name], spec)
+  else
+    spec_map[name] = spec
+  end
+end
 
-  if spec.optional then return end
-  packs[name] = { src = url, name = name, version = version }
-
-  lazies[#lazies + 1] = transform(name, spec)
+function M.load()
+  vim.pack.add(
+    vim
+      .iter(pairs(spec_map))
+      :map(function(name, spec) return { src = spec.url, name = name, version = spec.version } end)
+      :totable(),
+    { load = function() end }
+  )
+  require("lz.n").load(vim.iter(pairs(spec_map)):map(transform):totable())
+  spec_map = nil
 end
 
 ---@param name string
@@ -127,18 +166,6 @@ end
 ---@param callback fun(...)
 function M.after_wrap(name, callback)
   return function(...) M.after(name, callback, ...) end
-end
-
-function M.load()
-  local pkgs = {}
-  for _, pkg in pairs(packs) do
-    pkgs[#pkgs + 1] = pkg
-  end
-  vim.pack.add(pkgs, { load = function() end })
-  if not vim.tbl_isempty(lazies) then require("lz.n").load(lazies) end
-  packs = nil
-  lazies = nil
-  spec_map = nil
 end
 
 return M
