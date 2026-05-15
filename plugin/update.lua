@@ -1,5 +1,5 @@
-if vim.g.config_manager_loaded then return end
-vim.g.config_manager_loaded = true
+if vim.g.loadedconfig_manager then return end
+vim.g.loaded_config_manager = true
 
 ---@type table<string, config.command.SubcommandOpt|config.command.Subcommand>
 local commands = {
