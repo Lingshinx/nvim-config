@@ -1,5 +1,6 @@
 return {
   "css",
+  "html",
   {
     "astro",
     lsp = {
@@ -15,5 +16,5 @@ return {
   },
   formatter = "prettier",
   lsp = "tailwindcss",
-  plugin = { "tronikelis/ts-autotag.nvim" },
+  plugin = { "tronikelis/ts-autotag.nvim", ft = { "astro", "html" } },
 }
