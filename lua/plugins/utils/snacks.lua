@@ -68,6 +68,9 @@ return {
         nargs = 1,
         desc = "Snacks pick files wrapper",
       })
+      vim.api.nvim_create_user_command("Lazygit", function() Snacks.lazygit.open() end, {
+        nargs = 0,
+      })
     end,
   },
 }
