@@ -2,7 +2,7 @@
 return {
   formatter = "sqlfmt",
   lsp = "postgres_lsp",
-  packages = "postgres-language-server",
+  package = "postgres-language-server",
   plugin = {
     {
       "tpope/vim-dadbod",

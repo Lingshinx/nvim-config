@@ -12,7 +12,7 @@ return {
         },
       },
     },
-    pkgs = { "astro-language-server" },
+    package = "astro-language-server",
   },
   formatter = "prettier",
   lsp = "tailwindcss",
