@@ -1,5 +1,5 @@
 return {
-  { "esmuellert/codediff.nvim", load_before = "neogit" },
+  { "esmuellert/codediff.nvim", cmd = "CodeDiff", load_before = "neogit" },
   { "m00qek/baleia.nvim", load_before = "neogit" },
   { "folke/snacks.nvim", load_before = "neogit" },
   {
