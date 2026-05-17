@@ -4,7 +4,7 @@ return {
   { "<leader>gd", pick "git_diff", desc = "Diff" },
   { "<leader>gs", pick "git_status", desc = "Status" },
   { "<leader>gS", pick "git_stash", desc = "Stash" },
-  { "<leader>gg", plug "Lazygit", desc = "Lazygit" },
+  { "<leader>gg", plug "Git", desc = "Git" },
   { "<leader>gf", pick "git_log_file", desc = "File History" },
   { "<leader>gl", pick "git_log", desc = "Log" },
   { "<leader>gb", pick "git_log_line", desc = "Blame" },
