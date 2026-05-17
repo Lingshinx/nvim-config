@@ -107,7 +107,7 @@ local function merge_spec(left, right)
   for _, field in ipairs(keep_field) do
     if left[field] == nil and right[field] ~= nil then left[field] = right[field] end
   end
-  if right.opts then left.opts = merge(left.opts, right.opts) end
+  if right.opts then left.opts = left.opts and merge(left.opts, right.opts) or right.opts end
   return left
 end
 
