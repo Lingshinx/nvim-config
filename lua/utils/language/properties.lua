@@ -1,10 +1,10 @@
 local after = require("utils.pack").after_wrap
 
-local function get_lspnames(lsp)
-  if type(lsp) == "string" then
-    return { lsp }
-  elseif type(lsp) == "table" then
-    return vim.iter(pairs(lsp)):map(function(k, v) return type(k) == "number" and v or k end):totable()
+local function append(list, item)
+  if type(item) == "string" then
+    list[#list + 1] = item
+  elseif type(item) == "table" then
+    vim.list_extend(list, item)
   end
 end
 
@@ -131,30 +131,14 @@ return {
     end),
   },
 
-  package = {
-    collect = function(acc, packages)
-      if type(packages) == "string" then
-        acc[#acc + 1] = packages
-      elseif type(packages) == "table" then
-        vim.list_extend(acc, packages)
-      end
-    end,
-    load = function(langs)
-      local packages = langs.package
-      for _, lang in pairs(langs.data) do
-        if lang.lsp then vim.list_extend(packages, get_lspnames(lang.lsp)) end
-      end
-      vim.list_extend(packages, vim.iter(vim.tbl_values(langs.formatter)):flatten():totable())
-      if vim.g.config_installer == "mason" then
-        require("utils.pack").after("mason.nvim", function()
-          local install = require("utils.plugin.mason").install
-          for _, pkg in ipairs(packages) do
-            install(pkg)
-          end
-        end)
-      elseif vim.g.config_installer == "nix" then
-        require("nix-mason").ensure_installed(packages)
-      end
-    end,
+  package = { collect = append },
+
+  [vim.g.config_installer] = { collect = append },
+
+  disable = {
+    extract = {
+      table = true,
+      string = function(disable) return { disable } end,
+    },
   },
 }
