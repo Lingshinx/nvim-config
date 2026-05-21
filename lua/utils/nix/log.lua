@@ -42,7 +42,7 @@ function M.log(opts)
       end
 
       local now = vim.uv.now()
-      if now - last_update_time < interval and event.type ~= 106 then goto continue end
+      if now - last_update_time < interval then goto continue end
       last_update_time = now
 
       if opts.on_tasks then vim.schedule(function() opts.on_tasks(tasks) end) end
