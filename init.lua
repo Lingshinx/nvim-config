@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("User", {
     langs:load()
     require "load.keymap"
     require "config.autocmds"
-    require "config.after"
+    require "load.after"
     require "config.neovide"
 
     if vim.fn.argc(-1) ~= 0 then vim.api.nvim_exec_autocmds("BufEnter", {}) end
