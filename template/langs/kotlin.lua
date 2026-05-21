@@ -2,5 +2,6 @@
 return {
   lsp = "kotlin_lsp",
   formatter = "ktlint",
-  package = "kotlin-lsp",
+  mason = "kotlin-lsp",
+  nix = "kotlin-language-server",
 }
