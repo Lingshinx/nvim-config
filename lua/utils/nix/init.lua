@@ -64,42 +64,33 @@ local function install(pkgs, quiet)
   local warned = false
   local pkg_names = type(pkgs) == "string" and pkgs or (#pkgs > 1 and #pkgs .. " pkgs" or pkgs[1])
   vim.system(cmd, {
-    stderr = quiet
-      or require("utils.nix.log").log {
-        ---@param msg string
-        on_msg = function(msg)
-          if msg:find "^  /nix/store" then return end
-          local replaced, count = msg:gsub("^warning: ", "", 1)
-          if count ~= 0 then
-            vim.notify(replaced, vim.log.levels.WARN)
-            warned = true
-          else
-            vim.notify(msg)
-          end
-        end,
-        on_tasks = function(tasks)
-          if tasks.done == 0 then return end
-          local mb_total = math.floor(tasks.total / 1024 / 1024)
-          local mb_done = math.floor(tasks.done / 1024 / 1024)
-          local percentage = tasks:percentage()
-          if percentage < 95 then
-            local bar = make_progress_bar(percentage, 20)
-            vim.print(string.format("installing %s...\n%s %.1f MB / %.1f MB", pkg_names, bar, mb_done, mb_total))
-          else
-            vim.print(
-              string.format(
-                "installing %s...\n %.1f MB / %.1f MB",
-                pkg_names,
-                mb_done,
-                mb_total
-              )
-            )
-          end
-        end,
-      },
+    stderr = quiet or require("utils.nix.log").log {
+      ---@param msg string
+      on_msg = function(msg)
+        if msg:find "^  /nix/store" then return end
+        local replaced, warned = msg:gsub("^warning:[%s]*", "", 1)
+        local replaced, errored = replaced:gsub("^error:[%s]*", "", 1)
+        local levels = vim.log.levels
+        local level = levels.INFO
+        if warned ~= 0 then level = levels.WARN end
+        if errored ~= 0 then level = levels.ERROR end
+        warned = level == levels.INFO
+        vim.notify(replaced, level)
+      end,
+      on_tasks = function(tasks)
+        if tasks.done == 0 then return end
+        local mb_total = math.floor(tasks.total / 1024 / 1024)
+        local mb_done = math.floor(tasks.done / 1024 / 1024)
+        local percentage = tasks:percentage()
+        if percentage < 95 then
+          local bar = make_progress_bar(percentage, 37)
+          vim.print(string.format("installing %s... %.1f MB / %.1f MB\n%s", pkg_names, mb_done, mb_total, bar))
+        end
+      end,
+    },
   }, function()
     if warned then return end
-    vim.notify(pkg_names .. " installed")
+    vim.print("installed " .. pkg_names .. "  おめでとう ", "" .. (""):rep(37) .. "")
   end)
 end
 
