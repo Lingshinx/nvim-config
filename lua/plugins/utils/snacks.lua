@@ -50,7 +50,7 @@ return {
     after = function(spec)
       ---@diagnostic disable-next-line
       require("snacks.dashboard").sections.session = function(item)
-        require("lz.n").trigger_load "persistence.nvim"
+        if not package.loaded["persistence"] then require("lz.n").trigger_load "persistence.nvim" end
         return setmetatable({ -- add the action and disable the section
           action = ':lua require("persistence").load()',
           section = false,
