@@ -1,9 +1,3 @@
----@class config.manager.Spec
----@field before? fun(self: table?)
----@field update fun(items: string[]?, self: table?)
----@field clean? fun(self: table?)
----@field complete? fun(arg_lead: string?, self: table?): string[]
-
 local function load_treesitter()
   if not package.loaded["nvim-treesitter"] then require("lz.n").trigger_load "nvim-treesitter" end
   return require "nvim-treesitter"
