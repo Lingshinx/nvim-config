@@ -26,7 +26,7 @@
 ---@field extract fun(self:self, name:string, spec:table)
 ---@field fold fun(self:self, property: string, fold: fun(acc, cur):any, init:any?):any
 ---@field load fun(self:self)
----@field [string] any
+---@field string[] any
 
 local Langs = {}
 Langs.__index = Langs ---@diagnostic disable-line
