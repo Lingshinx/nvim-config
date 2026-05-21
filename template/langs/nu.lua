@@ -1,1 +1,1 @@
-return { lsp = "nushell" }
+return { lsp = "nushell", disable = "nushell" }
