@@ -1,6 +1,10 @@
 return {
   { "esmuellert/codediff.nvim", cmd = "CodeDiff", load_before = "neogit" },
-  { "m00qek/baleia.nvim", load_before = "neogit" },
+  {
+    "m00qek/baleia.nvim",
+    load_before = "neogit",
+    after = function() vim.g.baleia = require("baleia").setup {} end,
+  },
   { "folke/snacks.nvim", load_before = "neogit" },
   {
     "NeogitOrg/neogit",
