@@ -40,7 +40,7 @@ local filetypes = vim
     local lang = require("load.langs").data[filetype]
     local file_name = file_name_of[filetype]
     local ret = {
-      treesitter = lang and lang.treesitter,
+      treesitter = not not (lang and lang.treesitter),
       text = filetype,
       file = file_name,
     }
