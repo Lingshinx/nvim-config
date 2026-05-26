@@ -12,7 +12,7 @@ local managers = {
       local treesitter = self.treesitter
       local neededs = require("utils.fn").contains_map(require("load.langs").treesitter)
       local unneededs = vim
-        .iter(treesitter().get_installed())
+        .iter(treesitter.get_installed())
         :filter(function(parser) return not neededs[parser] end)
         :totable()
       treesitter.uninstall(unneededs)
