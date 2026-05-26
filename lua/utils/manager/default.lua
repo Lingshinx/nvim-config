@@ -7,6 +7,13 @@ end
 local managers = {
   treesitter = {
     before = function(self) self.treesitter = load_treesitter() end,
+    install = function(languages, self)
+      if not languages or vim.tbl_isempty(languages) then
+        self.treesitter.install(require("load.langs").treesitter)
+      else
+        self.treesitter.install(languages)
+      end
+    end,
     update = function(languages, self) self.treesitter.update(languages) end,
     clean = function(self)
       local treesitter = self.treesitter
