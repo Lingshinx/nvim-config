@@ -1,7 +1,7 @@
 return {
   "kdl",
   "bash",
-  { "json", lsp = "json-lsp", formatter = "prettier" },
+  { "json", lsp = "jsonls", formatter = "prettier", nix = "vscode-json-languageserver" },
   { "hyprlang", lsp = "hyprls", filetype = { pattern = ".*/hypr/.+%.conf" } },
   { "kitty", filetype = { pattern = ".*/kitty/.+%.conf" } },
 }
