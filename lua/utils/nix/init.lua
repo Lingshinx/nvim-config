@@ -71,6 +71,7 @@ local function install(pkgs, quiet)
   end
   local warned = false
   local pkg_names = type(pkgs) == "string" and pkgs or (#pkgs > 1 and #pkgs .. " pkgs" or pkgs[1])
+  vim.notify("evaluating " .. pkg_names .. "...")
   vim.system(cmd, {
     stderr = quiet or require("utils.nix.log").log {
       ---@param msg string
