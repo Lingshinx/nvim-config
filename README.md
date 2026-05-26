@@ -61,8 +61,9 @@ The `Plugin Spec` is quite like `lz.n` (*sure, it will be registered in `lz.n` a
 | **[1]** | `string?` | The plugin's repo, It's the equivalent to the `[1]` of `lazy.nvim` |
 | **name** | `string?` | The plugin's name (not the module name). This is what is passed to the `load(name)` function. |
 | **url** | `string?` | The plugins's url, param for `vim.pack.add`, for example `https://codeberg.org/abcd/efg` |
+| main | `string?` | The main module used for `setup()` |
 | version | `string?` or `vim.VersionRange`  | Version to use for install and updates. |
-| dir | string? | local plugin, It's pity that git repo is still needed |
+| dir | `string?` | local plugin, It's pity that git repo is still needed |
 | **enabled** | `boolean?` or `fun():boolean` | When `false`, or if the `function` returns false, then this plugin will not be included in the spec. |
 | **beforeAll** | `fun(lz.n.Plugin)?` | Always executed before any plugins are loaded. |
 | **before** | `fun(lz.n.Plugin)?` | Executed before a plugin is loaded. |

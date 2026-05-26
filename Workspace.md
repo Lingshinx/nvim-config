@@ -6,7 +6,7 @@
 
 To protect against running untrusted code accidentally,
 you need to confirm to trust the `.nvim` directory the first time it is detected.
-the trusted files or directories are recorded at `~/.local/state/nvim/trust`
+the trusted files or directories are recorded at `~/.local/state/nvim/trust`.
 
 > [!WARNING]
 > Since there's almost no chance that a normal repo contains a `.nvim` directory,

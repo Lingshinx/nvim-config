@@ -23,8 +23,7 @@ local M = {}
 ---@field priority? number
 ---@field load? fun(string)?
 ---@field opts? table
----@field optional? boolean
----@field load_before? any
+---@field load_before? string|string[]
 
 ---@alias utils.pack.Config (string|utils.pack.Spec)[]|utils.pack.Spec
 
