@@ -10,9 +10,9 @@ nvim
 ├── lazy-lock.json
 ├── lua
 │   ├── config
-│   │   ├── langs
-│   │   │   └── cpp.lua <- this
-│   └── plugins/
+│   └── plugins
+├── langs
+│   └── cpp.lua <- this
 └── README.md
 ```
 
@@ -21,12 +21,12 @@ nvim
 return {
   lsp = "clangd",
   formatter = "clang-format",
-  plugins = { "p00f/clangd_extensions.nvim", lazy = true },
+  plugin = { "p00f/clangd_extensions.nvim", ft = "cpp" },
 }
 ```
 
 Restart nvim and edit a c++ source file.
-You will notice that `clangd`, `clang-format` and `treesitter-cpp` start to be installed.
+Run `:Install all`, you will notice that `clangd`, `clang-format` and `treesitter-cpp` start to be installed.
 
 When no language nested inside, the file name will be taken as language name.
 Treesitter will automatically installed by language name.
@@ -35,13 +35,12 @@ Treesitter will automatically installed by language name.
 
 ```lua
 -- lua/config/langs/dotfiles.lua
--- you can add @type annotation to get lua_ls completition
----@type Config.LangConfig
 return {
   "kdl",
   "bash",
-  { "json", lsp = "json-lsp", formatter = "prettier" },
-  { "hyprlang", lsp = "hyprls" },
+  { "json", lsp = "jsonls", formatter = "prettier", nix = "vscode-json-languageserver" },
+  { "hyprlang", lsp = "hyprls", filetype = { pattern = ".*/hypr/.+%.conf" } },
+  { "kitty", filetype = { pattern = ".*/kitty/.+%.conf" } },
 }
 ```
 
@@ -72,7 +71,6 @@ Treesitter **tsx, javascript, typescript** will be installed.
 
 ```lua
 -- lua/config/langs/kotlin.lua
----@type config.language.Config
 return {
   lsp = "kotlin_lsp",
   formatter = "ktlint",

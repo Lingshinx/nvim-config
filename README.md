@@ -12,7 +12,7 @@ And most importantly — It's really cool to have my own Neovim configuration, i
 
 ## Requirements
 
-- Neovim latest. I use Arch, btw.
+- Neovim >= 0.12. I use Arch, btw.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) for [snacks](https://github.com/folke/snacks.nvim) and [grug-far](https://github.com/MagicDuck/grug-far.nvim)
 - [fd](https://github.com/sharkdp/fd) for [snacks](https://github.com/folke/snacks.nvim)
 - One of [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
@@ -25,9 +25,12 @@ And most importantly — It's really cool to have my own Neovim configuration, i
 Honestly, I wouldn't recommend using my configuration directly.
 It's quite personal. Some CLI tools integrated might be useless to you.
 Also, I'm not using DAP or NeoTest currently.
-
 Still, I think it will serve as a good reference or starting point for you to build your own configuration alongside LazyVim (which is also my reference).
 I'll even brag a bit that I have injected some **ingenuity** inside my configuration — Let me show you below:
+
+```bash
+git clone https://github.com/Lingshinx/nvim-config.git ~/.config/nvim
+```
 
 > [!TIP]
 > If you already have a Neovim setup in your environment, You don't need to move the current one away as a backup.
@@ -45,71 +48,13 @@ I'll even brag a bit that I have injected some **ingenuity** inside my configura
 > NVIM_APPNAME=nvim_lingshin nvim
 > ```
 
-### Nix
-
-#### Flake
-
-```nix
-inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nvim = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:lingshinx/nvim-config/unstable";
-    };
-}
-```
-
-#### Module
-
-```nix
-{
-  inputs,
-  pkgs,
-  ...
-}: {
-  imports = [inputs.nvim-config.homeModules.default];
-  programs.neovim = {
-    enable = true;
-    lingshin-config = {
-      enable = true;
-      # Enable Language Configurations In Directory `Langs`
-      languages = ["nix" "fish" "lua"];
-      # Extra Language Configuration Files
-      extraLanguages = [];
-    };
- 
-    extraPackages = with pkgs; [
-      stylua
-      luajitPackages.lua-lsp
-
-      fish-lsp
-
-      alejandra
-      nixd
-    ];
-  };
-}
-```
-
-### Plugins manager
-
-You have to install [`lazy.nvim`](https://lazy.folke.io) manually because I didn't include the process to install.
-
-```bash
-git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim
-```
-
-I know it'd be more convenient if this command ran automatically when lazy.nvim is not installed,
-but I just feel a little bit uncomfortable checking a condition every time for a task only executed for once,
-although I know it won't take any noticeable time
-
 ## Features
 
 ### Language
 
 It's convenient to treat Language configurations as packages and manage them together instead of scattering them around.
 
-You can put language configurations at `stdpath('config')/lua/langs` or just `~/.config/nvim/lua/langs`.
+You can put language configurations at `{rtp}/lua/langs` or just `~/.config/nvim/langs`.
 
 Each file should returns a table of type `Config.LangConfig`.
 
@@ -119,15 +64,18 @@ Each file should returns a table of type `Config.LangConfig`.
 | **treesitter** | `string[]` or `boolean` | default to true, treesitter-{language name} will be installed |
 | **lsp** | `string`, `string[]` or `table<string,lspconfig>` | name of **Language Server Protocol**, when `table`, `vim.lsp.config(key, value)` will be called |
 | **formatter** | `string` or `string[]`  | name of formatters |
-| **pkgs** | `string[]` | if the package name in [mason](https://github.com/mason-org/mason.nvim) is different with name of LSP and formatter, you can set `pkgs` to tell to mason to install it |
-| **plugins** | `LazySpec` | plugin configurations related to this language |
-| **options** | `table<string,any>` | language-specific options |
-| **enabled** | `boolean` | no need to explain | 
+| **plugin** | `utils.pack.Spec` | plugin configurations related to this language |
+| **option** | `table<string,any>` | language-specific options |
+| **filetype** | `table<string,string\|table>` | register new filetypes |
+| **parser** | `string` or `ParserInfo` | url to download custom treesitter parser, see also: [Adding custom languages](https://github.com/nvim-treesitter/nvim-treesitter#adding-custom-languages) |
+| **package** | `string[]` | if the package name in installer is different with name of LSP and formatter, you can set `package` to specify |
+| **nix** | `string[]` or `string` | [nixpkg](https://search.nixos.org/packages?channel=unstable) name, needed when the name is only valid in nix  |
+| **mason** | `string[]` or `string` | name in [mason](https://github.com/mason-org/mason.nvim), needed when the name is only valid in mason|
 
 
 [Example](./Language.md) about how to configure languages.
 
-Also, my own language configurations are placed in `stdpath('config')/languages`, You can copy some of them to `stdpath('config')/lua/langs` to enable.
+Also, my own language configurations are placed in `template/langs/`, You can copy some of them to `stdpath('config')/langs` to enable.
 
 Feel free to PR your own language configuration to me if you like this functionality.
 Since those configuration aren't applied automatically, so I'd really appreciate your contribution whatever the language is.
@@ -243,6 +191,9 @@ https://github.com/user-attachments/assets/d117ab08-c766-45c9-a294-b65614349734
 > [!NOTE]
 > Only available in Markdown math blocks, since I'm not using LaTeX.  
 > <kbd>\<leader\>ut</kbd> to toggle **Auto Snippets Trigger**.
+
+> [!WARNING]
+> not available now, I'm fixing, sorry
 
 ### Dashboard Header
 
