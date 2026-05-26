@@ -1,40 +1,39 @@
-local picktab = require("utils.plugin.heirline.utils").pick
-local rename = require("utils.plugin.heirline.tabline.name").set
-local pick = require("utils.plugin.snacks").picker
-require("which-key").add {
+local map = require "utils.keymaps"
+local plug, cmd, pick = map.config, map.cmd, map.pick
+return {
   -- buffers
-  { "<leader>bb", "<cmd>e #<cr>", desc = "Switch" },
-  { "<leader>bd", Snacks.bufdelete.delete, desc = "Delete" },
-  { "<leader>bo", Snacks.bufdelete.other, desc = "Delete Others" },
+  { "<leader>bb", cmd "e #", desc = "Switch" },
+  { "<leader>bd", plug "BufDelete", desc = "Delete" },
+  { "<leader>bo", plug "BufDeleteOthers", desc = "Delete Others" },
 
   -- windows
-  { "<leader>-", "<C-W>s", desc = "Split Below", remap = true, icon = { icon = "", color = "blue" } },
-  { "<leader>|", "<C-W>v", desc = "Split Right", remap = true, icon = { icon = "", color = "blue" } },
-  { "<leader>wd", "<C-W>c", desc = "Delete", remap = true },
-  { "<leader>bD", "<cmd>:bd<cr>", desc = "Quit" },
+  { "<leader>-", "<C-W>s", desc = "Split Below", icon = { icon = "", color = "blue" } },
+  { "<leader>|", "<C-W>v", desc = "Split Right", icon = { icon = "", color = "blue" } },
+  { "<leader>wd", "<C-W>c", desc = "Delete" },
+  { "<leader>bD", cmd ":bd", desc = "Quit" },
   -- Move to window using <ctrl> arrow keys
-  { "<C-h>", "<C-w>h", desc = "Go to Left", remap = true },
-  { "<C-j>", "<C-w>j", desc = "Go to Lower", remap = true },
-  { "<C-k>", "<C-w>k", desc = "Go to Upper", remap = true },
-  { "<C-l>", "<C-w>l", desc = "Go to Right", remap = true },
+  { "<C-h>", "<C-w>h", desc = "Go to Left" },
+  { "<C-j>", "<C-w>j", desc = "Go to Lower" },
+  { "<C-k>", "<C-w>k", desc = "Go to Upper" },
+  { "<C-l>", "<C-w>l", desc = "Go to Right" },
   -- Resize window using <ctrl> arrow keys
-  { "<C-S-k>", "<cmd>resize +2<cr>", desc = "Increase Height" },
-  { "<C-S-j>", "<cmd>resize -2<cr>", desc = "Decrease Height" },
-  { "<C-S-h>", "<cmd>vertical resize -2<cr>", desc = "Decrease Width" },
-  { "<C-S-l>", "<cmd>vertical resize +2<cr>", desc = "Increase Width" },
+  { "<C-S-k>", cmd "resize +2", desc = "Increase Height" },
+  { "<C-S-j>", cmd "resize -2", desc = "Decrease Height" },
+  { "<C-S-h>", cmd "vertical resize -2", desc = "Decrease Width" },
+  { "<C-S-l>", cmd "vertical resize +2", desc = "Increase Width" },
 
   -- tabs
-  { "<leader><tab>f", "<cmd>tabfirst<cr>", desc = "First" },
-  { "<leader><tab>l", "<cmd>tablast<cr>", desc = "Last" },
-  { "<leader><tab>o", "<cmd>tabonly<cr>", desc = "Delete Others" },
-  { "<leader><tab>n", "<cmd>tabnew<cr>", desc = "New" },
-  { "<leader><tab>d", "<cmd>tabclose<cr>", desc = "Delete" },
-  { "<leader><tab>H", "<cmd>-tabm<cr>", desc = "Prev" },
-  { "<leader><tab>L", "<cmd>+tabm<cr>", desc = "Next" },
-  { "<S-l>", "<cmd>tabn<cr>", desc = "Tab Next" },
-  { "<S-h>", "<cmd>tabp<cr>", desc = "Tab Prev" },
+  { "<leader><tab>f", cmd "tabfirst", desc = "First" },
+  { "<leader><tab>l", cmd "tablast", desc = "Last" },
+  { "<leader><tab>o", cmd "tabonly", desc = "Delete Others" },
+  { "<leader><tab>n", cmd "tabnew", desc = "New" },
+  { "<leader><tab>d", cmd "tabclose", desc = "Delete" },
+  { "<leader><tab>H", cmd "-tabm", desc = "Prev" },
+  { "<leader><tab>L", cmd "+tabm", desc = "Next" },
+  { "<S-l>", cmd "tabn", desc = "Tab Next" },
+  { "<S-h>", cmd "tabp", desc = "Tab Prev" },
 
-  { "<leader><tab>p", picktab, desc = "Pick" },
-  { "<leader><tab>r", rename, desc = "Rename" },
-  { "<leader><tab>s", pick "tabpages", desc = "Rename" },
+  { "<leader><tab>p", plug "TabPick", desc = "Pick" },
+  { "<leader><tab>r", plug "TabRename", desc = "Rename" },
+  { "<leader><tab>s", pick "tabpages", desc = "Select" },
 }

@@ -1,0 +1,19 @@
+#!/usr/bin/env -S nu --no-std-lib
+
+def main (
+  --profile: string
+  ...pkgs: string
+) {
+  let installed = ^nix profile list --json --profile $profile | from json | get elements | columns
+  let pkgs = $pkgs | where $it not-in $installed
+  let pkgs = $pkgs | to json --raw | str replace --all "," " "
+  if ($pkgs | is-empty) { return }
+  ^nix eval --raw -I nixpkgs=channel:nixpkgs-unstable --impure --expr ('
+    let
+      pkgs = import <nixpkgs> {};
+    in with builtins;
+        concatStringsSep "\n"
+          (sort (a: b: a < b)
+                (filter (name: hasAttr name pkgs)' +
+                        $pkgs + '))')
+}

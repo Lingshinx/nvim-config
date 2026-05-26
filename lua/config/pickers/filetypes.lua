@@ -1,36 +1,61 @@
-local config = require "config.language"
 local file_name_of = {}
-local lang_fn = require "utils.language.fn"
 
-require("utils.fs").load_each(vim.fn.stdpath "config", "config.langs", function(file_name, mod)
-  local names = lang_fn.get_names(mod)
-  if vim.tbl_isempty(names) then
-    file_name_of[file_name] = file_name
-  else
-    for _, lang_name in ipairs(names) do
-      file_name_of[lang_name] = file_name
+local function get_lsp_name(lsp)
+  if type(lsp) == "string" then
+    return lsp
+  elseif type(lsp) == "table" then
+    for k, v in pairs(lsp) do
+      return type(k) == "number" and v or k
     end
   end
-end)
+end
 
-local filetypes = vim.tbl_map(function(filetype)
-  local lang = config.get[filetype]
-  local file_name = file_name_of[filetype]
-  local ret = {
-    treesitter = not vim.tbl_isempty(lang and lang.treesitter or {}),
-    text = filetype,
-    file = file_name and lang_fn.get_path(file_name),
-  }
-  if lang then
-    ret.formatter = lang.formatter and lang.formatter[1]
-    ret.lsp = lang.lsp and lang:get_lspnames()[1]
+local function get_name(spec)
+  local names = {}
+  for _, lang in ipairs(spec) do
+    if type(lang) == "string" then
+      names[#names + 1] = lang
+    else
+      vim.list_extend(names, get_name(lang))
+    end
   end
-  return ret
-end, vim.fn.getcompletion("", "filetype"))
+  return names
+end
+
+local files = vim.api.nvim_get_runtime_file("langs/*.lua", true)
+for _, file in ipairs(files) do
+  local name = vim.fn.fnamemodify(file, ":t:r")
+  local config = dofile(file)
+  if config then
+    if not config[1] then config[1] = name end
+    for _, name in ipairs(get_name(config)) do
+      file_name_of[name] = file
+    end
+  end
+end
+
+local filetypes = vim
+  .iter(vim.fn.getcompletion("", "filetype"))
+  :map(function(filetype)
+    local lang = require("load.langs").data[filetype]
+    local file_name = file_name_of[filetype]
+    local ret = {
+      treesitter = not not (lang and lang.treesitter),
+      text = filetype,
+      file = file_name,
+    }
+    if lang then
+      ret.formatter = lang.formatter and lang.formatter[1]
+      ret.lsp = lang.lsp and get_lsp_name(lang.lsp)
+    end
+    return ret
+  end)
+  :totable()
 
 ---@type snacks.picker.Config
+
 return {
-  title = "Filetypes",
+  title = "File Types",
   layout = "vscode",
   sort_lastused = true,
   sort = { fields = { "treesitter", "lsp", "formatter" } },
@@ -55,9 +80,9 @@ return {
       },
       {
         align(item.formatter, center_width, { align = "center", truncate = true }),
-        "LingshinPickerFtFormatter",
+        "@constant",
       },
-      { align(item.lsp, math.ceil(side_width), { align = "right", truncate = true }), "LingshinPickerFtLsp" },
+      { align(item.lsp, math.ceil(side_width), { align = "right", truncate = true }), "Special" },
     }
   end,
   items = filetypes,

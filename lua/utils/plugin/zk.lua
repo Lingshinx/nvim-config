@@ -30,7 +30,7 @@ local function zk_new()
 end
 
 vim.api.nvim_create_user_command("ZkAdd", function(opts)
-  local nargs = #opts.fargs
+  local nargs = opts.nargs
   if nargs == 0 then
     zk_new()
   else

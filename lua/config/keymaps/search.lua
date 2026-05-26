@@ -1,35 +1,35 @@
-local picker = require("utils.plugin.snacks").picker
+local pick = require("utils.keymaps").pick
 
-require("which-key").add {
-  { "<leader>S", picker "pickers", desc = "All Searcher" },
+return {
+  { "<leader>S", pick "pickers", desc = "All Searcher" },
 
-  { "<leader>s/", picker "search_history", desc = "Search History" },
-  { "<leader>s:", picker "command_history", desc = "Command History" },
+  { "<leader>s/", pick "search_history", desc = "Search History" },
+  { "<leader>s:", pick "command_history", desc = "Command History" },
 
-  { '<leader>s"', picker "registers", desc = "Registers" },
-  { "<leader>sj", picker "jumps", desc = "Jumps" },
-  { "<leader>sm", picker "marks", desc = "Marks" },
+  { '<leader>s"', pick "registers", desc = "Registers" },
+  { "<leader>sj", pick "jumps", desc = "Jumps" },
+  { "<leader>sm", pick "marks", desc = "Marks" },
 
-  { "<leader>sa", picker "autocmds", desc = "Autocmds" },
-  { "<leader>sk", picker "keymaps", desc = "Keymaps" },
-  { "<leader>sc", picker "commands", desc = "Commands" },
+  { "<leader>sa", pick "autocmds", desc = "Autocmds" },
+  { "<leader>sk", pick "keymaps", desc = "Keymaps" },
+  { "<leader>sc", pick "commands", desc = "Commands" },
 
-  { "<leader>sb", picker "lines", desc = "Buffer Lines" },
-  { "<leader>sB", picker "grep_buffers", desc = "Buffers Grep " },
-  { "<leader>sw", picker "grep_word", desc = "Word Grep", mode = { "n", "x" } },
-  { "<leader>sg", picker "grep", desc = "Grep" },
+  { "<leader>sb", pick "lines", desc = "Buffer Lines" },
+  { "<leader>sB", pick "grep_buffers", desc = "Buffers Grep " },
+  { "<leader>sw", pick "grep_word", desc = "Word Grep", mode = { "n", "x" } },
+  { "<leader>sg", pick "grep", desc = "Grep" },
 
-  { "<leader>sq", picker "qflist", desc = "Quickfix" },
-  { "<leader>sl", picker "loclist", desc = "Quickfix (Local)" },
-  { "<leader>sd", picker "diagnostics", desc = "Diagnostics" },
-  { "<leader>sD", picker "diagnostics_buffer", desc = "Diagnostics (Buffer)" },
+  { "<leader>sq", pick "qflist", desc = "Quickfix" },
+  { "<leader>sl", pick "loclist", desc = "Quickfix (Local)" },
+  { "<leader>sd", pick "diagnostics", desc = "Diagnostics" },
+  { "<leader>sD", pick "diagnostics_buffer", desc = "Diagnostics (Buffer)" },
 
-  { "<leader>sh", picker "help", desc = "Help Pages" },
+  { "<leader>sh", pick "help", desc = "Help Pages" },
 
-  { "<leader>sp", picker "lazy", desc = "Plugins" },
-  { "<leader>su", picker "undo", desc = "Undotree" },
+  { "<leader>sp", pick "lazy", desc = "Plugins" },
+  { "<leader>su", pick "undo", desc = "Undotree" },
 
-  { "<leader>sn", picker "notifications", desc = "Notifications" },
-  { "<leader>sf", picker "filetypes", desc = "Filetypes" },
-  { "<leader>si", picker "icons", desc = "Icons" },
+  { "<leader>sn", pick "notifications", desc = "Notifications" },
+  { "<leader>sf", pick "filetypes", desc = "Filetypes" },
+  { "<leader>si", pick "icons", desc = "Icons" },
 }

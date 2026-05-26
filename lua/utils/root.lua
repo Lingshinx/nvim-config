@@ -1,53 +1,62 @@
-local fn = require "utils.fn"
-local fs = require "utils.fs"
-local list = require "utils.list"
+---@param buf integer
+---@return string?
+local function bufpath(buf) return vim.uv.fs_realpath(vim.api.nvim_buf_get_name(buf)) end
+
+---@param pattern string
+---@param path string
+---@return boolean
+local function match(pattern, path)
+  return pattern == path or pattern:sub(1, 1) == "*" and path:find(vim.pesc(pattern:sub(2)) .. "$") ~= nil
+end
+
 local M = {}
 M = {
   ---@param buf integer
+  ---@param bufpath string
   ---@return string?
-  lsp = function(buf)
-    local bufpath = fs.bufpath(buf)
-    if not bufpath then return nil end
+  lsp = function(buf, bufpath) ---@diagnostic disable-line
+    if not bufpath then return end
     local roots = {}
     local clients = vim.lsp.get_clients { bufnr = buf }
     for _, client in pairs(clients) do
       local workspace = client.config.workspace_folders
       for _, ws in pairs(workspace or {}) do
-        list.append(roots, vim.uri_to_fname(ws.uri))
+        roots[#roots + 1] = vim.uri_to_fname(ws.uri)
       end
-      list.append(roots, client.root_dir)
+      roots[#roots + 1] = client.root_dir
     end
-    return list.maxBy(
-      fn.comparing(fn.length),
-      vim.tbl_filter(function(path) return path and bufpath:find(path, 1, true) == 1 end, roots)
-    )
+
+    local longest_path = vim
+      .iter(roots)
+      :filter(function(path) return path and bufpath:find(path, 1, true) == 1 end)
+      :fold("", function(acc, cur) return #cur > #acc and cur or acc end)
+    if longest_path ~= "" then return longest_path end
   end,
 
-  ---@param buf integer
+  ---@param from string
   ---@param patterns string[]
   ---@return string?
-  pattern = function(buf, patterns)
+  pattern = function(from, patterns)
     local result = vim.fs.find(function(path)
-      return list.any(function(pattern) return fs.match(pattern, path) end, patterns)
+      return vim.iter(patterns):any(function(pattern) return match(pattern, path) end)
     end, {
-      path = fs.bufpath(buf) or vim.uv.cwd(),
+      path = from or vim.uv.cwd(),
       upward = true,
     })[1]
     return result and vim.fs.dirname(result)
   end,
 
-  ---@param buf integer
+  ---@param path string
   ---@return string?
-  parent = function(buf)
-    local path = vim.api.nvim_buf_get_name(buf)
-    if vim.fn.filereadable(path) == 0 then return end
-    local parent = vim.fn.fnamemodify(path, ":p:h")
-    return vim.uv.fs_stat(parent) and parent or nil
-  end,
+  parent = function(path) return vim.fn.fnamemodify(path, ":p:h") end,
 
   ---@param buf integer
   ---@return string?
-  detect = function(buf) return M.lsp(buf) or M.pattern(buf, vim.g.root_pattern) or M.parent(buf) or vim.uv.cwd() end,
+  detect = function(buf)
+    local name = bufpath(buf)
+    if not name then return end
+    return M.lsp(buf, name) or M.pattern(name, vim.g.root_pattern) or M.parent(name)
+  end,
 
   cache = {},
 

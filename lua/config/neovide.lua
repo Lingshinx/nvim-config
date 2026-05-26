@@ -3,7 +3,7 @@ if not vim.g.neovide then return end
 vim.g.neovide_padding_top = 10
 vim.g.neovide_padding_right = 0
 
-vim.g.neovide_opacity = 0.95
+vim.g.neovide_opacity = 0.90
 vim.g.neovide_hide_mouse_when_typing = true
 
 vim.g.neovide_cursor_unfocused_outline_width = 0

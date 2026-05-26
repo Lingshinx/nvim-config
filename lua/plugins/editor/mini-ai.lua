@@ -16,11 +16,10 @@ end
 
 return {
   "nvim-mini/mini.ai",
-  event = "VeryLazy",
-  opts = function()
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+  after = function()
     ---@module "which-key"
     ---@type wk.Spec[]
-    local list = require "utils.list"
     local keys = { mode = { "o", "x" } }
     local objects = {
       { " ", desc = "whitespace" },
@@ -54,22 +53,28 @@ return {
     local mappings = {
       a = "around",
       i = "inside",
-      ["a]"] = "next",
-      ["i]"] = "next",
-      ["a["] = "prev",
-      ["i["] = "prev",
+      ["]a"] = "next",
+      ["]i"] = "next",
+      ["[a"] = "prev",
+      ["[i"] = "prev",
     }
     for prefix, name in pairs(mappings) do
-      list.append(keys, { prefix, group = name })
+      keys[#keys + 1] = { prefix, group = name }
       for _, obj in pairs(objects) do
-        list.append(keys, { prefix .. obj[1], desc = obj.desc })
+        keys[#keys + 1] = { prefix .. obj[1], desc = obj.desc }
       end
     end
     require("which-key").add(keys, { notify = false })
 
     local ai = require "mini.ai"
-    return {
+    ai.setup {
       n_lines = 500,
+      mappings = {
+        around_next = "]a",
+        inside_next = "]i",
+        around_last = "[a",
+        inside_last = "[i",
+      },
       custom_textobjects = {
         o = ai.gen_spec.treesitter { -- code block
           a = { "@block.outer", "@conditional.outer", "@loop.outer" },

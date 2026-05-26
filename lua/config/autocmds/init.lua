@@ -5,26 +5,10 @@ local name = require "utils.plugin.heirline.tabline.name"
 -- Auto Chdir
 autocmd({ "BufEnter", "BufWinEnter" }, {
   desc = "Auto change dir to root",
-  nested = true,
   callback = function()
     if vim.bo.buftype ~= "" then return end
     vim.fn.chdir(require("utils.root").get())
   end,
-})
-
--- Auto Format
-autocmd("BufWritePre", {
-  desc = "Auto Format buffer",
-  callback = function(args)
-    if vim.g.autoformat and vim.b.autoformat ~= false then require("conform").format { bufnr = args.buf } end
-  end,
-})
-
--- Highlight on yank
-autocmd("TextYankPost", {
-  desc = "Highlight on yank",
-  group = augroup "highlight_yank",
-  callback = function() vim.highlight.on_yank() end,
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist

@@ -1,4 +1,5 @@
 local Diff = require "utils.plugin.heirline.statusline.diff"
+
 return {
   init = function(self)
     if not package.loaded["noice"] then return end

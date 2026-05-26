@@ -16,6 +16,7 @@ local fn = require "utils.fn"
 local data = require "utils.plugin.dashboard.fake-data"
 
 local function gh_notify(cb, opts)
+  if not vim.fn.executable "gh" then return end
   vim.system({
     "gh",
     "api",
@@ -92,7 +93,7 @@ function M.notification(opts)
     vim.schedule_wrap(function(result)
       opts.text = format(result, opts)
       vim.wait(1000, function() return Snacks ~= nil end)
-      Snacks.dashboard.update()
+      if Snacks then Snacks.dashboard.update() end
     end),
     opts
   )

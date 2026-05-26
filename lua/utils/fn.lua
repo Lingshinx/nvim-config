@@ -1,14 +1,32 @@
+---@param a table
+---@param b table
+---@return table c
+local function merge(a, b)
+  for key, value in pairs(b) do
+    if type(a[key]) == "table" and type(value) == "table" then
+      merge(a[key], value)
+    else
+      a[key] = value
+    end
+  end
+  return a
+end
+
+---@param list any[]
+---@return table<any,boolean>
+local function contains_map(list)
+  local ret = {}
+  for _, it in ipairs(list) do
+    ret[it] = true
+  end
+  return ret
+end
+
 local M = {}
 M = {
-  ---@param f fun(x):integer
-  ---@return fun(a, b):boolean
-  comparing = function(f)
-    return function(a, b) return f(a) < f(b) end
-  end,
+  merge = merge,
 
-  ---@param str string
-  ---@return integer
-  length = function(str) return str and #str or 0 end,
+  contains_map = contains_map,
 
   ---@param str string
   ---@return string
@@ -20,13 +38,6 @@ M = {
   truncate = function(str, length, tail)
     if #str <= length then return str end
     return str:sub(1, length - #tail) .. tail
-  end,
-
-  ---@param callback fun()
-  deter = function(callback)
-    vim.api.nvim_create_autocmd("UIEnter", {
-      callback = callback,
-    })
   end,
 }
 return M
