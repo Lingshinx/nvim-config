@@ -6,33 +6,29 @@
 ---@field complete? fun(arg_lead: string?, self: table?): string[]
 
 ---@type table<string, config.command.SubcommandOpt|config.command.Subcommand>
-local updaters = {
-  all = function(_, opts)
-    local bang = opts.bang
-    for _, manager in pairs(require "utils.manager") do
-      if manager.clean and bang then manager.clean() end
-      if manager.update then manager.update() end
-    end
-  end,
-}
+local installers = {}
+installers.all = function()
+  for _, installer in pairs(installers) do
+    installer()
+  end
+end
 
 ---@type table<string, config.command.SubcommandOpt|config.command.Subcommand>
-local installers = {
-  all = function()
-    for _, manager in pairs(require "utils.manager") do
-      if manager.install then manager.install() end
-    end
-  end,
-}
+local cleaners = {}
+cleaners.all = function()
+  for _, cleaner in pairs(cleaners) do
+    cleaner()
+  end
+end
 
 ---@type table<string, config.command.SubcommandOpt|config.command.Subcommand>
-local cleaners = {
-  all = function()
-    for _, manager in pairs(require "utils.manager") do
-      if manager.clean then manager.clean() end
-    end
-  end,
-}
+local updaters = {}
+updaters.all = function(_, opts)
+  if opts.bang then cleaners.all() end
+  for _, updater in pairs(updaters) do
+    updater()
+  end
+end
 
 local init = {}
 
