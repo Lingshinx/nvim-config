@@ -77,13 +77,13 @@ local function install(pkgs, quiet)
       ---@param msg string
       on_msg = function(msg)
         if msg:find "^  /nix/store" then return end
-        local replaced, warned = msg:gsub("^warning:[%s]*", "", 1)
-        local replaced, errored = replaced:gsub("^error:[%s]*", "", 1)
+        local replaced, warn = msg:gsub("^warning:[%s]*", "", 1)
+        local replaced, error = replaced:gsub("^error:[%s]*", "", 1)
         local levels = vim.log.levels
         local level = levels.INFO
-        if warned ~= 0 then level = levels.WARN end
-        if errored ~= 0 then level = levels.ERROR end
-        warned = level == levels.INFO
+        if warn ~= 0 then level = levels.WARN end
+        if error ~= 0 then level = levels.ERROR end
+        warned = level ~= levels.INFO
         vim.notify(replaced, level)
       end,
       on_tasks = function(tasks)
