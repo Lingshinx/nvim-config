@@ -4,7 +4,7 @@ return {
     {
       "brianhuster/live-preview.nvim.git",
       cmd = "LivePreview",
-      ft = { "markdown" },
+      ft = "markdown",
     },
     {
       "MeanderingProgrammer/render-markdown.nvim",
