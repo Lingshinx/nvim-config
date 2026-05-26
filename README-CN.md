@@ -36,6 +36,10 @@
 不过，拿来试试 Neovim，从此基础上修改，或是在我的配置中寻求一些灵感什么的，
 相信我的配置还是足以胜任的
 
+```bash
+git clone https://github.com/Lingshinx/nvim-config.git ~/.config/nvim
+```
+
 > [!TIP]
 > 如果你已经有一个 Neovim 配置的话，可以不用备份原来的配置，而是将我的配置下载到 `$XDG_CONFIG_COME/{NVIM_APPNAME}`
 > NVIM_APPNAME 随便起什么都行啦，只要不和你原来的目录起冲突。比如说，你可以用 `nvim_lingshin` 来当这份配置的 APPNAME
@@ -64,51 +68,6 @@ inputs = {
 }
 ```
 
-#### Module
-
-```nix
-{
-  inputs,
-  pkgs,
-  ...
-}: {
-  imports = [inputs.nvim-config.homeModules.default];
-  programs.neovim = {
-    enable = true;
-    lingshin-config = {
-      enable = true;
-      # Enable Language Configurations In Directory `Langs`
-      languages = ["nix" "fish" "lua"];
-      # Extra Language Configuration Files
-      extraLanguages = [];
-      dashboardCommand = "echo hello world"; 
-    };
-
-    extraPackages = with pkgs; [
-      stylua
-      luajitPackages.lua-lsp
-
-      fish-lsp
-
-      alejandra
-      nixd
-    ];
-  };
-}
-```
-
-### 插件管理器（Plugins manager）
-
-我的配置不会自动安装 [`lazy.nvim`](https://lazy.folke.io), 所以需要你手动安装一下来着
-
-```bash
-git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim
-```
-
-自动安装插件管理器的确会方便一些，
-但我就是不喜欢每次启动都要检查一下有没有安装 lazy.nvim。
-况且手动安装更加方便排查一些网络问题呢
-
 ## Features
 
 ### Language
@@ -127,10 +86,13 @@ git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.
 | **treesitter** | `string[]` or `boolean` | 默认是 `true`，会自动安装 `treesitter-{language name}` |
 | **lsp** | `string`, `string[]` or `table<string,lspconfig>` | 语言服务器的名字, 如果类型是 `table`, 就会执行 `vim.lsp.config(key, value)`  |
 | **formatter** | `string` or `string[]`  | formmatter 的名字 |
-| **pkgs** | `string[]` | 如果 [mason](https://github.com/mason-org/mason.nvim) 包的名字和上面使用的 lsp/formmatter 的名字不一样 , 你可以用这个来指定要安装的包 |
 | **plugins** | `LazySpec` |和这个语言相关的 nvim 插件|
 | **options** | `table<string,any>` | 语言特定的选项 |
-| **enabled** | `boolean` | 赋能传统语言文化配置 | 
+| **filetype** | `table<string,string\|table>` | 注册新的 filetype |
+| **parser** | `string` or `ParserInfo` | 用来下载自定义的 treesitter parser，另见[添加自定义 parser](https://github.com/nvim-treesitter/nvim-treesitter#adding-custom-languages) |
+| **package** | `string[]` | 如果 LSP 和 formatter 的名字和在下载器里的名字不同，可以用这个来指定 |
+| **nix** | `string[]` or `string` | 在 [nixpkg](https://search.nixos.org/packages?channel=unstable) 里的名字，如果和 mason 里面不一样的话 |
+| **mason** | `string[]` or `string` | 同上 |
 
 
 关于配置语言的[示例](./Language.md)，我只写了英文版，开个翻译将就看呗
@@ -250,6 +212,9 @@ https://github.com/user-attachments/assets/d117ab08-c766-45c9-a294-b65614349734
 > [!NOTE]
 > 仅在 Markdown 的公式块里面可用，因为我不用破 LaTeX  
 > 用 <kbd>\<leader\>ut</kbd> 来切换启用 **Auto Snippets Trigger**
+
+> [!WARNING]
+> 现在不能用，在修www
 
 ### Dashboard Header
 
