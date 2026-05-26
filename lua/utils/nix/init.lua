@@ -41,6 +41,14 @@ end
 ---@return string
 local function parse_pack(pkg) return pkg:find "#" and pkg or "nixpkgs#" .. pkg end
 
+local function progress(percentage, status)
+  vim.schedule(
+    function()
+      vim.api.nvim_echo({}, false, { kind = "progress", percent = percentage, source = "utils.nix", status = status })
+    end
+  )
+end
+
 ---@return table<string, boolean>
 local function list()
   local path = get_default_profile()
@@ -82,13 +90,20 @@ local function install(pkgs, quiet)
         local mb_total = math.floor(tasks.total / 1024 / 1024)
         local mb_done = math.floor(tasks.done / 1024 / 1024)
         local percentage = tasks:percentage()
+        vim.api.nvim_echo(
+          {},
+          false,
+          { kind = "progress", percent = percentage, source = "utils.nix", status = "running" }
+        )
         if percentage < 95 then
           local bar = make_progress_bar(percentage, 37)
           vim.print(string.format("installing %s... %.1f MB / %.1f MB\n%s", pkg_names, mb_done, mb_total, bar))
         end
       end,
     },
-  }, function()
+  }, function(result)
+    if result.code ~= 0 then return progress(100, "failed") end
+    progress(100, "success")
     if warned then return end
     vim.print("installed " .. pkg_names .. "  おめでとう ", "" .. (""):rep(37) .. "")
   end)
