@@ -50,13 +50,39 @@ git clone https://github.com/Lingshinx/nvim-config.git ~/.config/nvim
 
 ## Features
 
+### Plugin Manager
+
+Plugin configurations are in `~/.config/nvim/lua/plugins`, just same with `lazy.nvim`.
+
+The `Plugin Spec` is quite like `lz.n` (*sure, it will be registered in `lz.n` after all*).
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **[1]** | `string?` | The plugin's repo, It's the equivalent to the `[1]` of `lazy.nvim` |
+| **name** | `string?` | The plugin's name (not the module name). This is what is passed to the `load(name)` function. |
+| **url** | `string?` | The plugins's url, param for `vim.pack.add`, for example `https://codeberg.org/abcd/efg` |
+| version | `string?` or `vim.VersionRange`  | Version to use for install and updates. |
+| dir | string? | local plugin, It's pity that git repo is still needed |
+| **enabled** | `boolean?` or `fun():boolean` | When `false`, or if the `function` returns false, then this plugin will not be included in the spec. |
+| **beforeAll** | `fun(lz.n.Plugin)?` | Always executed before any plugins are loaded. |
+| **before** | `fun(lz.n.Plugin)?` | Executed before a plugin is loaded. |
+| **after** | `fun(lz.n.Plugin)?` | Executed after a plugin is loaded. |
+| **event** | `string?` or `string[]` | Lazy-load on event. Events can be specified as `BufEnter` or with a pattern like `BufEnter *.lua`. |
+| **cmd** | `string?` or `string[]` | Lazy-load on command. |
+| **ft** | `string?` or `string[]` | Lazy-load on filetype. |
+| **keys** | `string?` or `string[]` or `lz.n.KeysSpec[]` | Lazy-load on key mapping. |
+| **colorscheme** | `string?` or `string[]` | Lazy-load on colorscheme. |
+| **lazy** | `boolean?` | Lazy-load manually, e.g. using `trigger_load`. Will disable lazy-loading if explicitly set to `false`. |
+| **priority** | `number?` | Only useful for **start** plugins (not lazy-loaded) to force loading certain plugins first. Default priority is `50`. |
+| opts? | `table` | same with `lazy.nvim`  |
+| load_before | `string` or `string[]` | mark a plugin as a dependencies of others |
+
+
 ### Language
 
 It's convenient to treat Language configurations as packages and manage them together instead of scattering them around.
 
 You can put language configurations at `{rtp}/lua/langs` or just `~/.config/nvim/langs`.
-
-Each file should returns a table of type `Config.LangConfig`.
 
 | Property | Type  |Description |
 | --- | --- | -----|

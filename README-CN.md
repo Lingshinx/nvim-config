@@ -70,6 +70,35 @@ inputs = {
 
 ## Features
 
+### Plugin Manager
+
+插件配置放在 `~/.config/nvim/lua/plugins`, 就跟 `lazy.nvim` 差不多
+
+插件规范和 `lz.n` 差不多（*毕竟最后要注册到 `lz.n` 里面的嘛*）
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **[1]** | `string?` | 短仓库 url, 和 `lazy.nvim` 的一样 |
+| **name** | `string?` | 插件名（不是模组名） |
+| **url** | `string?` | 完整的仓库 url |
+| main | `string?` | The main module used for `setup()` |
+| version | `string?` or `vim.VersionRange`  | 版本，不必多说 |
+| dir | `string?` | 本地插件，不过很遗憾还是需要 git 仓库(泣) |
+| **enabled** | `boolean?` or `fun():boolean` | 当为 false 或返回 false 的时候，禁用这个插件 |
+| **beforeAll** | `fun(lz.n.Plugin)?` | 在所有插件加载前执行 |
+| **before** | `fun(lz.n.Plugin)?` | 在插件加载前执行 |
+| **after** | `fun(lz.n.Plugin)?` | 在插件加载后执行 |
+| **event** | `string?` or `string[]` | 就像 `lazy.nvim`，用来懒加载的 event |
+| **cmd** | `string?` or `string[]` | 用来懒加载的 cmd |
+| **ft** | `string?` or `string[]` | 同上 |
+| **keys** | `string?` or `string[]` or `lz.n.KeysSpec[]` | 同 |
+| **colorscheme** | `string?` or `string[]` |  同 |
+| **lazy** | `boolean?` | `true`: 完全手动加载, `false`: 立即加载 |
+| **priority** | `number?` | 为立刻加载的插件设置优先级 |
+| opts? | `table` | opts, 就像 `lazy.nvim` 一样 |
+| load_before | `string` or `string[]` | 用来标记为其它插件的依赖 |
+
+
 ### Language
 
 我把语言相关的配置都放在了一块，
