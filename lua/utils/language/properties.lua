@@ -57,7 +57,7 @@ return {
   },
 
   plugin = {
-    extract = function(plugin) require("utils.pack").add(plugin) end,
+    extract = require("utils.pack").add,
   },
 
   formatter = {
