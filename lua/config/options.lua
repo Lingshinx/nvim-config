@@ -4,6 +4,7 @@ vim.g.maplocalleader = "\\"
 
 -- Globals
 vim.g.root_pattern = { ".git", "lua", ".nvim" }
+vim.g.config_installer = "mason"
 
 -- Persistence
 vim.o.undofile = true
