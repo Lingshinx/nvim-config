@@ -1,5 +1,9 @@
----@type config.language.Config
 return {
   treesitter = "qmljs",
-  lsp = "qmlls",
+  lsp = {
+    qmlls = {
+      cmd = { vim.g.config_installer == "nix" and "qmlls6" or "qmlls", "-E" },
+    },
+  },
+  nix = "qt6.qtlanguageserver",
 }
