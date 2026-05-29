@@ -1,5 +1,3 @@
-/.envrc
-/.direnv
 /langs/*
 /lua/config/custom.lua
 /lua/plugins/extra

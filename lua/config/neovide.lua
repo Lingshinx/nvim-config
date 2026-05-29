@@ -5,11 +5,12 @@ vim.g.neovide_padding_right = 0
 
 vim.g.neovide_opacity = 0.90
 vim.g.neovide_hide_mouse_when_typing = true
-vim.g.neovide_input_ime = true
-vim.g.neovide_underline_stroke_scale = 1.0
+
+vim.g.neovide_floating_corner_radius = 0.5
+vim.g.neovide_detach_on_quit = "always_detach"
+vim.g.neovide_position_animation_length = 0.3
 
 vim.g.neovide_cursor_unfocused_outline_width = 0
-vim.g.neovide_cursor_unfocuesd_outline_width = 0
 vim.g.neovide_cursor_animate_command_line = false
 vim.g.neovide_cursor_smooth_blink = true
 

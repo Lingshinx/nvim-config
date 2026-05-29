@@ -3,6 +3,41 @@ local pick, file = keymap.pick, keymap.file
 local utils = require "utils.plugin.dashboard"
 local make_side_panel = utils.make_side_panel
 local notification = utils.notification
+local header = { section = "header" }
+local keys = { section = "keys", gap = 1, indent = 2, padding = 1 }
+local gh_notify = make_side_panel {
+  title = "Notification",
+  icon = "󰊤",
+  notification(),
+}
+local project = make_side_panel {
+  section = "projects",
+  title = "Projects",
+  icon = "",
+}
+local recent = make_side_panel {
+  section = "recent_files",
+  title = "Recents",
+  icon = "",
+}
+local startup
+
+vim.api.nvim_create_autocmd("UIEnter", {
+  once = true,
+  callback = function()
+    local ms = vim.fn.reltimefloat(vim.fn.reltime()) / 1000
+    startup = {
+      align = "center",
+      indent = 2,
+      padding = 1,
+      pane = 2,
+      text = {
+        { "⚡ " .. "Neovim loaded ", hl = "footer" },
+        { ("%.2f ms"):format(ms), hl = "special" },
+      },
+    }
+  end,
+})
 
 local config_dir = vim.fn.stdpath "config"
 local dot_dir = vim.env.XDG_CONFIG_HOME or "~/.config"
@@ -16,26 +51,22 @@ return {
   opts = {
     dashboard = {
       ---@type snacks.dashboard.Section
-      sections = {
-        { section = "header" },
-        make_side_panel {
-          title = "Notification",
-          icon = "󰊤",
-          notification(),
-        },
-        make_side_panel {
-          section = "projects",
-          title = "Projects",
-          icon = "",
-        },
-        make_side_panel {
-          section = "recent_files",
-          title = "Recents",
-          icon = "",
-        },
-        { section = "keys", gap = 1, indent = 2, padding = 1 },
-        -- { section = "startup", indent = 2, padding = 1, pane = 2 },
-      },
+      sections = function(self)
+        local win_width = vim.api.nvim_win_get_width(self.win)
+        local pane_gap = self.opts.pane_gap
+        local item_width = self.opts.width
+        local max_panes = math.floor((win_width + pane_gap) / (item_width + pane_gap))
+        return {
+          header,
+          max_panes > 1 and {
+            gh_notify,
+            project,
+            recent,
+          },
+          keys,
+          startup,
+        }
+      end,
       preset = {
         header = logo,
         ---@type snacks.dashboard.Item[]
