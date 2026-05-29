@@ -36,6 +36,12 @@ return {
         vim.list_extend(acc, treesitter)
       elseif type(treesitter) == "string" then
         acc[#acc + 1] = treesitter
+        if acc.extra_names then
+          local extra_names = acc.extra_names
+          acc.extra_names = extra_names
+        else
+          acc.extra_names = { name }
+        end
       elseif treesitter == true then
         acc[#acc + 1] = name
       end
@@ -44,14 +50,21 @@ return {
       local treesitters = langs.treesitter
       if not treesitters or vim.tbl_isempty(treesitters) then return end
       require("utils.plugin.treesitter").ensure_installed(treesitters)
+      local cb = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo.foldmethod = "expr"
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+      local extra_names = treesitters.extra_names
+      treesitters.extra_names = nil
       vim.api.nvim_create_autocmd("FileType", {
         pattern = treesitters,
-        callback = function()
-          vim.treesitter.start()
-          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-          vim.wo.foldmethod = "expr"
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end,
+        callback = cb,
+      })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = extra_names,
+        callback = cb,
       })
     end,
   },
