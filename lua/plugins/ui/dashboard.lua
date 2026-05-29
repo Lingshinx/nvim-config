@@ -20,6 +20,24 @@ local recent = make_side_panel {
   title = "Recents",
   icon = "",
 }
+local startup
+
+vim.api.nvim_create_autocmd("UIEnter", {
+  once = true,
+  callback = function()
+    local ms = vim.fn.reltimefloat(vim.fn.reltime()) / 1000
+    startup = {
+      align = "center",
+      indent = 2,
+      padding = 1,
+      pane = 2,
+      text = {
+        { "⚡ " .. "Neovim loaded ", hl = "footer" },
+        { ("%.2f ms"):format(ms), hl = "special" },
+      },
+    }
+  end,
+})
 
 local config_dir = vim.fn.stdpath "config"
 local dot_dir = vim.env.XDG_CONFIG_HOME or "~/.config"
@@ -46,6 +64,7 @@ return {
             recent,
           },
           keys,
+          startup,
         }
       end,
       preset = {
