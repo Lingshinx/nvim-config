@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("User", {
     require "load.after"
     require "config.neovide"
 
-    if vim.fn.argc(-1) ~= 0 then vim.api.nvim_exec_autocmds("BufEnter", {}) end
+    if vim.fn.argc(-1) ~= 0 then vim.api.nvim_exec_autocmds({ "BufEnter", "FileType" }, {}) end
   end,
 })
 
