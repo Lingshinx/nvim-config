@@ -1,3 +1,5 @@
+local start = vim.fn.reltime()
+
 -- require "utils.profiler"
 require "config.options"
 require "load.workspace"
@@ -19,4 +21,5 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+vim.g.config_startuptime = vim.fn.reltimefloat(vim.fn.reltime(start)) * 1000
 wait()

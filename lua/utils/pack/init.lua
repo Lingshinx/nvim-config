@@ -28,6 +28,7 @@ local M = {}
 ---@alias utils.pack.Config (string|utils.pack.Spec)[]|utils.pack.Spec
 
 local spec_map = {}
+local count = 0
 
 ---@param spec utils.pack.Spec
 ---@return string url, string name, string? version
@@ -49,6 +50,8 @@ local function parse_pack(spec)
   if name == nil then error(("name not specified in %s"):format(vim.inspect(spec))) end
   return url, name, version
 end
+
+M.loaded = 0
 
 local default_loader = vim.g.package_load or vim.g.lz_n or vim.cmd.packadd
 ---@param spec utils.pack.Spec
@@ -116,6 +119,7 @@ function M.register(spec)
   spec.loaded = true
 
   local url, name, version = parse_pack(spec)
+  count = count + 1
 
   spec.main = spec.main or get_main(name)
   spec.url = url
@@ -138,6 +142,7 @@ function M.load()
     { load = function() end }
   )
   require("lz.n").load(vim.iter(pairs(spec_map)):map(transform):totable())
+  M.count = count
   spec_map = nil
 end
 

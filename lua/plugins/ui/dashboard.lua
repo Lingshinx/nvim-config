@@ -22,10 +22,11 @@ local recent = make_side_panel {
 }
 local startup
 
-vim.api.nvim_create_autocmd("UIEnter", {
+vim.api.nvim_create_autocmd("User", {
+  pattern = "DeferredUIEnter",
   once = true,
   callback = function()
-    local ms = vim.fn.reltimefloat(vim.fn.reltime()) / 1000
+    local pack = require "utils.pack"
     startup = {
       align = "center",
       indent = 2,
@@ -33,7 +34,9 @@ vim.api.nvim_create_autocmd("UIEnter", {
       pane = 2,
       text = {
         { "⚡ " .. "Neovim loaded ", hl = "footer" },
-        { ("%.2f ms"):format(ms), hl = "special" },
+        { tostring(pack.count), hl = "special" },
+        { " plugins in ", hl = "footer" },
+        { ("%.2f ms"):format(vim.g.config_startuptime), hl = "special" },
       },
     }
   end,
