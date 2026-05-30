@@ -62,6 +62,7 @@ return {
         pattern = treesitters,
         callback = cb,
       })
+      if not extra_names or vim.tbl_isempty(extra_names) then return end
       vim.api.nvim_create_autocmd("FileType", {
         pattern = extra_names,
         callback = cb,
