@@ -4,7 +4,7 @@ local start = vim.fn.reltime()
 require "config.options"
 require "load.workspace"
 pcall(require, "config.custom")
-local wait = require "load.packs"
+require "load.packs"
 local langs = require "load.langs"
 require "load.colorscheme"
 
@@ -22,4 +22,3 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 vim.g.config_startuptime = vim.fn.reltimefloat(vim.fn.reltime(start)) * 1000
-wait()
