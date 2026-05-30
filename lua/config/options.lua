@@ -1,11 +1,3 @@
--- Leader
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
--- Globals
-vim.g.root_pattern = { ".git", "lua", ".nvim" }
-vim.g.config_installer = "mason"
-
 -- Persistence
 vim.o.undofile = true
 vim.o.undolevels = 10000
@@ -81,8 +73,3 @@ vim.o.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to 
 -- Command Line
 vim.o.wildmode = "longest:full,full" -- Command-line completion mode
 vim.o.confirm = true -- Confirm to save changes before exiting modified buffer
-
--- Disable rtp plugins
-vim.g.loaded_netrw = true
-vim.g.loaded_fzf = true
-vim.g.loaded_tutor_mode_plugin = true

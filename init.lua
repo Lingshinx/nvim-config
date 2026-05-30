@@ -1,12 +1,16 @@
 local start = vim.fn.reltime()
 
 -- require "utils.profiler"
-require "config.options"
+require "config.globals"
 require "load.workspace"
 pcall(require, "config.custom")
 require "load.packs"
 local langs = require "load.langs"
 require "load.colorscheme"
+
+vim.api.nvim_create_autocmd("UIEnter", {
+  callback = function() require "config.options" end,
+})
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "DeferredUIEnter",
