@@ -25,4 +25,12 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+if vim.fn.argc(-1) == 0 then
+  vim.o.laststatus = 0
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "SnacksDashboardClosed",
+    callback = function() vim.o.laststatus = 3 end,
+  })
+end
+
 vim.g.config_startuptime = vim.fn.reltimefloat(vim.fn.reltime(start)) * 1000

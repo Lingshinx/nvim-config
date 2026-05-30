@@ -8,7 +8,7 @@ vim.opt.sessionoptions:append { "buffers", "curdir", "tabpages", "winsize", "hel
 -- Appearance
 vim.o.background = "dark"
 vim.o.number = true -- Print line number
-vim.o.laststatus = 3 -- global statusline
+vim.o.cmdheight = 0 -- global statusline
 vim.o.wrap = false -- Disable line wrap
 vim.o.list = true -- Show some invisible characters (tabs...
 vim.o.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
