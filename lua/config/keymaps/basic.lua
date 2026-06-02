@@ -60,7 +60,7 @@ M = {
 
   {
     "<esc>",
-    require("utils.escapes").escape,
+    require("utils.keymap.escapes").escape,
     mode = { "n", "i", "s" },
     expr = true,
     desc = "Escape and Clear hlsearch",

@@ -15,7 +15,7 @@ return {
   after = function()
     local substitute = require "substitute"
     substitute.setup { on_substitute = require("yanky.integration").substitute() }
-    require("utils.escapes").add(require("substitute.range").clear_match)
+    require("utils.keymap.escapes").add(require("substitute.range").clear_match)
 
     local map = vim.keymap.set
     map("n", "ds", substitute.operator, { noremap = true })
