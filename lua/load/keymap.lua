@@ -30,6 +30,7 @@ require("utils.load").ls(dir, {
 
     map.add(mappings)
     map.add_ft(ft_mappings)
+    require("utils.keymap.icons").load()
     require("which-key").add(wk_mappings)
   end),
 })
