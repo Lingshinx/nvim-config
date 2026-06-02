@@ -1,4 +1,4 @@
-local map = require("utils.keymaps")
+local map = require "utils.keymaps"
 local plug = map.plug
 
 return {
@@ -16,7 +16,5 @@ return {
     { "sr", plug "nvim-surround-change", desc = "Replace surrounding" },
     { "sR", plug "nvim-surround-change-line", desc = "Replace surrounding on new lines" },
   },
-  before = function()
-    vim.g.nvim_surround_no_mappings = true
-  end
+  before = function() vim.g.nvim_surround_no_mappings = true end,
 }

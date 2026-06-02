@@ -12,8 +12,8 @@ return {
   },
   --stylua: ignore
 	keys = {
-    { "iy", function() require("yanky.textobj").last_put() end, mode =  { "o", "x" }, desc = "Yanky last paste" },
-    { "ay", function() require("yanky.textobj").last_put() end, mode =  { "o", "x" }, desc = "Yanky last paste" },
+    { "iy", function() require("yanky.textobj").last_put() end, mode = { "o", "x" }, desc = "Yanky last paste" },
+    { "ay", function() require("yanky.textobj").last_put() end, mode = { "o", "x" }, desc = "Yanky last paste" },
 		{ "<leader>p", "<cmd>YankyRingHistory<CR>", mode = { "n", "x" }, desc = "Yank History", icon = { icon = "󰅇" , color = "yellow" } },
 		{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
 		{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Cursor" },
