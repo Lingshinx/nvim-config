@@ -33,7 +33,6 @@ return {
   },
   {
     "folke/snacks.nvim",
-    optional = true,
     opts = {
       picker = {
         win = {

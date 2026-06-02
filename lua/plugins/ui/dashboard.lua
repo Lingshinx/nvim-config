@@ -50,7 +50,6 @@ local logo = logos[vim.g.config_header] or logos.lingshin
 
 return {
   "folke/snacks.nvim",
-  optional = true,
   opts = {
     dashboard = {
       ---@type snacks.dashboard.Section
