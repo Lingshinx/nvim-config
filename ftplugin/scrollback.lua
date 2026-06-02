@@ -1,3 +1,6 @@
+if vim.b.loaded_snacks then return end
+vim.b.loaded_snacks = true
+
 Snacks.terminal.colorize()
 vim.bo.modifiable = false
 vim.o.laststatus = 0
