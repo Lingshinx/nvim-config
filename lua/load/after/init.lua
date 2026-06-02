@@ -13,6 +13,4 @@ vim.diagnostic.config {
 
 require("utils.manager").setup()
 
-if vim.g.config_installer == "nix" then
-  require("utils.nix").setup()
-end
+if vim.g.config_installer == "nix" then require("utils.nix").setup() end
