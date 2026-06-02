@@ -12,7 +12,6 @@ require("utils.load").ls(dir, {
     local mappings = {}
 
     for _, file in ipairs(files) do
-      print(files)
       local keymaps = dofile(file)
       if keymaps then
         for _, keymap in ipairs(keymaps) do
