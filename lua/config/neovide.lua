@@ -6,7 +6,6 @@ vim.g.neovide_padding_right = 0
 vim.g.neovide_opacity = 0.90
 vim.g.neovide_hide_mouse_when_typing = true
 
-vim.g.neovide_floating_corner_radius = 0.5
 vim.g.neovide_detach_on_quit = "always_detach"
 vim.g.neovide_position_animation_length = 0.3
 
