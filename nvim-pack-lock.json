@@ -64,6 +64,10 @@
       "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
       "src": "https://github.com/rebelot/heirline.nvim"
     },
+    "jj.nvim": {
+      "rev": "f30eefeaf3ce19a045ff12deb065ddb60cf611e5",
+      "src": "https://github.com/nicolasgb/jj.nvim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"

@@ -1,5 +1,6 @@
 return {
   "tsx",
+  "jsx",
   "javascript",
   "typescript",
   { "javascriptreact", treesitter = false },
