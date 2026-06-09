@@ -16,7 +16,7 @@ local fn = require "utils.fn"
 local data = require "utils.plugin.dashboard.fake-data"
 
 local function gh_notify(cb, opts)
-  if not vim.fn.executable "gh" then return end
+  if vim.fn.executable "gh" == 0 then return end
   vim.system({
     "gh",
     "api",
