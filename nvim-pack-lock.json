@@ -64,6 +64,10 @@
       "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
       "src": "https://github.com/rebelot/heirline.nvim"
     },
+    "hunk.nvim": {
+      "rev": "c8a8e7b6973576f63e5bf39aa8338d7f37f4dc53",
+      "src": "https://github.com/julienvincent/hunk.nvim"
+    },
     "jj.nvim": {
       "rev": "f30eefeaf3ce19a045ff12deb065ddb60cf611e5",
       "src": "https://github.com/nicolasgb/jj.nvim"
