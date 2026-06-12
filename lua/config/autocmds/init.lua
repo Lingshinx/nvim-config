@@ -6,8 +6,9 @@ local name = require "utils.plugin.heirline.tabline.name"
 autocmd({ "BufEnter", "BufWinEnter" }, {
   desc = "Auto change dir to root",
   callback = function()
-    if vim.bo.buftype ~= "" then return end
-    vim.fn.chdir(require("utils.root").get())
+    if vim.bo.buftype ~= "" or vim.t.autochdir == false then return end
+    local dir = require("utils.root").get()
+    if dir ~= "/tmp" then vim.fn.chdir(dir) end
   end,
 })
 
