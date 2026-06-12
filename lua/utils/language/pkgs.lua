@@ -44,8 +44,7 @@ local function get_pkgs()
   length = extend(ret, langs.package, length)
   length = extend(ret, langs[vim.g.config_installer], length)
   extend(ret, vim.iter(vim.tbl_values(langs.data)):map(get_names):flatten():totable(), length)
-  ret = vim.list.unique(ret)
-  return ret
+  return vim.iter(vim.list.unique(ret)):filter(function(pkg) return vim.fn.executable(pkg) == 0 end):totable()
 end
 
 return get_pkgs
