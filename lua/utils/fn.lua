@@ -25,6 +25,7 @@ end
 ---@return boolean
 local function start_with_buf()
   if vim.fn.argc(-1) ~= 0 then return true end
+  if vim.list_contains(vim.v.argv, "-c") then return true end
   local buf = 1
   local uis = vim.api.nvim_list_uis()
   if #uis == 0 then return true end
