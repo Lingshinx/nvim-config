@@ -47,6 +47,9 @@ M = {
   { "<", "<gv", mode = "v" },
   { ">", ">gv", mode = "v" },
 
+  -- better duplicate
+  { "yp", "<cmd>.t.<CR>" },
+
   { "<leader>n", plug "Notifications", desc = "Notifications" },
   { "<leader>qq", cmd "quitall", desc = "Quit All" },
   { [[<C-\>]], plug "OpenTerminal", desc = "ToggleTerm" },
