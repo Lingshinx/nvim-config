@@ -26,7 +26,7 @@ return {
       { "<leader>jD", function() require("jj.diff").open_vdiff() end, desc = "diff current buffer" },
       { "<leader>js", function() require("jj.picker").status() end, desc = "JJ Picker status" },
       { "<leader>jh", function() require("jj.picker").file_history() end, desc = "JJ Picker history" },
-      { "<leader>jL", function() require("jj.cmd").log { revisions = "'all()'" } end },
+      { "<leader>jL", function() require("jj.cmd").log { revisions = "'all()'" } end, desc = "log all" },
     },
     opts = {
       terminal = {
