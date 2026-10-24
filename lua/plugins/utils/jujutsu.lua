@@ -1,5 +1,4 @@
 return {
-  { "esmuellert/codediff.nvim", cmd = "CodeDiff", load_before = "jj.nvim" },
   {
     "nicolasgb/jj.nvim",
     keys = {
