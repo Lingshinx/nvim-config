@@ -1,4 +1,5 @@
 return {
+  formatter = "rustfmt",
   plugin = {
     {
       "Saecki/crates.nvim",
