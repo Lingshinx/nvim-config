@@ -10,6 +10,18 @@ end
 
 ---@type utils.language.Properties
 return {
+  ftplugin = {
+    extract = true,
+    each = function(callback, name)
+      if type(callback) ~= "function" then return end
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = name,
+        desc = "Set at lang specs",
+        callback = callback,
+      })
+    end,
+  },
+
   lsp = {
     extract = true,
     each = function(lsp)
