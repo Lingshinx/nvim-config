@@ -19,5 +19,12 @@ return {
         long_message_to_split = true,
       },
     },
+    after = function(spec)
+      if vim.g.neovide then
+        vim.defer_fn(function() require("noice").setup(spec.opts) end, 50)
+      else
+        require("noice").setup(spec.opts)
+      end
+    end,
   },
 }
