@@ -1,5 +1,15 @@
 return {
   {
+    "dlyongemallo/diffview-plus.nvim",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewToggle",
+      "DiffviewFileHistory",
+      "DiffviewDiffFiles",
+      "DiffviewLog",
+    },
+  },
+  {
     "nicolasgb/jj.nvim",
     keys = {
       { "<leader>jj", function() require("jj.cmd").log() end, desc = "log" },
