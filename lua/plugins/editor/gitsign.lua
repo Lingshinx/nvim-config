@@ -13,6 +13,7 @@ return {
   opts = {
     signs = signs,
     signs_staged = signs,
+    current_line_blame = true,
     on_attach = function(buffer)
       local gitsign = require "gitsigns"
 
