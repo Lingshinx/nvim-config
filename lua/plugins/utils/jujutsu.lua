@@ -1,6 +1,7 @@
 return {
   {
     "dlyongemallo/diffview-plus.nvim",
+    load_before = "jj.nvim",
     cmd = {
       "DiffviewOpen",
       "DiffviewToggle",
@@ -41,6 +42,7 @@ return {
       terminal = {
         cursor_render_delay = 10, -- Adjust if cursor position isn't restoring correctly
       },
+      diff = { backend = "diffview" },
       cmd = {
         describe = {
           editor = {
