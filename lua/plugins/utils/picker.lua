@@ -18,6 +18,9 @@ return {
           auto_close = false,
           layout = "sidebar",
         },
+        zoxide = {
+          confirm = "picker_files",
+        },
       },
       actions = { confirm = { action = "jump", cmd = "drop" } },
       layouts = {
