@@ -4,7 +4,16 @@ def main (
   --profile: string
   ...pkgs: string
 ) {
-  let installed = ^nix profile list --json --profile $profile | from json | get elements | columns
+  let installed = ^nix profile list --json --profile $profile
+  | from json
+  | get elements
+  | values
+  | get attrPath
+  | each {
+    split row "."
+    | skip 2
+    | str join "."
+  }
   let pkgs = $pkgs | where $it not-in $installed
   let pkgs = $pkgs | to json --raw | str replace --all "," " "
   if ($pkgs | is-empty) { return }
