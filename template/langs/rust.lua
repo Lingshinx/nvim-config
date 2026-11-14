@@ -1,5 +1,6 @@
 return {
   formatter = "rustfmt",
+  lsp = "rust-analyzer",
   plugin = {
     {
       "Saecki/crates.nvim",
