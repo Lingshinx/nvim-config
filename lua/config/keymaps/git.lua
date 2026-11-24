@@ -5,7 +5,8 @@ return {
   { "<leader>gs", pick "git_status", desc = "Status" },
   { "<leader>gS", pick "git_stash", desc = "Stash" },
   { "<leader>gg", plug "Git", desc = "Git" },
-  { "<leader>gf", cmd "DiffviewFileHistory", desc = "File History" },
+  { "<leader>gf", cmd "DiffviewFileHistory %", desc = "File History" },
+  { "<leader>gF", cmd "DiffviewFileHistory", desc = "File History All" },
   { "<leader>gl", pick "git_log", desc = "Log" },
   { "<leader>gb", pick "git_log_line", desc = "Blame" },
 }
