@@ -36,6 +36,10 @@ return {
     opts = {
       terminal = {
         cursor_render_delay = 10, -- Adjust if cursor position isn't restoring correctly
+        window = {
+          floating_width = 0.8, -- Width % of the floating window (between 0.1 and 1.0)
+          floating_height = 0.85, -- Height % of the floating window (between 0.1 and 1.0)
+        },
       },
       diff = { backend = "diffview" },
       cmd = {
