@@ -39,35 +39,14 @@ return {
       },
       diff = { backend = "diffview" },
       cmd = {
-        describe = {
-          editor = {
-            type = "buffer",
-            keymaps = {
-              close = { "q", "<Esc>", "<C-c>" }, -- Enable <Esc> in the editor
-            },
-          },
-        },
-        bookmark = {
-          prefix = "feat/",
-        },
         keymaps = {
           log = {
-            edit = "<CR>",
-            describe = "d",
-            diff = "<S-d>",
-            abandon = "<S-a>",
-            fetch = "<S-f>",
+            describe = "cc",
+            abandon = "dd",
+            new = "o",
+            open_pr = false,
+            open_pr_list = false,
           },
-          status = {
-            open_file = "<CR>",
-            restore_file = "<S-x>",
-          },
-          close = { "q", "<Esc>" },
-        },
-      },
-      highlights = {
-        editor = {
-          modified = { fg = "#89ddff" },
         },
       },
     },
