@@ -8,5 +8,4 @@ return {
   { "<leader>gf", cmd "DiffviewFileHistory %", desc = "File History" },
   { "<leader>gF", cmd "DiffviewFileHistory", desc = "File History All" },
   { "<leader>gl", pick "git_log", desc = "Log" },
-  { "<leader>gb", pick "git_log_line", desc = "Blame" },
 }

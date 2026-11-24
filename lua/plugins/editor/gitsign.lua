@@ -19,7 +19,6 @@ return {
 
       local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc, silent = true }) end
 
-      map("n", "<leader>gu", gitsign.stage_hunk, "Undo")
       map("n", "ga", gitsign.stage_hunk, "Stage")
       map("n", "gs", gitsign.reset_hunk, "Reset")
       map("v", "ga", function() gitsign.stage_hunk { vim.fn.line ".", vim.fn.line "v" } end)
@@ -28,11 +27,11 @@ return {
       map("n", "<leader>ghS", gitsign.stage_buffer, "Stage Buffer")
       map("n", "<leader>ghR", gitsign.reset_buffer, "Reset Buffer")
 
-      map("n", "<leader>ghp", gitsign.preview_hunk_inline, "Preview Inline")
-      map("n", "<leader>ghK", gitsign.preview_hunk, "Preview")
+      map("n", "<leader>gk", gitsign.preview_hunk_inline, "Preview Inline")
+      map("n", "<leader>gK", gitsign.preview_hunk, "Preview")
 
-      map("n", "<leader>ghb", function() gitsign.blame_line { full = true } end, "Blame Line")
-      map("n", "<leader>ghB", gitsign.blame, "Blame Buffer")
+      map("n", "<leader>gb", function() gitsign.blame_line { full = true } end, "Blame Line")
+      map("n", "<leader>gB", gitsign.blame, "Blame Buffer")
 
       map("n", "<leader>ghd", gitsign.diffthis, "Diff")
       map("n", "<leader>ghD", function() gitsign.diffthis "~" end, "Diff ~")
