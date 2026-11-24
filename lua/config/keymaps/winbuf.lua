@@ -4,6 +4,7 @@ return {
   -- buffers
   { "<leader>bb", cmd "e #", desc = "Switch" },
   { "<leader>bd", plug "BufDelete", desc = "Delete" },
+  { "<leader>bh", plug "BufDeleteInvisible", desc = "Delete Invisible" },
   { "<leader>bo", plug "BufDeleteOthers", desc = "Delete Others" },
 
   -- windows

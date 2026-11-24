@@ -35,6 +35,7 @@ return {
       {
         "<leader>b",
         group = "buffer",
+        icon = " ",
         expand = function() return require("which-key.extras").expand.buf() end,
       },
       {

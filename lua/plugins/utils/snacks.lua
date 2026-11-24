@@ -1,3 +1,6 @@
+local map = require "utils.keymaps"
+local plug = map.config
+
 return {
   {
     "folke/snacks.nvim",
@@ -5,14 +8,29 @@ return {
     cmd = { "Pick", "PickFiles" },
     keys = {
       {
-        "<Plug>(ConfigOpenTerminal)",
+        plug "OpenTerminal",
         require("utils.plugin.snacks").open_terminal,
         desc = "ToggleTerm",
         mode = { "n", "i", "x", "t" },
       },
       {
-        "<Plug>(ConfigNotifications)",
+        plug "Notifications",
         function() Snacks.notifier.show_history() end,
+        desc = "Notifications",
+      },
+      {
+        plug "BufDelete",
+        function() Snacks.bufdelete.delete() end,
+        desc = "Notifications",
+      },
+      {
+        plug "BufDeleteInvisible",
+        function() Snacks.bufdelete.invisible() end,
+        desc = "Notifications",
+      },
+      {
+        plug "BufDeleteOthers",
+        function() Snacks.bufdelete.other() end,
         desc = "Notifications",
       },
       {
